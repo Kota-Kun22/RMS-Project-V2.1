@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "842059053517",
+    "project_id": "rms-project-v2",
+    "storage_bucket": "rms-project-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842059053517:android:42b98c3c346fad7c4bec84",
+        "android_client_info": {
+          "package_name": "com.example.rms_project_v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXonpI4YaRtwTD9v41gR8qqjuAEzH4100"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
