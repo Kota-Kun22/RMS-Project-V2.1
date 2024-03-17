@@ -26,4 +26,5 @@
     <color name="g_green">#11FF00</color>
     <color name="whiteSmoke">	#F5F5F5</color>
     <color name="ghostwhite">#F8F8FF</color>
+    <color name="Transparent">#00000</color>
 </resources>
