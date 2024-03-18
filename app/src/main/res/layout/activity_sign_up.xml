@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/ghostwhite"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="81dp"
+        android:layout_height="235dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_texture_left"
+        app:layout_constraintDimensionRatio="1:3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ellipse"
+        android:layout_width="241dp"
+        android:layout_height="234dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ellips"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRightAddressForShopping"
+        style="@style/h4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:text="Welcome,\nSign Up continue "
+        android:textAlignment="center"
+        android:textSize="30sp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/ellipse"
+        app:layout_constraintEnd_toEndOf="@+id/ellipse"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="@+id/ellipse" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_texture_right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/signInMail"
+        style="@style/editText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edittextHeight"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/whiteSmoke"
+        android:hint="@string/type_your_email"
+        android:padding="16dp"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/g_gray700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ellipse" />
+
+
+    <EditText
+        android:id="@+id/singUp_password"
+        style="@style/editText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edittextHeight"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="Type Your Password"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/g_gray700"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signInMail" />
+
+    <EditText
+        android:id="@+id/reTypePassword"
+        style="@style/editText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edittextHeight"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/whiteSmoke"
+        android:hint="RE- Type Your Password"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/g_gray700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/singUp_password" />
+
+    <Button
+        android:id="@+id/signUp_button"
+        style="@style/blueButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/mediumButtonHeight"
+        android:layout_marginLeft="30dp"
+
+
+        android:layout_marginTop="48dp"
+        android:layout_marginRight="30dp"
+        android:text="SIGN UP..."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reTypePassword"
+        app:spinning_bar_color="@color/white" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Already Register..?"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_button" />
+
+    <Button
+        android:id="@+id/sign_in_page_signUp_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="SIGN..IN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
