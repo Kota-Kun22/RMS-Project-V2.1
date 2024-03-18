@@ -136,7 +136,7 @@
             app:layout_constraintEnd_toEndOf="@id/guidelineLoginRight"
             android:layout_marginTop="15dp"
             android:text="Login"
-            app:spinning_bar_color="@color/white"/>
+           />
 
 
 

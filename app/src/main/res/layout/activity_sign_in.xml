@@ -118,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Type_password_SignIN"
-        app:spinning_bar_color="@color/white" />
+        />
 
     <TextView
         android:id="@+id/textView"
