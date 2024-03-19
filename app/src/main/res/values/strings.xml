@@ -20,7 +20,7 @@
     <string name="email">Email</string>
     <string name="delete_member">Delete Member</string>
     <string-array name="assign_role">
-    <item>Assign Role</item>
-    <item>Head Of Family</item>
+        <item>Assign Role</item>
+        <item>Head Of Family</item>
     </string-array>
 </resources>

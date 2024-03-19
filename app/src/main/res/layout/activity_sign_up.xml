@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/sign_in_mail"
+        android:id="@+id/signInMail"
         style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/edittextHeight"
@@ -70,24 +70,25 @@
 
 
     <EditText
+        android:id="@+id/singUp_password"
         style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/edittextHeight"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_mail"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:hint="Type Your Password"
         android:inputType="textPassword"
-        android:textAlignment="textStart"
         android:padding="16dp"
-        android:textColorHint="@color/g_gray700"/>
+        android:textAlignment="textStart"
+        android:textColorHint="@color/g_gray700"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signInMail" />
 
     <EditText
-        android:id="@+id/sign_in_password"
+        android:id="@+id/reTypePassword"
         style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/edittextHeight"
@@ -101,36 +102,35 @@
         android:textColorHint="@color/g_gray700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="428dp" />
+        app:layout_constraintTop_toBottomOf="@+id/singUp_password" />
 
     <Button
-        android:id="@+id/buttonRegisterRegister"
+        android:id="@+id/signUp_button"
         style="@style/blueButtonStyle"
         android:layout_width="0dp"
         android:layout_height="@dimen/mediumButtonHeight"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
 
 
+        android:layout_marginTop="48dp"
         android:layout_marginRight="30dp"
         android:text="SIGN UP..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_password"
-        app:spinning_bar_color="@color/white" />
+        app:layout_constraintTop_toBottomOf="@+id/reTypePassword" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="48dp"
         android:text="Already Register..?"
-        android:textSize="20dp"
         android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_button" />
 
     <Button
         android:id="@+id/sign_in_page_signUp_button"

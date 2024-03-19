@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvQuality" />
 
     <EditText
-        android:id="@+id/sign_in_password"
+        android:id="@+id/Type_password_SignIN"
         style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/edittextHeight"
@@ -105,7 +105,7 @@
 
 
     <Button
-        android:id="@+id/buttonRegisterRegister"
+        android:id="@+id/LogINButton"
         style="@style/blueButtonStyle"
         android:layout_width="0dp"
         android:layout_height="@dimen/mediumButtonHeight"
@@ -114,11 +114,11 @@
 
 
         android:layout_marginRight="30dp"
-        android:text="Register"
+        android:text="Log IN....."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_password"
-        app:spinning_bar_color="@color/white" />
+        app:layout_constraintTop_toBottomOf="@+id/Type_password_SignIN"
+        />
 
     <TextView
         android:id="@+id/textView"
@@ -130,7 +130,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/LogINButton" />
 
     <Button
         android:id="@+id/sign_in_page_signUp_button"
@@ -144,3 +144,6 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
