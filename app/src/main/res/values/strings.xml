@@ -19,6 +19,7 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="email">Email</string>
     <string name="delete_member">Delete Member</string>
+    <string name="floating_action_button">floating_action_button</string>
     <string-array name="assign_role">
         <item>Assign Role</item>
         <item>Head Of Family</item>
