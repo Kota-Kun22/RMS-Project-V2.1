@@ -20,7 +20,7 @@
         android:background="@drawable/pp_bg"
         android:padding="26dp"
         android:src="@drawable/add_media_image"
-        app:tint="@color/purple_500"
+        app:tint="#6D7DFF"
         android:contentDescription="@string/media_image" />
     <TextView
         android:id="@+id/insert_edit_image"
@@ -30,7 +30,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_light"
         android:text="@string/insert_image"
-        android:textColor="@color/purple_500"
+        android:textColor="#6D7DFF"
         android:textSize="@dimen/h2TextSize" />
     <EditText
         android:id="@+id/assign_Role"
@@ -44,8 +44,8 @@
         android:fontFamily="@font/poppins_light"
         android:hint="@string/assign_role"
         android:padding="8dp"
-        android:backgroundTint="@color/purple_500"
-        android:textColorHint="@color/purple_500"
+        android:backgroundTint="#6D7DFF"
+        android:textColorHint="#6D7DFF"
         android:textSize="@dimen/h3TextSize"
         android:autofillHints="" />
     <TextView
