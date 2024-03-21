@@ -3,16 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.HomeFragment"
-    android:background="@color/purple_200">
+    android:background="@color/white">
+    <include android:id="@+id/top_bar"
+        layout="@layout/search_bar_home"/>
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="135dp"
+        android:text="Customers"
+        android:layout_marginStart="20dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="143dp"
+        android:paddingEnd="25dp"
+        android:text="All"
+        android:textColor="#B1B1B1"
+        android:textAlignment="textEnd"
+        android:textSize="14sp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_rv"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/hello_blank_fragment"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="175dp"
+        tools:listitem="@layout/customers_profile_cardview"/>
 
 </FrameLayout>

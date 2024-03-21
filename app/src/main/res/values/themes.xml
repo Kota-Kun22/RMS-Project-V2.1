@@ -6,5 +6,5 @@
     </style>
 
     <style name="Theme.RMS_project_V2" parent="Base.Theme.RMS_project_V2" />
-     <style name="AppTheme.BottomBar" parent="Theme.MaterialComponents.Light">
+     <style name="AppTheme.BottomBar" parent="Theme.MaterialComponents.Light"/>
 </resources>
