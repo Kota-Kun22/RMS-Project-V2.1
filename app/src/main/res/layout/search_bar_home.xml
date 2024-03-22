@@ -23,7 +23,7 @@
             android:drawableStart="@drawable/ic_search"
             android:drawableEnd="@drawable/ic_filter"
             android:drawablePadding="7.5dp"
-            android:hint="Enter name, number or HOF          |"
+            android:hint="Enter name, number or HOF"
             android:paddingStart="10dp"
             android:paddingEnd="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
