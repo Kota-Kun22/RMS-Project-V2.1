@@ -38,20 +38,26 @@ class AddCustomerPopUp: AppCompatActivity() {
             val userTelecom = telecom.text.toString().trim()
             val userEmail = email.text.toString().trim()
 
-            val user = NewUser(firebaseAuth.currentUser?.uid!!,userName, userDob, userNumber, userTelecom, userEmail)
+            // Check if current user is not null before proceeding
+            firebaseAuth.currentUser?.let { currentUser ->
+                val user = NewUser(currentUser.uid, userName, userDob, userNumber, userTelecom, userEmail)
 
-            Fdatabase.child(userName).setValue(user)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Successfully Saved", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this,MainActivity::class.java))
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
-                }
-            val back:ImageView=findViewById(R.id.back_icon)
+                Fdatabase.child(currentUser.uid).push().setValue(user)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Successfully Saved", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, MainActivity::class.java))
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+                    }
+            }
+
+            // Handle back button click
+            val back: ImageView = findViewById(R.id.back_icon)
             back.setOnClickListener {
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
             }
         }
     }
 }
+

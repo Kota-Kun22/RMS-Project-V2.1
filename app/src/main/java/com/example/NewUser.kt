@@ -16,6 +16,5 @@ class NewUser {
         this.phone_no=phone_no
         this.telecom=telecom
         this.email=email
-
     }
 }
