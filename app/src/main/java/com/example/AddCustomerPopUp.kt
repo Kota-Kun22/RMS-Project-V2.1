@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -16,6 +18,9 @@ class AddCustomerPopUp: AppCompatActivity() {
 
     private lateinit var Fdatabase: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: AddCustomerRecyclerViewAdapter
+    private val familyMembers = mutableListOf<NewUser>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +28,24 @@ class AddCustomerPopUp: AppCompatActivity() {
 
         Fdatabase = FirebaseDatabase.getInstance().getReference("Users")
         firebaseAuth = FirebaseAuth.getInstance()
+
+
+        recyclerView = findViewById(R.id.addCustomerRecyclerview)
+        adapter = AddCustomerRecyclerViewAdapter(familyMembers)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+
+        val addMember: TextView = findViewById(R.id.addMember)
+        addMember.setOnClickListener {
+            familyMembers.add(NewUser("","", "", "", "", ""))
+            adapter.notifyItemInserted(familyMembers.size - 1)
+        }
+
+
+
+
+
 
         val saveDetails: TextView = findViewById(R.id.saveDetails)
         saveDetails.setOnClickListener {
