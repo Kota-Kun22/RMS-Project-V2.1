@@ -27,11 +27,7 @@ class UserAdapter(val c: Context, val userList: ArrayList<NewUser>) :
         holder.number.text = currentUser.phone_no
         holder.telecom.text = currentUser.telecom
 
-        // Set item click listener
         holder.itemView.setOnClickListener {
-            // Handle item click here
-            // For example, you can open a new activity or fragment to show detailed information about the clicked user
-            // You can access the clicked user using userList[position]
             Toast.makeText(c, "Clicked user: ${currentUser.name}", Toast.LENGTH_SHORT).show()
         }
     }
