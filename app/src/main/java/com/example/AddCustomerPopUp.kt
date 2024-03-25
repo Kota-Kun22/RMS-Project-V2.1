@@ -26,6 +26,9 @@ class AddCustomerPopUp: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_customer_recyclerciew)
 
+        var count=0
+
+
         Fdatabase = FirebaseDatabase.getInstance().getReference("Users")
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -38,12 +41,10 @@ class AddCustomerPopUp: AppCompatActivity() {
 
         val addMember: TextView = findViewById(R.id.addMember)
         addMember.setOnClickListener {
-            familyMembers.add(NewUser("","", "", "", "", ""))
+            familyMembers.add(NewUser("","", "", "", "", "",0, listOf()))
             adapter.notifyItemInserted(familyMembers.size - 1)
+            count+=1
         }
-
-
-
 
 
 
@@ -61,9 +62,14 @@ class AddCustomerPopUp: AppCompatActivity() {
             val userTelecom = telecom.text.toString().trim()
             val userEmail = email.text.toString().trim()
 
-            // Check if current user is not null before proceeding
+            val membersList = mutableListOf<Member>()
+            for (i in 0 until recyclerView.childCount) {
+                val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as AddCustomerRecyclerViewAdapter.UserViewHolder
+                membersList.add(viewHolder.getMember())
+            }
+
             firebaseAuth.currentUser?.let { currentUser ->
-                val user = NewUser(currentUser.uid, userName, userDob, userNumber, userTelecom, userEmail)
+                val user = NewUser(currentUser.uid, userName, userDob, userNumber, userTelecom, userEmail,count,membersList)
 
                 Fdatabase.child(currentUser.uid).push().setValue(user)
                     .addOnSuccessListener {
@@ -74,8 +80,6 @@ class AddCustomerPopUp: AppCompatActivity() {
                         Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
                     }
             }
-
-            // Handle back button click
             val back: ImageView = findViewById(R.id.back_icon)
             back.setOnClickListener {
                 startActivity(Intent(this, MainActivity::class.java))

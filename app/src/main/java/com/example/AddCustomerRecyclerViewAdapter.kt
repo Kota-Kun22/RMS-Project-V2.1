@@ -1,13 +1,15 @@
 package com.example
 
-import com.example.rms_project_v2.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rms_project_v2.R
 
-class AddCustomerRecyclerViewAdapter(private val userList: MutableList<NewUser>) :
+class AddCustomerRecyclerViewAdapter(
+    private val userList: MutableList<NewUser>,
+) :
     RecyclerView.Adapter<AddCustomerRecyclerViewAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -38,6 +40,15 @@ class AddCustomerRecyclerViewAdapter(private val userList: MutableList<NewUser>)
             numberEditText.setText(user.phone_no)
             telecomEditText.setText(user.telecom)
             emailEditText.setText(user.email)
+        }
+        fun getMember(): Member {
+            return Member(
+                nameEditText.text.toString(),
+                dobEditText.text.toString(),
+                numberEditText.text.toString(),
+                telecomEditText.text.toString(),
+                emailEditText.text.toString()
+            )
         }
     }
 }
