@@ -63,9 +63,11 @@ class AddCustomerPopUp: AppCompatActivity() {
             val userEmail = email.text.toString().trim()
 
             val membersList = mutableListOf<Member>()
-            for (i in 0 until recyclerView.childCount) {
-                val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as AddCustomerRecyclerViewAdapter.UserViewHolder
-                membersList.add(viewHolder.getMember())
+            for (i in 0 until count) {
+                val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? AddCustomerRecyclerViewAdapter.UserViewHolder
+                viewHolder?.let {
+                    membersList.add(it.getMember())
+                }
             }
 
             firebaseAuth.currentUser?.let { currentUser ->
