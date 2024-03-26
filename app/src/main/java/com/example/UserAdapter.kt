@@ -1,6 +1,7 @@
 package com.example
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rms_project_v2.R
+import java.io.Serializable
 
 class UserAdapter(val c: Context, val userList: ArrayList<NewUser>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
@@ -28,7 +30,10 @@ class UserAdapter(val c: Context, val userList: ArrayList<NewUser>) :
         holder.telecom.text = currentUser.telecom
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(c, "Clicked user: ${currentUser.name}", Toast.LENGTH_SHORT).show()
+            val intent= Intent(c,FamilyMemberDetails::class.java)
+            intent.putExtra("count",currentUser.count)
+            intent.putExtra("members",currentUser.members as Serializable)
+            c.startActivity(intent)
         }
     }
 

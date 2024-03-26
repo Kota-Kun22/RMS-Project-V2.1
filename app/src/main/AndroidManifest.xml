@@ -33,6 +33,7 @@
 
         </activity>
         <activity android:name="com.example.AddCustomerPopUp"/>
+        <activity android:name="com.example.FamilyMemberDetails"/>
     </application>
 
 </manifest>
