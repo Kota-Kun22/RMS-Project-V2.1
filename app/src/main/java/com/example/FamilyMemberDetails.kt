@@ -16,7 +16,7 @@ class FamilyMemberDetails:AppCompatActivity() {
         val members = intent.getSerializableExtra("members") as? List<Member>
 
         recyclerView = findViewById(R.id.familyMember_rv)
-        adapter = FamilyMemberDetailRecyclerViewAdapter(members!!)
+        adapter = FamilyMemberDetailRecyclerViewAdapter(this,members!!)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 

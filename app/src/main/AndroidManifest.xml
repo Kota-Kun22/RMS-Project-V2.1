@@ -34,6 +34,7 @@
         </activity>
         <activity android:name="com.example.AddCustomerPopUp"/>
         <activity android:name="com.example.FamilyMemberDetails"/>
+        <activity android:name="com.example.RechargeActivity"/>
     </application>
 
 </manifest>

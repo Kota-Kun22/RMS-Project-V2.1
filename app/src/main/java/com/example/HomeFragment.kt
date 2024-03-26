@@ -51,7 +51,6 @@ class HomeFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle database error
                 Log.e("FirebaseError", "Database operation cancelled: $error")
             }
         })

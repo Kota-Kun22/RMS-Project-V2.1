@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -35,11 +36,19 @@ class UserAdapter(val c: Context, val userList: ArrayList<NewUser>) :
             intent.putExtra("members",currentUser.members as Serializable)
             c.startActivity(intent)
         }
+        holder.recharge.setOnClickListener {
+            val intent=Intent(c,RechargeActivity::class.java)
+            intent.putExtra("name",currentUser.name)
+            intent.putExtra("number",currentUser.phone_no)
+            intent.putExtra("telecom",currentUser.telecom)
+            c.startActivity(intent)
+        }
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val user_name = itemView.findViewById<TextView>(R.id.name)
         val number = itemView.findViewById<TextView>(R.id.Phone_number_temp)
         val telecom = itemView.findViewById<TextView>(R.id.telecom_temp)
+        val recharge=itemView.findViewById<ImageView>(R.id.recharge)
     }
 }
