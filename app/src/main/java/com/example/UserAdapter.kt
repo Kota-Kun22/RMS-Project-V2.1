@@ -2,12 +2,14 @@ package com.example
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rms_project_v2.R
 import java.io.Serializable
@@ -31,16 +33,29 @@ class UserAdapter(val c: Context, val userList: ArrayList<NewUser>) :
         holder.telecom.text = currentUser.telecom
 
         holder.itemView.setOnClickListener {
-            val intent= Intent(c,FamilyMemberDetails::class.java)
-            intent.putExtra("count",currentUser.count)
-            intent.putExtra("members",currentUser.members as Serializable)
-            c.startActivity(intent)
+
+            if(currentUser.members.isNullOrEmpty()){
+                Toast.makeText(c,"No members added",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val intent= Intent(c,FamilyMemberDetails::class.java)
+                intent.putExtra("count",currentUser.count)
+                intent.putExtra("members",currentUser.members as Serializable)
+                c.startActivity(intent)
+            }
         }
         holder.recharge.setOnClickListener {
             val intent=Intent(c,RechargeActivity::class.java)
             intent.putExtra("name",currentUser.name)
             intent.putExtra("number",currentUser.phone_no)
             intent.putExtra("telecom",currentUser.telecom)
+            c.startActivity(intent)
+        }
+        holder.message.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            val number="+91"+currentUser.phone_no
+            val url = "https://api.whatsapp.com/send?phone=$number"
+            intent.data = Uri.parse(url)
             c.startActivity(intent)
         }
     }
@@ -50,5 +65,6 @@ class UserAdapter(val c: Context, val userList: ArrayList<NewUser>) :
         val number = itemView.findViewById<TextView>(R.id.Phone_number_temp)
         val telecom = itemView.findViewById<TextView>(R.id.telecom_temp)
         val recharge=itemView.findViewById<ImageView>(R.id.recharge)
+        val message=itemView.findViewById<ImageView>(R.id.message)
     }
 }
