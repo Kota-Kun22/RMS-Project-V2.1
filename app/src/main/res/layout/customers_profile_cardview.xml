@@ -46,7 +46,7 @@
                         android:fontFamily="@font/poppins_thin"
                         android:padding="6dp"
                         android:text="Amit Jha"
-                        android:textSize="@dimen/h2TextSize"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -61,7 +61,7 @@
                             android:fontFamily="@font/poppins_thin"
                             android:padding="6dp"
                             android:text="@string/mob_number_profile_display"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/Phone_number_temp"
@@ -69,22 +69,23 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_thin"
                             android:text=" 9588779890"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <ImageView
                             android:id="@+id/recharge"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_marginStart="40dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginEnd="4dp"
                             android:backgroundTint="@color/colour"
                             android:src="@drawable/flash_ic"
                             app:tint="@color/colour" />
 
                         <ImageView
+                            android:id="@+id/message"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_marginStart="6dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginEnd="4dp"
                             android:src="@drawable/comment_ic"
                             app:tint="@color/colour" />
@@ -103,7 +104,7 @@
                             android:fontFamily="@font/poppins_thin"
                             android:padding="6dp"
                             android:text="Telecom:"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/telecom_temp"
@@ -111,7 +112,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_thin"
                             android:text="Airtel"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
                         <ImageView
                             android:id="@+id/telecom_icon"
                             android:layout_width="20dp"
@@ -146,19 +147,6 @@
                         android:fontFamily="@font/poppins_thin"
                         android:paddingStart="4dp"
                         android:text="12/11/2024"
-                        android:textSize="16sp" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/Expiry_button1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginEnd="6dp"
-                        android:background="@drawable/btn_bg"
-                        android:backgroundTint="@color/g_light_red"
-                        android:fontFamily="@font/poppins_thin"
-                        android:text="expiry"
-                        android:textColor="@color/g_red"
                         android:textSize="16sp" />
 
                 </LinearLayout>
