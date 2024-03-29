@@ -8,8 +8,9 @@ class RechargeDetails {
     var amount:String?=null
     var payment_status:String?=null
     var validity:String?=null
+    var date:String?=null
     constructor(){}
-    constructor(uid:String?,name:String?,phone_no:String?,telecom:String?,amount:String?,payment_status:String?,validity:String?){
+    constructor(uid:String?,name:String?,phone_no:String?,telecom:String?,amount:String?,payment_status:String?,validity:String?,date:String?){
         this.uid=uid
         this.name=name
         this.phone_no=phone_no
@@ -17,5 +18,6 @@ class RechargeDetails {
         this.amount=amount
         this.payment_status=payment_status
         this.validity=validity
+        this.date=date
     }
 }

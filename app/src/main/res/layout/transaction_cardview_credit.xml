@@ -84,7 +84,7 @@
 
             android:paddingBottom="5dp"
 
-            android:text="$ 256"
+            android:text="&#8377; 256"
             android:textAlignment="center"
             android:textSize="20dp"
             android:textStyle="bold" />

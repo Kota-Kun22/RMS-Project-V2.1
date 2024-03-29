@@ -193,7 +193,9 @@
                             android:minHeight="48dp"
                             android:text=""
                             android:textColorHint="@color/Transparent"
-                            android:textSize="@dimen/h2TextSize" />
+                            android:textSize="@dimen/h2TextSize"
+                            android:inputType="number"
+                            android:maxLength="10"/>
                     </LinearLayout>
 
                     <LinearLayout
