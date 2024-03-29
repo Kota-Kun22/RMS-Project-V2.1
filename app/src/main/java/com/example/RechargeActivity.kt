@@ -14,6 +14,7 @@ import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Calendar
 
 class RechargeActivity : AppCompatActivity() {
     private lateinit var Fdatabase: DatabaseReference
@@ -62,7 +63,12 @@ class RechargeActivity : AppCompatActivity() {
             else {
                 val currentUser = firebaseAuth.currentUser
                 if (currentUser != null) {
-                    val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"")
+                    val calendar = Calendar.getInstance()
+                    val year = calendar.get(Calendar.YEAR)
+                    val month = calendar.get(Calendar.MONTH) + 1
+                    val day = calendar.get(Calendar.DAY_OF_MONTH)
+                    val dateString = "$day-$month-$year"
+                    val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString)
                     Fdatabase.push().setValue(recharge)
                         .addOnSuccessListener {
                             Toast.makeText(this@RechargeActivity, "Recharge details saved successfully.", Toast.LENGTH_SHORT).show()

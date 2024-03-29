@@ -2,17 +2,173 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.TransactionsFragment"
-    android:background="@color/purple_700">
+    android:background="@color/white">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="20dp"
+        android:text="Transactions"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:src="@drawable/ic_menu"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"/>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/hello_blank_fragment"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:text="Total Earnings"
+        android:textSize="16sp"
+        android:layout_marginTop="75dp"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="&#8377; 0"
+        android:textSize="37.5sp"
+        android:layout_marginTop="105dp"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="200dp"
+        android:gravity="center">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#DAFFD1"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Paid"
+                android:textColor="#33FF00"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_up"
+                android:layout_gravity="center"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/paid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginTop="7.5dp"
+                android:layout_marginStart="12.5dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#FFC9C9"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="25dp"
+            app:cardCornerRadius="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Credit"
+                android:textColor="#FF0000"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_down"
+                android:layout_gravity="center"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginTop="7.5dp"
+                android:layout_marginStart="12.5dp"/>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="325dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Name/Date"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Telecom"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Amount"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Payment"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="350dp"
+        android:background="@android:color/black" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transaction_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="355dp"
+        tools:listitem="@layout/transaction_cardview"/>
 </FrameLayout>
