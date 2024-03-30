@@ -3,7 +3,9 @@ package com.example
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rms_project_v2.R
 
@@ -33,6 +35,11 @@ class AddCustomerRecyclerViewAdapter(
         private val numberEditText: EditText = itemView.findViewById(R.id.mobile_number)
         private val telecomEditText: EditText = itemView.findViewById(R.id.telecom_type)
         private val emailEditText: EditText = itemView.findViewById(R.id.emailAddress)
+        private val roleSpinner = itemView.findViewById<Spinner>(R.id.assign_Role1)
+
+        val rolePlans = arrayOf("Assign Role","Head of Family","Child","Wife","Husband","Father","Mother")
+        val arrayAdapter = ArrayAdapter(itemView.context ,android.R.layout.simple_spinner_dropdown_item,rolePlans)
+        //roleSpinner.adapter= arrayAdapter
 
         fun bind(user: NewUser) {
             nameEditText.setText(user.name)
@@ -40,6 +47,7 @@ class AddCustomerRecyclerViewAdapter(
             numberEditText.setText(user.phone_no)
             telecomEditText.setText(user.telecom)
             emailEditText.setText(user.email)
+            roleSpinner.adapter= arrayAdapter
         }
         fun getMember(): Member {
             return Member(

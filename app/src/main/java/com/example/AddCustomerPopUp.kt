@@ -2,8 +2,10 @@ package com.example
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -39,9 +41,14 @@ class AddCustomerPopUp: AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
+        val roleSpinner = findViewById<Spinner>(R.id.assign_Role)
+        val rolePlans = arrayOf("Assign Role","Head of Family","Child","Wife","Husband","Father","Mother")
+        val arrayAdapter = ArrayAdapter(this@AddCustomerPopUp,android.R.layout.simple_spinner_dropdown_item,rolePlans)
+        roleSpinner.adapter= arrayAdapter
+
         val addMember: TextView = findViewById(R.id.addMember)
         addMember.setOnClickListener {
-            familyMembers.add(NewUser("","", "", "", "", "",0, listOf()))
+            familyMembers.add(NewUser("","", "", "", "", "",0, listOf(),""))
             adapter.notifyItemInserted(familyMembers.size - 1)
             count+=1
         }
@@ -50,6 +57,9 @@ class AddCustomerPopUp: AppCompatActivity() {
 
         val saveDetails: TextView = findViewById(R.id.saveDetails)
         saveDetails.setOnClickListener {
+
+            val role = roleSpinner.selectedItem.toString()
+
             val name: EditText = findViewById(R.id.user_name1)
             val dob: EditText = findViewById(R.id.date_of_birth1)
             val number: EditText = findViewById(R.id.mobile_number1)
@@ -71,7 +81,7 @@ class AddCustomerPopUp: AppCompatActivity() {
             }
 
             firebaseAuth.currentUser?.let { currentUser ->
-                val user = NewUser(currentUser.uid, userName, userDob, userNumber, userTelecom, userEmail,count,membersList)
+                val user = NewUser(currentUser.uid, userName, userDob, userNumber, userTelecom, userEmail,count,membersList,role)
 
                 Fdatabase.child(currentUser.uid).push().setValue(user)
                     .addOnSuccessListener {
