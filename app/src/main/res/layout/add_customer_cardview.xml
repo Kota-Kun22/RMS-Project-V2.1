@@ -32,22 +32,22 @@
         android:text="@string/insert_image"
         android:textColor="#6D7DFF"
         android:textSize="@dimen/h2TextSize" />
-    <EditText
-        android:id="@+id/assign_Role"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/assign_Role1"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/spinner_bg"
         android:layout_marginTop="10dp"
+        android:autofillHints=""
         android:drawableEnd="@drawable/baseline_arrow_downward_24"
         android:drawablePadding="10dp"
-        android:inputType="none"
         android:fontFamily="@font/poppins_light"
         android:hint="@string/assign_role"
+        android:inputType="none"
         android:padding="8dp"
-        android:backgroundTint="#6D7DFF"
-        android:textColorHint="#6D7DFF"
-        android:textSize="@dimen/h3TextSize"
-        android:autofillHints="" />
+        android:textColorHint="@color/colour"
+        android:textSize="@dimen/h3TextSize" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -96,14 +96,14 @@
                     android:textColor="@color/colour"
                     android:textSize="@dimen/h2TextSize" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/assign_Role"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="@drawable/spinner_bg"
                     android:layout_marginTop="10dp"
                     android:autofillHints=""
-                    android:backgroundTint="@color/purple_500"
                     android:drawableEnd="@drawable/baseline_arrow_downward_24"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/poppins_light"

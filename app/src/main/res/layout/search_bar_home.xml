@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="125dp">
+    android:layout_height="125dp"
+    android:background="@color/white">
     <androidx.cardview.widget.CardView
        android:layout_width="match_parent"
         android:layout_height="119dp"
@@ -16,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="25dp"
