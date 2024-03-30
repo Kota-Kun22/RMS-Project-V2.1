@@ -14,12 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.NewUser
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import java.util.*
+import com.google.firebase.database.*
 
 class HomeFragment : Fragment() {
 
@@ -43,6 +38,23 @@ class HomeFragment : Fragment() {
         userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRecyclerView.adapter = adapter
 
+        loadAllCustomers()
+
+        val searchEditText = rootView.findViewById<EditText>(R.id.search_bar)
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                filterCustomers(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        return rootView
+    }
+
+    private fun loadAllCustomers() {
         mDbRef.child(firebaseAuth.currentUser?.uid ?: "").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userList.clear()
@@ -59,18 +71,18 @@ class HomeFragment : Fragment() {
                 Log.e("FirebaseError", "Database operation cancelled: $error")
             }
         })
+    }
 
-        val searchEditText = rootView.findViewById<EditText>(R.id.search_bar)
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                adapter.filter(s.toString())
+    private fun filterCustomers(query: String) {
+        if (query.isEmpty()) {
+            loadAllCustomers()
+        } else {
+            val filteredList = userList.filter { user ->
+                user.name?.contains(query, ignoreCase = true) ?: false ||
+                        user.phone_no?.contains(query) ?: false ||
+                        user.telecom?.contains(query, ignoreCase = true) ?: false
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-
-        return rootView
+            adapter.setData(filteredList as ArrayList<NewUser>)
+        }
     }
 }
