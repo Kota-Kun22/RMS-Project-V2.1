@@ -67,7 +67,7 @@ class RechargeActivity : AppCompatActivity() {
                     val year = calendar.get(Calendar.YEAR)
                     val month = calendar.get(Calendar.MONTH) + 1
                     val day = calendar.get(Calendar.DAY_OF_MONTH)
-                    val dateString = "$day-$month-$year"
+                    val dateString = "$day/$month/$year"
                     val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString)
                     Fdatabase.push().setValue(recharge)
                         .addOnSuccessListener {

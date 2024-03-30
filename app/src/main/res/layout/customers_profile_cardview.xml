@@ -49,13 +49,13 @@
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:orientation="horizontal">
+                        android:layout_marginStart="6dp">
 
                         <TextView
+                            android:id="@+id/mob_number_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_thin"
@@ -67,30 +67,41 @@
                             android:id="@+id/Phone_number_temp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/mob_number_label"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginTop="7.5dp"
                             android:fontFamily="@font/poppins_thin"
                             android:text=" 9588779890"
                             android:textSize="14sp" />
 
-                        <ImageView
-                            android:id="@+id/recharge"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="4dp"
-                            android:backgroundTint="@color/colour"
-                            android:src="@drawable/flash_ic"
-                            app:tint="@color/colour" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/message"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="4dp"
-                            android:src="@drawable/comment_ic"
-                            app:tint="@color/colour" />
+                            <ImageView
+                                android:id="@+id/recharge"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="4dp"
+                                android:backgroundTint="@color/colour"
+                                android:src="@drawable/flash_ic"
+                                app:tint="@color/colour" />
 
-                    </LinearLayout>
+                            <ImageView
+                                android:id="@+id/message"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="4dp"
+                                android:src="@drawable/comment_ic"
+                                app:tint="@color/colour" />
+
+                        </LinearLayout>
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -113,13 +124,6 @@
                             android:fontFamily="@font/poppins_thin"
                             android:text="Airtel"
                             android:textSize="14sp" />
-                        <ImageView
-                            android:id="@+id/telecom_icon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="6dp"
-                            android:src="@drawable/airtel_ic" />
 
                     </LinearLayout>
 
