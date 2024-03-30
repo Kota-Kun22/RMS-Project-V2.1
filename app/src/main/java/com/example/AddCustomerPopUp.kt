@@ -46,6 +46,11 @@ class AddCustomerPopUp: AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this@AddCustomerPopUp,android.R.layout.simple_spinner_dropdown_item,rolePlans)
         roleSpinner.adapter= arrayAdapter
 
+        val telecomSpinner = findViewById<Spinner>(R.id.telecom_type1)
+        val telecomPlans = arrayOf("Select","Airtel","Jio","Vi","Bsnl")
+        val arrayAdapter1 = ArrayAdapter(this@AddCustomerPopUp,android.R.layout.simple_spinner_dropdown_item,telecomPlans)
+       telecomSpinner.adapter= arrayAdapter1
+
         val addMember: TextView = findViewById(R.id.addMember)
         addMember.setOnClickListener {
             familyMembers.add(NewUser("","", "", "", "", "",0, listOf(),""))
@@ -59,17 +64,16 @@ class AddCustomerPopUp: AppCompatActivity() {
         saveDetails.setOnClickListener {
 
             val role = roleSpinner.selectedItem.toString()
+            val userTelecom = telecomSpinner.selectedItem.toString()
 
             val name: EditText = findViewById(R.id.user_name1)
             val dob: EditText = findViewById(R.id.date_of_birth1)
             val number: EditText = findViewById(R.id.mobile_number1)
-            val telecom: EditText = findViewById(R.id.telecom_type1)
             val email: EditText = findViewById(R.id.emailAddress1)
 
             val userName = name.text.toString().trim()
             val userDob = dob.text.toString().trim()
             val userNumber = number.text.toString().trim()
-            val userTelecom = telecom.text.toString().trim()
             val userEmail = email.text.toString().trim()
 
             val membersList = mutableListOf<Member>()

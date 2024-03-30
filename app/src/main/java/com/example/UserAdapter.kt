@@ -1,12 +1,17 @@
 package com.example
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rms_project_v2.R
+import java.io.Serializable
 
 class UserAdapter(private val context: Context, private var userList: ArrayList<NewUser>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
@@ -25,6 +30,33 @@ class UserAdapter(private val context: Context, private var userList: ArrayList<
         holder.user_name.text = currentUser.name
         holder.number.text = currentUser.phone_no
         holder.telecom.text = currentUser.telecom
+
+        holder.itemView.setOnClickListener {
+
+            if(currentUser.members.isNullOrEmpty()){
+                Toast.makeText(context,"No members added",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val intent= Intent(context, FamilyMemberDetails::class.java)
+                intent.putExtra("count",currentUser.count)
+                intent.putExtra("members",currentUser.members as Serializable)
+                context.startActivity(intent)
+            }
+        }
+        holder.recharge.setOnClickListener {
+            val intent=Intent(context, RechargeActivity::class.java)
+            intent.putExtra("name",currentUser.name)
+            intent.putExtra("number",currentUser.phone_no)
+            intent.putExtra("telecom",currentUser.telecom)
+            context.startActivity(intent)
+        }
+        holder.message.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            val number="+91"+currentUser.phone_no
+            val url = "https://api.whatsapp.com/send?phone=$number"
+            intent.data = Uri.parse(url)
+            context.startActivity(intent)
+        }
     }
 
     fun setData(data: ArrayList<NewUser>) {
@@ -36,5 +68,7 @@ class UserAdapter(private val context: Context, private var userList: ArrayList<
         val user_name: TextView = itemView.findViewById(R.id.name)
         val number: TextView = itemView.findViewById(R.id.Phone_number_temp)
         val telecom: TextView = itemView.findViewById(R.id.telecom_temp)
+        val recharge=itemView.findViewById<ImageView>(R.id.recharge)
+        val message=itemView.findViewById<ImageView>(R.id.message)
     }
 }

@@ -33,29 +33,34 @@ class AddCustomerRecyclerViewAdapter(
         private val nameEditText: EditText = itemView.findViewById(R.id.user_name)
         private val dobEditText: EditText = itemView.findViewById(R.id.date_of_birth)
         private val numberEditText: EditText = itemView.findViewById(R.id.mobile_number)
-        private val telecomEditText: EditText = itemView.findViewById(R.id.telecom_type)
+        private val telecomEditText: Spinner = itemView.findViewById(R.id.telecom_type)
         private val emailEditText: EditText = itemView.findViewById(R.id.emailAddress)
         private val roleSpinner = itemView.findViewById<Spinner>(R.id.assign_Role1)
 
         val rolePlans = arrayOf("Assign Role","Head of Family","Child","Wife","Husband","Father","Mother")
         val arrayAdapter = ArrayAdapter(itemView.context ,android.R.layout.simple_spinner_dropdown_item,rolePlans)
-        //roleSpinner.adapter= arrayAdapter
+
+        val telecomPlans = arrayOf("Select","Airtel","Jio","Vi","Bsnl")
+        val arrayAdapter1 = ArrayAdapter(itemView.context,android.R.layout.simple_spinner_dropdown_item,telecomPlans)
+
+
 
         fun bind(user: NewUser) {
             nameEditText.setText(user.name)
             dobEditText.setText(user.dob)
             numberEditText.setText(user.phone_no)
-            telecomEditText.setText(user.telecom)
             emailEditText.setText(user.email)
             roleSpinner.adapter= arrayAdapter
+            telecomEditText.adapter= arrayAdapter1
         }
         fun getMember(): Member {
             return Member(
                 nameEditText.text.toString(),
                 dobEditText.text.toString(),
                 numberEditText.text.toString(),
-                telecomEditText.text.toString(),
-                emailEditText.text.toString()
+                telecomEditText.selectedItem.toString(),
+                emailEditText.text.toString(),
+                roleSpinner.selectedItem.toString()
             )
         }
     }
