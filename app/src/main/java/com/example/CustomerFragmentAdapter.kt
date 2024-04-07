@@ -102,7 +102,10 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
             return 0
         }
     }
-
+    fun setData(data: ArrayList<RechargeDetails>) {
+        userList = data
+        notifyDataSetChanged()
+    }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val user_name = itemView.findViewById<TextView>(R.id.name3)
