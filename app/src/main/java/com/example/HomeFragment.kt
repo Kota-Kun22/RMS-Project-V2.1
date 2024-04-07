@@ -19,8 +19,8 @@ import com.google.firebase.database.*
 class HomeFragment : Fragment() {
 
     private lateinit var userRecyclerView: RecyclerView
-    private lateinit var userList: ArrayList<NewUser>
-    private lateinit var adapter: UserAdapter
+    private lateinit var userList: ArrayList<RechargeDetails>
+    private lateinit var adapter: CustomerFragmentAdapter
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
 
@@ -31,9 +31,9 @@ class HomeFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        mDbRef = FirebaseDatabase.getInstance().getReference("Users")
+        mDbRef = FirebaseDatabase.getInstance().getReference("Recharge")
         userList = ArrayList()
-        adapter = UserAdapter(requireContext(), userList)
+        adapter = CustomerFragmentAdapter(requireContext(), userList)
         userRecyclerView = rootView.findViewById(R.id.home_rv)
         userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRecyclerView.adapter = adapter
@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadAllCustomers() {
-        mDbRef.child(firebaseAuth.currentUser?.uid ?: "").addListenerForSingleValueEvent(object : ValueEventListener {
+        /*mDbRef.child(firebaseAuth.currentUser?.uid ?: "").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userList.clear()
                 for (postSnapshot in snapshot.children) {
@@ -70,7 +70,26 @@ class HomeFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 Log.e("FirebaseError", "Database operation cancelled: $error")
             }
+        })*/
+
+
+        mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                userList.clear()
+
+                for (childSnapshot in snapshot.children) {
+                    val rechargeDetails = childSnapshot.getValue(RechargeDetails::class.java)
+                    rechargeDetails?.let {
+                        userList.add(it)
+                    }
+                }
+                adapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("FirebaseError", "Database operation cancelled: $error")
+            }
         })
+
     }
 
     private fun filterCustomers(query: String) {
@@ -82,7 +101,7 @@ class HomeFragment : Fragment() {
                         user.phone_no?.contains(query) ?: false ||
                         user.telecom?.contains(query, ignoreCase = true) ?: false
             }
-            adapter.setData(filteredList as ArrayList<NewUser>)
+            adapter.setData(filteredList as ArrayList<RechargeDetails>)
         }
     }
 }

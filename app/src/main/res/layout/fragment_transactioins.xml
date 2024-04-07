@@ -14,13 +14,30 @@
         android:text="Transactions"
         android:textSize="20sp"
         android:textColor="@color/black"/>
-    <ImageView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:src="@drawable/ic_menu"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"/>
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <ImageView
+            android:id="@+id/date_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_calendar_month_24"/>
+
+        <ImageView
+            android:id="@+id/i1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+
 
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +59,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="190dp"
         android:gravity="center">
 
         <androidx.cardview.widget.CardView
@@ -125,10 +142,74 @@
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="325dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="310dp">
+
+        <TextView
+            android:id="@+id/allTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All"
+            android:textColor="#6D7DFF"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textColor="#AAB4FF"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/paidTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Paid"
+            android:textColor="#AAB4FF"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textColor="#AAB4FF"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/creditTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Credit"
+            android:textStyle="bold"
+            android:textColor="#AAB4FF"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="375dp"
         android:gravity="center">
 
         <TextView
@@ -163,12 +244,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="350dp"
-        android:background="@android:color/black" />
+        android:layout_marginTop="400dp"
+        android:background="#C2C2C2" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transaction_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="355dp"
+        android:layout_marginTop="405dp"
         tools:listitem="@layout/transaction_cardview"/>
 </FrameLayout>
