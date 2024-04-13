@@ -216,7 +216,7 @@
         android:id="@+id/submit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/submit_btn_bg"
         android:fontFamily="@font/poppins_thin"
         android:text="@string/submit"
@@ -224,7 +224,7 @@
         android:textSize="@dimen/h3TextSize"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space2"
         tools:ignore="TextSizeCheck" />

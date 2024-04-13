@@ -36,6 +36,8 @@
         <activity android:name="com.example.FamilyMemberDetails"/>
         <activity android:name="com.example.RechargeActivity"/>
         <activity android:name="com.example.PasswordChange"/>
+        <activity android:name="com.example.CreditActivity"/>
+
     </application>
 
 </manifest>
