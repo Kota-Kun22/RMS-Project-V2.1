@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/home_ic"
-        android:title="Home"
+        android:title=""
         android:icon="@drawable/home_ic"/>
     <item android:id="@+id/person_ic"
-        android:title="Customers"
+        android:title=""
         android:icon="@drawable/person_ic"/>
     <item android:id="@+id/addFloating_ic"
         android:title=""
         android:enabled="false"/>
     <item android:id="@+id/transfer_ic"
-        android:title="Transactions"
+        android:title=""
         android:icon="@drawable/transfer_ic"/>
     <item android:id="@+id/menu_ic"
-        android:title="More"
+        android:title=""
         android:icon="@drawable/menu_ic"/>
 
 
