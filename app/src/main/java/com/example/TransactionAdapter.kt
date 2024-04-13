@@ -1,6 +1,8 @@
 package com.example
 
+
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +34,16 @@ class TransactionAdapter(
         holder.status.text = currentUser.payment_status
         if (currentUser.payment_status == "Credit") {
             holder.status.setTextColor(ContextCompat.getColor(c, R.color.g_red))
+            holder.itemView.setOnClickListener {
+                val intent=Intent(c,CreditActivity::class.java)
+                intent.putExtra("name",currentUser.name)
+                intent.putExtra("number",currentUser.phone_no)
+                intent.putExtra("amount",currentUser.amount)
+                intent.putExtra("telecom",currentUser.telecom)
+                intent.putExtra("validity",currentUser.validity)
+                intent.putExtra("date",currentUser.date)
+                c.startActivity(intent)
+            }
         } else {
             holder.status.setTextColor(ContextCompat.getColor(c, R.color.g_green))
         }
