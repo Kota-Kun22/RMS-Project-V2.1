@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rms_project_v2.R
@@ -81,6 +83,24 @@ class TransactionsFragment : Fragment() {
                 Log.e("FirebaseError", "Database operation cancelled: $error")
             }
         })
+
+        val delete:ImageView=rootView.findViewById(R.id.delete_history)
+        delete.setOnClickListener {
+            val firebaseDatabase = FirebaseDatabase.getInstance()
+            val rootReference = firebaseDatabase.reference
+            val rechargeReference = rootReference.child("Recharge")
+            rechargeReference.removeValue()
+                .addOnSuccessListener {
+                    Toast.makeText(requireContext(), "Transaction history deleted", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Failed to delete transaction history: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            transactionList.clear()
+            adapter.notifyDataSetChanged()
+        }
+
+
 
         date_set.setOnClickListener {
             var selectedDate:String=""

@@ -125,6 +125,21 @@
                             android:text="Airtel"
                             android:textSize="14sp" />
 
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_double_person"
+                            android:layout_marginStart="35dp"/>
+
+                        <TextView
+                            android:id="@+id/count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="+ 0" />
+
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -144,14 +159,6 @@
                     android:layout_marginBottom="6dp"
                     android:orientation="horizontal"
                     android:layout_below="@id/customers_profile_card">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_thin"
-                        android:paddingStart="4dp"
-                        android:text="12/11/2024"
-                        android:textSize="16sp" />
 
                 </LinearLayout>
 

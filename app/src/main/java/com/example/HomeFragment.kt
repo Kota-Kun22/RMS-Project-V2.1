@@ -15,6 +15,10 @@ import com.example.NewUser
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -81,6 +85,13 @@ class HomeFragment : Fragment() {
                     val rechargeDetails = childSnapshot.getValue(RechargeDetails::class.java)
                     rechargeDetails?.let {
                         userList.add(it)
+                        userList.sortBy { rechargeDetails ->
+                            val validityDays = rechargeDetails.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
+                            val expiry:String=addDaysToDate(rechargeDetails.date!!, validityDays)
+                            val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                            val date: Date = format.parse(expiry)
+                            date
+                        }
                     }
                 }
                 adapter.notifyDataSetChanged()
@@ -102,6 +113,18 @@ class HomeFragment : Fragment() {
                         user.telecom?.contains(query, ignoreCase = true) ?: false
             }
             adapter.setData(filteredList as ArrayList<RechargeDetails>)
+        }
+    }
+    fun addDaysToDate(dateString: String, daysToAdd: Int): String {
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+        val date = sdf.parse(dateString)
+        if (date != null) {
+            calendar.time = date
+            calendar.add(Calendar.DAY_OF_MONTH, daysToAdd)
+            return sdf.format(calendar.time)
+        } else {
+            return ""
         }
     }
 }

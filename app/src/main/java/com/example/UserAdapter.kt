@@ -57,6 +57,7 @@ class UserAdapter(private val context: Context, private var userList: ArrayList<
             intent.data = Uri.parse(url)
             context.startActivity(intent)
         }
+        holder.count.text="+ "+currentUser.count.toString()
     }
 
     fun setData(data: ArrayList<NewUser>) {
@@ -70,5 +71,6 @@ class UserAdapter(private val context: Context, private var userList: ArrayList<
         val telecom: TextView = itemView.findViewById(R.id.telecom_temp)
         val recharge=itemView.findViewById<ImageView>(R.id.recharge)
         val message=itemView.findViewById<ImageView>(R.id.message)
+        val count=itemView.findViewById<TextView>(R.id.count)
     }
 }

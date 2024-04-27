@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="15dp"
-        android:text="Customers :"
+        android:text="Head of Family :"
         android:layout_marginStart="10dp"
         android:textColor="#000000"
         android:textSize="20sp"

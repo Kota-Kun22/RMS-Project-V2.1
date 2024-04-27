@@ -1,10 +1,9 @@
 package com.example
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.rms_project_v2.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.rms_project_v2.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -13,11 +12,11 @@ class signUp_activity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivitySignUpBinding.inflate(layoutInflater)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.signInPageSignUpButton.setOnClickListener {
-            val intent= Intent(this,SignIn_activity::class.java)
+            val intent = Intent(this, SignIn_activity::class.java)
             startActivity(intent)
         }
         firebaseAuth = FirebaseAuth.getInstance()
@@ -47,8 +46,6 @@ class signUp_activity : AppCompatActivity() {
 
             }
         }
-
-
 
 
     }
