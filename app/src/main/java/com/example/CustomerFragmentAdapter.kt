@@ -33,7 +33,6 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         holder.user_name.text = currentUser.name
         holder.number.text = currentUser.phone_no
         holder.telecom.text = currentUser.telecom
-        holder.date.text = currentUser.date
         holder.validity.text = currentUser.validity
 
 
@@ -111,7 +110,6 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         val user_name = itemView.findViewById<TextView>(R.id.name3)
         val number = itemView.findViewById<TextView>(R.id.Phone_number3)
         val telecom = itemView.findViewById<TextView>(R.id.telecom3)
-        val date = itemView.findViewById<TextView>(R.id.date3)
         val validity = itemView.findViewById<TextView>(R.id.validity3)
         val expired = itemView.findViewById<TextView>(R.id.expired3)
         val recharge=itemView.findViewById<ImageView>(R.id.recharge3)

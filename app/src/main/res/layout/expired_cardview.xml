@@ -162,14 +162,6 @@
                     android:orientation="horizontal"
                     android:layout_below="@id/customers_profile_card">
                     <TextView
-                        android:id="@+id/date3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_thin"
-                        android:paddingStart="4dp"
-                        android:text="12/11/2024"
-                        android:textSize="16sp" />
-                    <TextView
                         android:id="@+id/expired3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
