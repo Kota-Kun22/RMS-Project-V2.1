@@ -7,10 +7,13 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_margin="16dp"
         android:text="Family Members :"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="#000000"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="47dp"
         android:paddingStart="15dp"
@@ -20,6 +23,6 @@
         android:id="@+id/familyMember_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="94dp"
         tools:listitem="@layout/customers_profile_cardview"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
