@@ -17,11 +17,12 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
         android:background="@drawable/pp_bg"
+        android:contentDescription="@string/media_image"
         android:padding="7.5dp"
         android:src="@drawable/add_media_image"
-        app:tint="#6D7DFF"
-        android:contentDescription="@string/media_image" />
+        app:tint="#6D7DFF" />
     <TextView
         android:id="@+id/insert_edit_image"
         android:layout_width="wrap_content"
@@ -51,11 +52,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/name"
         android:textColor="@color/black"
-        android:fontFamily="@font/poppins_thin"
-        android:textSize="@dimen/h3TextSize"/>
+        android:textFontWeight="500"
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/user_name"
@@ -75,11 +78,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/date_of_birth"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/date_of_birth"
         android:textColor="@color/black"
-        android:fontFamily="@font/poppins_thin"
-        android:textSize="@dimen/h3TextSize"/>
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/date_of_birth"
@@ -111,11 +115,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mob_no"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/mob_no"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppins_thin"
-                android:textSize="@dimen/h3TextSize"/>
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/mobile_number"
@@ -140,11 +145,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/telecom"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/telecom"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppins_thin"
-                android:textSize="@dimen/h3TextSize"/>
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/telecom_type"
@@ -172,8 +178,9 @@
         android:text="@string/email_id"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
-        android:fontFamily="@font/poppins_thin"
-        android:textSize="@dimen/h3TextSize"/>
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_light"
+        android:textSize="17sp"/>
 
     <EditText
         android:id="@+id/emailAddress"
