@@ -123,8 +123,9 @@
         android:id="@+id/editText2"
         android:layout_width="152dp"
         android:layout_height="32dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/edittext_bg"
-        android:padding="6dp"
+        android:padding="4dp"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textColorHint="@color/g_gray700"
@@ -222,9 +223,9 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/submit_btn_bg"
         android:fontFamily="@font/poppins_thin"
         android:text="@string/submit"
@@ -232,7 +233,7 @@
         android:textSize="@dimen/h3TextSize"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space2"
         tools:ignore="TextSizeCheck" />
