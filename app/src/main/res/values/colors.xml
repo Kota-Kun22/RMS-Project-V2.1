@@ -31,4 +31,5 @@
     <color name="ghostwhite">#F8F8FF</color>
     <color name="Transparent">#00000000</color>
     <color name="colour">#6D7DFF</color>
+    <color name="Gray">#6B6B6B</color>
 </resources>
