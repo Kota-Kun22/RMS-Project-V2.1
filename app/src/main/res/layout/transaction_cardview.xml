@@ -22,7 +22,7 @@
             <TextView
                 android:id="@+id/name2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="21dp"
                 android:textSize="15dp"
                 android:text="Aisha Jha"
                 android:textStyle="bold"
@@ -32,10 +32,11 @@
             <TextView
                 android:id="@+id/date2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="18dp"
                 android:textSize="15dp"
                 android:text="04/01/2024"
                 android:layout_marginTop="4dp"
+                android:textColor="@color/Gray"
                 android:fontFamily="@font/poppins_thin"/>
         </LinearLayout>
         <LinearLayout
@@ -48,7 +49,7 @@
             <TextView
                 android:id="@+id/telecom2"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
+                android:layout_height="21dp"
                 android:text="Airtel"
                 android:textAlignment="center"
                 android:textSize="15dp"
@@ -58,21 +59,19 @@
             <TextView
                 android:id="@+id/Number2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="18dp"
                 android:layout_marginTop="4dp"
                 android:text="9548287891"
                 android:textSize="15dp"
+                android:textColor="@color/Gray"
                 android:fontFamily="@font/poppins_thin"/>
         </LinearLayout>
         <TextView
             android:id="@+id/Amount2"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="21dp"
             android:layout_weight="1"
-            android:paddingStart="5dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="5dp"
+            android:layout_margin="4dp"
             android:text="&#8377; 256"
             android:textAlignment="center"
             android:textSize="18dp"
@@ -81,7 +80,7 @@
         <TextView
             android:id="@+id/Status2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="18dp"
             android:layout_weight="1"
             android:text="Paid"
             android:textAlignment="center"
