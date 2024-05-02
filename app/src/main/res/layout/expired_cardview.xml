@@ -61,8 +61,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:layout_marginTop="7.5dp"
-                            android:fontFamily="@font/poppins_thin"
+                            android:fontFamily="@font/poppins_light"
                             android:text="@string/mob_number_profile_display"
+                            android:textColor="@color/Gray"
                             android:textFontWeight="500"
                             android:textSize="15sp" />
 
@@ -70,13 +71,14 @@
                             android:id="@+id/Phone_number3"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:layout_toEndOf="@id/mob_number_label"
                             android:layout_marginStart="4dp"
-                            android:layout_marginEnd="24dp"
                             android:layout_marginTop="7.5dp"
-                            android:fontFamily="@font/poppins_thin"
+                            android:layout_marginEnd="24dp"
+                            android:layout_toEndOf="@id/mob_number_label"
+                            android:fontFamily="@font/poppins_light"
                             android:text=" 9588779890"
-                            android:textSize="14sp"/>
+                            android:textColor="@color/Gray"
+                            android:textSize="14sp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -97,7 +99,7 @@
                                 android:id="@+id/message3"
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
-                                android:layout_marginStart="5dp"
+                                android:layout_marginStart="12dp"
                                 android:layout_marginEnd="4dp"
                                 android:src="@drawable/comment_ic"
                                 app:tint="#6D7DFF" />
@@ -115,35 +117,39 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:fontFamily="@font/poppins_thin"
                             android:layout_marginTop="7.5dp"
+                            android:fontFamily="@font/poppins_light"
                             android:text="Telecom:"
+                            android:textColor="@color/Gray"
                             android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/telecom3"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:fontFamily="@font/poppins_thin"
-                            android:text="Airtel"
                             android:layout_marginTop="7.5dp"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="Airtel"
+                            android:textColor="@color/Gray"
                             android:textSize="15sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:fontFamily="@font/poppins_thin"
                             android:layout_marginLeft="15dp"
-                           android:layout_marginTop="7.5dp"
+                            android:layout_marginTop="7.5dp"
+                            android:fontFamily="@font/poppins_light"
                             android:text="Validity:"
+                            android:textColor="@color/Gray"
                             android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/validity3"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:fontFamily="@font/poppins_thin"
                             android:layout_marginTop="7.5dp"
+                            android:fontFamily="@font/poppins_light"
                             android:text="56 days"
+                            android:textColor="@color/Gray"
                             android:textSize="15sp" />
 
                     </LinearLayout>
