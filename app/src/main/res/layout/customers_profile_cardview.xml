@@ -61,8 +61,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:layout_marginTop="7.5dp"
-                            android:fontFamily="@font/poppins_thin"
+                            android:fontFamily="@font/poppins_light"
                             android:text="@string/mob_number_profile_display"
+                            android:textColor="@color/Gray"
                             android:textFontWeight="500"
                             android:textSize="15sp" />
 
@@ -70,13 +71,14 @@
                             android:id="@+id/Phone_number_temp"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:layout_toEndOf="@id/mob_number_label"
                             android:layout_marginStart="4dp"
-                            android:layout_marginEnd="24dp"
                             android:layout_marginTop="7.5dp"
-                            android:fontFamily="@font/poppins_thin"
+                            android:layout_marginEnd="24dp"
+                            android:layout_toEndOf="@id/mob_number_label"
+                            android:fontFamily="@font/poppins_light"
                             android:text=" 9588779890"
-                            android:textSize="14sp" />
+                            android:textColor="@color/Gray"
+                            android:textSize="15sp" />
 
                         <LinearLayout
                             android:layout_width="123dp"
@@ -87,7 +89,7 @@
                             <ImageView
                                 android:id="@+id/recharge"
                                 android:layout_width="28dp"
-                                android:layout_height="28dp"
+                                android:layout_height="match_parent"
                                 android:backgroundTint="#6D7DFF"
                                 android:src="@drawable/flash_ic"
                                 app:tint="#6D7DFF" />
@@ -95,8 +97,8 @@
                             <ImageView
                                 android:id="@+id/message"
                                 android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_marginStart="5dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="6dp"
                                 android:layout_marginEnd="4dp"
                                 android:src="@drawable/comment_ic"
                                 app:tint="#6D7DFF" />
@@ -113,10 +115,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:fontFamily="@font/poppins_thin"
+                            android:fontFamily="@font/poppins_light"
                             android:text="Telecom:"
                             android:layout_marginBottom="7.5dp"
                             android:textFontWeight="500"
+                            android:textColor="@color/Gray"
                             android:layout_marginTop="7.5dp"
                             android:textSize="15sp" />
 
@@ -124,10 +127,11 @@
                             android:id="@+id/telecom_temp"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:fontFamily="@font/poppins_thin"
-                            android:text="Airtel"
                             android:layout_marginTop="7.5dp"
                             android:layout_marginBottom="7.5dp"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="Airtel"
+                            android:textColor="@color/Gray"
                             android:textSize="15sp" />
 
                         <ImageView
