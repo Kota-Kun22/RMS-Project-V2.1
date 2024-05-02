@@ -18,7 +18,7 @@
         android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/customer_rv"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="564dp"
         android:layout_marginTop="108dp"
         tools:listitem="@layout/customers_profile_cardview"/>
