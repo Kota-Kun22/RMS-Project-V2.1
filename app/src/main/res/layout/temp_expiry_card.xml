@@ -158,6 +158,7 @@
 
             </LinearLayout>
             <androidx.cardview.widget.CardView
+                android:id="@+id/hof"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -195,7 +196,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/name2"
+                            android:id="@+id/name22"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:text="Aisha Jha"
@@ -213,7 +214,7 @@
                             android:textSize="14dp" />
                     </LinearLayout>
                     <ImageView
-                        android:id="@+id/recharge4"
+                        android:id="@+id/recharge45"
                         android:layout_width="28dp"
                         android:layout_height="match_parent"
                         android:backgroundTint="#6D7DFF"

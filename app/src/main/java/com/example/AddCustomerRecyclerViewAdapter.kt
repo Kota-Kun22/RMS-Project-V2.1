@@ -83,7 +83,7 @@ class AddCustomerRecyclerViewAdapter(
                 numberEditText.text.toString(),
                 telecomEditText.selectedItem.toString(),
                 emailEditText.text.toString(),
-                roleSpinner.selectedItem.toString()
+                roleSpinner.selectedItem.toString(),"",""
             )
         }
     }

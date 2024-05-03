@@ -31,6 +31,8 @@ class CreditActivity : AppCompatActivity() {
         val telecom = intent.getStringExtra("telecom")
         val validity = intent.getStringExtra("validity")
         val date = intent.getStringExtra("date")
+        val hof = intent.getStringExtra("hof")
+        val hofNumber = intent.getStringExtra("hofNumber")
         val user_name = findViewById<TextView>(R.id.name6)
         user_name.text = name
         val phone_no = findViewById<TextView>(R.id.Phone_number_temp6)
@@ -80,7 +82,7 @@ class CreditActivity : AppCompatActivity() {
             if (enteredAmountValue <= 0) {
                 Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
             } else {
-                val toRemove=RechargeDetails(currentUser?.uid,name,number,telecom,amount,"Credit",validity, date)
+                val toRemove=RechargeDetails(currentUser?.uid,name,number,telecom,amount,"Credit",validity, date,hof,hofNumber)
                 val toRemoveRef = Fdatabase.orderByChild("name").equalTo(toRemove.name)
                 toRemoveRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -102,9 +104,9 @@ class CreditActivity : AppCompatActivity() {
                         // Handle error
                     }
                 })
-                val t1 = RechargeDetails(currentUser?.uid, name, number, telecom, enteredAmountValue.toString(), "Paid", validity, date)
+                val t1 = RechargeDetails(currentUser?.uid, name, number, telecom, enteredAmountValue.toString(), "Paid", validity, date,hof,hofNumber)
                 val remainingAmount = a1 - enteredAmountValue
-                val t2 = RechargeDetails(currentUser?.uid, name, number, telecom, remainingAmount.toString(), "Credit", validity, date)
+                val t2 = RechargeDetails(currentUser?.uid, name, number, telecom, remainingAmount.toString(), "Credit", validity, date,hof,hofNumber)
                 Fdatabase.push().setValue(t1)
                     .addOnSuccessListener {
                         //Toast.makeText(this, "Recharge details updated successfully.", Toast.LENGTH_SHORT).show()

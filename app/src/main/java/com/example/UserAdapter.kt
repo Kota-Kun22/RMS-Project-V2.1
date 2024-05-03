@@ -32,22 +32,25 @@ class UserAdapter(private val context: Context, private var userList: ArrayList<
         holder.telecom.text = currentUser.telecom
 
         holder.itemView.setOnClickListener {
-
-            if(currentUser.members.isNullOrEmpty()){
-                Toast.makeText(context,"No members added",Toast.LENGTH_SHORT).show()
+            if(currentUser.count!=0){
+                    val intent= Intent(context, FamilyMemberDetails::class.java)
+                    intent.putExtra("count",currentUser.count)
+                    intent.putExtra("members",currentUser.members as Serializable)
+                    context.startActivity(intent)
             }
             else{
-                val intent= Intent(context, FamilyMemberDetails::class.java)
-                intent.putExtra("count",currentUser.count)
-                intent.putExtra("members",currentUser.members as Serializable)
-                context.startActivity(intent)
+                Toast.makeText(context,"No members added",Toast.LENGTH_SHORT).show()
             }
+
+
         }
         holder.recharge.setOnClickListener {
             val intent=Intent(context, RechargeActivity::class.java)
             intent.putExtra("name",currentUser.name)
             intent.putExtra("number",currentUser.phone_no)
             intent.putExtra("telecom",currentUser.telecom)
+            intent.putExtra("hof",currentUser.hof)
+            intent.putExtra("hofNumber",currentUser.hofNumber)
             context.startActivity(intent)
         }
         holder.message.setOnClickListener {
