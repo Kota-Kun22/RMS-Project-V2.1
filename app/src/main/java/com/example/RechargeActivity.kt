@@ -53,6 +53,8 @@ class RechargeActivity : AppCompatActivity() {
 
         val submit: Button =findViewById(R.id.submit)
         submit.setOnClickListener {
+            submit.isEnabled = false
+            submit.text = "Loading..."
             val amount: EditText = findViewById(R.id.editText3)
             val rechargeAmount = amount.text.toString().trim()
             val validity = validitySpinner.selectedItem.toString()
@@ -61,6 +63,9 @@ class RechargeActivity : AppCompatActivity() {
 
             if (validity == "Select Validity" || paymentStatus == "Payment Status" || rechargeAmount.isEmpty()) {
                 Toast.makeText(this@RechargeActivity, "Please select validity and payment status, and enter recharge amount.", Toast.LENGTH_SHORT).show()
+                submit.isEnabled = true
+                submit.text = "Submit"
+                return@setOnClickListener
             }
             else {
                 val currentUser = firebaseAuth.currentUser
@@ -74,6 +79,8 @@ class RechargeActivity : AppCompatActivity() {
                     Fdatabase.push().setValue(recharge)
                         .addOnSuccessListener {
                             Toast.makeText(this@RechargeActivity, "Recharge details saved successfully.", Toast.LENGTH_SHORT).show()
+                            submit.isEnabled = true
+                            submit.text = "Submit"
                             startActivity(Intent(this,MainActivity::class.java))
                         }
                         .addOnFailureListener {

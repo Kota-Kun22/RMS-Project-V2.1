@@ -25,13 +25,13 @@ class AddCustomerPopUp : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AddCustomerRecyclerViewAdapter
     private val familyMembers = mutableListOf<NewUser>()
+    private var flag:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_customer_recyclerciew)
 
         var count = 0
-
 
         Fdatabase = FirebaseDatabase.getInstance().getReference("Users")
         firebaseAuth = FirebaseAuth.getInstance()
@@ -94,7 +94,7 @@ class AddCustomerPopUp : AppCompatActivity() {
 
         val saveDetails: TextView = findViewById(R.id.saveDetails)
         saveDetails.setOnClickListener {
-
+            flag=true
             saveDetails.isEnabled = false
             saveDetails.text = "Loading..."
 
@@ -142,10 +142,25 @@ class AddCustomerPopUp : AppCompatActivity() {
                     val temp=it.getMember()
                     temp.hof=userName
                     temp.hofNumber=userNumber
+
+                    if (temp.name!!.isEmpty() || temp.dob!!.isEmpty()) {
+                        flag=false
+                    }
+                    if (temp.phone_no!!.length != 10) {
+                        flag=false
+                    }
+                    if (!temp.email!!.matches(emailPattern.toRegex())) {
+                        flag=false
+                    }
                     membersList.add(temp)
                 }
             }
-
+            if(!flag){
+                saveDetails.isEnabled = true
+                saveDetails.text = "Save"
+                Toast.makeText(this, "Please  fill in all member details", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             firebaseAuth.currentUser?.let { currentUser ->
                 val user = NewUser(
                     currentUser.uid,
