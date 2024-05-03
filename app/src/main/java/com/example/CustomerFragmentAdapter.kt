@@ -39,6 +39,7 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         holder.telecom.text = currentUser.telecom
         holder.validity.text = currentUser.validity
         holder.hof.text = currentUser.hof
+        holder.hofNo.text=currentUser.hofNumber
         if (currentUser.hof=="1"){
             val parentView = holder.card.parent as ViewGroup
             parentView.removeView(holder.card)
@@ -143,5 +144,6 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         val hof=itemView.findViewById<TextView>(R.id.name22)
         val hofNumber=itemView.findViewById<ImageView>(R.id.recharge45)
         val card=itemView.findViewById<CardView>(R.id.hof)
+        val hofNo=itemView.findViewById<TextView>(R.id.Mobile98)
     }
 }

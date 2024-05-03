@@ -79,7 +79,7 @@ class CreditActivity : AppCompatActivity() {
         val submit=findViewById<TextView>(R.id.save_credit)
         submit.setOnClickListener {
             val enteredAmountValue = enteredAmount.text.toString().toIntOrNull() ?: 0
-            if (enteredAmountValue <= 0) {
+            if (enteredAmountValue <= 0 || enteredAmountValue>amount!!.toInt()) {
                 Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
             } else {
                 val toRemove=RechargeDetails(currentUser?.uid,name,number,telecom,amount,"Credit",validity, date,hof,hofNumber)
