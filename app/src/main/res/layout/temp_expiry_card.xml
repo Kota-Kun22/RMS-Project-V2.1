@@ -158,7 +158,6 @@
 
             </LinearLayout>
             <androidx.cardview.widget.CardView
-                android:id="@+id/hof"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -181,10 +180,10 @@
                     android:textColor="@color/Gray"
                     android:textStyle="bold" />
                     <TextView
-                        android:layout_width="25dp"
+                        android:layout_width="4dp"
                         android:layout_height="wrap_content"
                         android:text="|"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="4dp"
                         android:textColor="@color/Gray"
                         android:textSize="40sp"/>
 
@@ -193,28 +192,55 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:layout_marginLeft="6dp"
                         android:orientation="vertical">
-
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:orientation="horizontal">
                         <TextView
-                            android:id="@+id/name22"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
-                            android:text="Aisha Jha"
+                            android:text="Name:"
                             android:textSize="15dp"
-                            android:textStyle="bold" />
-
+                            android:fontFamily="@font/poppins_light"/>
                         <TextView
-                            android:id="@+id/date2"
+                            android:id="@+id/name2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:text=" Aisha Jha"
+                            android:textSize="15dp"
+                            android:fontFamily="@font/poppins_light" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/textMob"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/poppins_light"
-                            android:text="04/01/2024"
+                            android:text="Mob. No."
+                            android:textColor="@color/Gray"
+                            android:textSize="14dp"/>
+                        <TextView
+                            android:id="@+id/Mobile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/poppins_light"
+                            android:text="9588779890"
                             android:textColor="@color/Gray"
                             android:textSize="14dp" />
                     </LinearLayout>
+
+
+                    </LinearLayout>
                     <ImageView
-                        android:id="@+id/recharge45"
+                        android:id="@+id/recharge4"
                         android:layout_width="28dp"
                         android:layout_height="match_parent"
                         android:backgroundTint="#6D7DFF"
