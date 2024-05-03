@@ -71,37 +71,48 @@
         style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/edittextHeight"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
-        android:hint="@string/type_your_email"
-        android:textAlignment="textStart"
-        android:padding="16dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/sf_pro_display"
+        android:layout_marginRight="30dp"
         android:background="@color/whiteSmoke"
+        android:hint="@string/type_your_email"
+        android:padding="16dp"
+        android:textAlignment="center"
         android:textColorHint="@color/g_gray700"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvQuality" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Type_password_SignIN"
         style="@style/editText"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/edittextHeight"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
-        android:hint="Type Your Password"
-        android:padding="16dp"
-        android:background="@color/whiteSmoke"
-        android:inputType="textPassword"
-        android:textAlignment="textStart"
+        android:padding="10dp"
         android:textColorHint="@color/g_gray700"
+        android:textAlignment="center"
+        app:passwordToggleEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_mail" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_mail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittextHeight"
+            android:inputType="textPassword"
+            android:background="@color/whiteSmoke"
+            android:textAlignment="center"
+            style="@style/editText"
+          android:fontFamily="@font/sf_pro_display"
+            android:hint="@string/type_your_password"
+            android:textColorHint="@color/g_gray700">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
