@@ -11,12 +11,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.RMS_project_V2"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
-
         <activity
             android:name="com.example.signUp_activity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
 
         <activity
             android:name="com.example.SignIn_activity"

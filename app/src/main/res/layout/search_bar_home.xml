@@ -26,7 +26,6 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/border_edittext"
             android:drawableStart="@drawable/ic_search"
-            android:drawableEnd="@drawable/ic_filter"
             android:drawablePadding="7.5dp"
             android:hint="Enter name, number or HOF"
             android:paddingStart="10dp"
