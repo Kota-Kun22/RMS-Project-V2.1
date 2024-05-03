@@ -1,5 +1,7 @@
 package com.example
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rms_project_v2.R
 import java.text.ParseException
@@ -19,9 +24,8 @@ import java.util.Locale
 class CustomerFragmentAdapter(private val c: Context, private var userList: ArrayList<RechargeDetails>) :
 RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        return CustomerFragmentAdapter.UserViewHolder(LayoutInflater.from(c).inflate(R.layout.expired_cardview, parent, false))
+        return CustomerFragmentAdapter.UserViewHolder(LayoutInflater.from(c).inflate(R.layout.temp_expiry_card, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +38,11 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         holder.number.text = currentUser.phone_no
         holder.telecom.text = currentUser.telecom
         holder.validity.text = currentUser.validity
-
+        holder.hof.text = currentUser.hof
+        if (currentUser.hof=="1"){
+            val parentView = holder.card.parent as ViewGroup
+            parentView.removeView(holder.card)
+        }
 
         val validityString = currentUser.validity
         val validityValue = validityString?.split(" ")?.get(0)?.toIntOrNull() ?: 0
@@ -62,6 +70,8 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
             intent.putExtra("name",currentUser.name)
             intent.putExtra("number",currentUser.phone_no)
             intent.putExtra("telecom",currentUser.telecom)
+            intent.putExtra("hof",currentUser.hof)
+            intent.putExtra("hofNumber",currentUser.hofNumber)
             c.startActivity(intent)
         }
         holder.message.setOnClickListener {
@@ -71,8 +81,24 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
             intent.data = Uri.parse(url)
             c.startActivity(intent)
         }
+        holder.hofNumber.setOnClickListener {
+            copyToClipboard(currentUser.phone_no!!)
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            val number="+91"+currentUser.hofNumber
+            val url = "https://api.whatsapp.com/send?phone=$number"
+            intent.data = Uri.parse(url)
+            c.startActivity(intent)
+        }
 
 
+    }
+
+    private fun copyToClipboard(text: String) {
+        val clipboardManager = c.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("Copied Text", text)
+        clipboardManager.setPrimaryClip(clipData)
+        Toast.makeText(c, "Number copied to clipboard", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -114,5 +140,8 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         val expired = itemView.findViewById<TextView>(R.id.expired3)
         val recharge=itemView.findViewById<ImageView>(R.id.recharge3)
         val message=itemView.findViewById<ImageView>(R.id.message3)
+        val hof=itemView.findViewById<TextView>(R.id.name22)
+        val hofNumber=itemView.findViewById<ImageView>(R.id.recharge45)
+        val card=itemView.findViewById<CardView>(R.id.hof)
     }
 }

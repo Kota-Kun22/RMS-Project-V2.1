@@ -97,6 +97,12 @@ class TransactionsFragment : Fragment() {
                     Toast.makeText(requireContext(), "Failed to delete transaction history: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             transactionList.clear()
+            val creditText: TextView = rootView.findViewById(R.id.credit)
+            val paidText: TextView = rootView.findViewById(R.id.paid)
+            val totalText: TextView = rootView.findViewById(R.id.total)
+            creditText.text = "0"
+            paidText.text = "0"
+            totalText.text = "₹ 0"
             adapter.notifyDataSetChanged()
         }
 
@@ -215,7 +221,10 @@ class TransactionsFragment : Fragment() {
                                 transactionList.add(it)
                                 paid += (it.amount!!.toInt())
                             }
-                            credit=0
+                            else{
+                                credit+=it.amount!!.toInt()
+                            }
+
                         }
                     }
                     adapter.notifyDataSetChanged()
@@ -253,7 +262,10 @@ class TransactionsFragment : Fragment() {
                                 transactionList.add(it)
                                 credit+= (it.amount!!.toInt())
                             }
-                            paid=0
+                            else{
+                                paid+=(it.amount!!.toInt())
+                            }
+
                         }
                     }
                     adapter.notifyDataSetChanged()

@@ -9,10 +9,14 @@ class Member(
     var phone_no: String? = null,
     var telecom: String? = null,
     var email: String? = null,
-    var role:String?=null
+    var role: String? = null,
+    var hof: String? = null,
+    var hofNumber: String? = null
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -28,6 +32,8 @@ class Member(
         parcel.writeString(telecom)
         parcel.writeString(email)
         parcel.writeString(role)
+        parcel.writeString(hof)
+        parcel.writeString(hofNumber)
     }
 
     override fun describeContents(): Int {

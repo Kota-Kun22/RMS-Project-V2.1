@@ -38,6 +38,8 @@ class RechargeActivity : AppCompatActivity() {
         val name=intent.getStringExtra("name")
         val number=intent.getStringExtra("number")
         val telecom=intent.getStringExtra("telecom")
+        val hof=intent.getStringExtra("hof")
+        val hofNumber=intent.getStringExtra("hofNumber")
 
         val customerName:TextView=findViewById(R.id.customer_name)
         customerName.text=name
@@ -68,7 +70,7 @@ class RechargeActivity : AppCompatActivity() {
                     val month = calendar.get(Calendar.MONTH) + 1
                     val day = calendar.get(Calendar.DAY_OF_MONTH)
                     val dateString = "$day/$month/$year"
-                    val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString)
+                    val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString,hof,hofNumber)
                     Fdatabase.push().setValue(recharge)
                         .addOnSuccessListener {
                             Toast.makeText(this@RechargeActivity, "Recharge details saved successfully.", Toast.LENGTH_SHORT).show()

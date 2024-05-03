@@ -9,6 +9,8 @@ class RechargeDetails {
     var payment_status: String? = null
     var validity: String? = null
     var date: String? = null
+    var hof: String? = null // Added hof field
+    var hofNumber: String? = null // Added hofNumber field
 
     constructor() {}
 
@@ -20,7 +22,9 @@ class RechargeDetails {
         amount: String?,
         payment_status: String?,
         validity: String?,
-        date: String?
+        date: String?,
+        hof: String?, // Include hof in the constructor parameters
+        hofNumber: String? // Include hofNumber in the constructor parameters
     ) {
         this.uid = uid
         this.name = name
@@ -30,7 +34,10 @@ class RechargeDetails {
         this.payment_status = payment_status
         this.validity = validity
         this.date = date
+        this.hof = hof // Assign hof to the property
+        this.hofNumber = hofNumber // Assign hofNumber to the property
     }
+
     fun matches(other: RechargeDetails): Boolean {
         return (uid == other.uid
                 && name == other.name
@@ -39,6 +46,8 @@ class RechargeDetails {
                 && amount == other.amount
                 && payment_status == other.payment_status
                 && validity == other.validity
-                && date == other.date)
+                && date == other.date
+                && hof == other.hof // Check hof equality
+                && hofNumber == other.hofNumber) // Check hofNumber equality
     }
 }

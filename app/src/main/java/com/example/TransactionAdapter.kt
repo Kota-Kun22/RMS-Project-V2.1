@@ -42,6 +42,8 @@ class TransactionAdapter(
                 intent.putExtra("telecom",currentUser.telecom)
                 intent.putExtra("validity",currentUser.validity)
                 intent.putExtra("date",currentUser.date)
+                intent.putExtra("hof",currentUser.hof)
+                intent.putExtra("hofNumber",currentUser.hofNumber)
                 c.startActivity(intent)
             }
         } else {

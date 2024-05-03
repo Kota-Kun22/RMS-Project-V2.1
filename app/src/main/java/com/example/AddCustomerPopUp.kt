@@ -63,7 +63,7 @@ class AddCustomerPopUp : AppCompatActivity() {
 
         val addMember: TextView = findViewById(R.id.addMember)
         addMember.setOnClickListener {
-            familyMembers.add(NewUser("", "", "", "", "", "", 0, listOf(), ""))
+            familyMembers.add(NewUser("", "", "", "", "", "", 0, listOf(), "","",""))
             adapter.notifyItemInserted(familyMembers.size - 1)
             count += 1
         }
@@ -139,7 +139,10 @@ class AddCustomerPopUp : AppCompatActivity() {
                 val viewHolder =
                     recyclerView.findViewHolderForAdapterPosition(i) as? AddCustomerRecyclerViewAdapter.UserViewHolder
                 viewHolder?.let {
-                    membersList.add(it.getMember())
+                    val temp=it.getMember()
+                    temp.hof=userName
+                    temp.hofNumber=userNumber
+                    membersList.add(temp)
                 }
             }
 
@@ -153,7 +156,9 @@ class AddCustomerPopUp : AppCompatActivity() {
                     userEmail,
                     count,
                     membersList,
-                    role
+                    role,
+                    "1",
+                    "1"
                 )
                 Fdatabase.child(currentUser.uid).push().setValue(user)
                     .addOnSuccessListener {
