@@ -25,7 +25,7 @@ class SignIn_activity : AppCompatActivity() {
 
         binding.LogINButton.setOnClickListener {
             val email = binding.signInMail.text.toString()
-            val pass = binding.TypePasswordSignIN.text.toString()
+            val pass = binding.TypePasswordSignIN.editText!!.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty()) {
 
