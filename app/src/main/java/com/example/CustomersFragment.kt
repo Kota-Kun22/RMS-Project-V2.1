@@ -39,6 +39,8 @@ class CustomersFragment : Fragment() {
         userRecyclerView = rootView.findViewById(R.id.customer_rv)
         userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRecyclerView.adapter = adapter
+        var count=0
+        val listSize:TextView=rootView.findViewById(R.id.listSize)
 
         mDbRef.child(firebaseAuth.currentUser?.uid ?: "").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -47,6 +49,8 @@ class CustomersFragment : Fragment() {
                     val currentUser = postSnapshot.getValue(NewUser::class.java)
                     currentUser?.let {
                         userList.add(it)
+                        count+=1
+                        listSize.setText("All (${count})")
                     }
                 }
                 adapter.notifyDataSetChanged()
@@ -56,6 +60,7 @@ class CustomersFragment : Fragment() {
                 Log.e("FirebaseError", "Database operation cancelled: $error")
             }
         })
+
 
         return rootView
     }

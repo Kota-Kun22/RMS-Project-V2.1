@@ -16,6 +16,16 @@
         android:textSize="20sp"
         android:fontFamily="@font/poppins_thin"
         android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/listSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:paddingStart="15dp"
+        android:text="Total(0)"
+        android:textColor="#6B6B6B"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/customer_rv"
         android:layout_width="match_parent"
