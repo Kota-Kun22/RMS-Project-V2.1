@@ -37,24 +37,14 @@
         android:paddingBottom="50dp" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Change Theme"
-        android:drawableEnd="@drawable/ic_arrow_right_24"
-        android:textSize="18sp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:textStyle="bold"/>
-    <TextView
         android:id="@+id/password_change"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Change Password"
-        android:drawableEnd="@drawable/ic_arrow_right_24"
-        android:textSize="18sp"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="140dp"
-        android:textStyle="bold"/>
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
+        android:drawableEnd="@drawable/ic_arrow_right_24"
+        android:text="Change Password"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </FrameLayout>

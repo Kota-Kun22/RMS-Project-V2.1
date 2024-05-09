@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class CustomerFragmentAdapter(private val c: Context, private var userList: ArrayList<RechargeDetails>) :
 RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
@@ -40,9 +42,14 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         holder.validity.text = currentUser.validity
         holder.hof.text = currentUser.hof
         holder.hofNo.text=currentUser.hofNumber
-        if (currentUser.hof=="1"){
-            val parentView = holder.card.parent as ViewGroup
-            parentView.removeView(holder.card)
+        holder.card.parent?.let { parent ->
+            if (currentUser.hof == "1") {
+                if (parent is ViewGroup) {
+                    parent.removeView(holder.card)
+                } else {
+                    Log.e("CustomerFragmentAdapter", "Parent view is not a ViewGroup")
+                }
+            }
         }
 
         val validityString = currentUser.validity
@@ -57,8 +64,12 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         val expiry=addDaysToDate(currentUser.date.toString(),validityValue)
 
         val check=compareDates(expiry,formattedCurrentDate)
-        if(check<0){
+        val daysRemaining=differenceDate(expiry,formattedCurrentDate)
+        if(check<=0){
             holder.expired.text="Expired"
+        }
+        else if(daysRemaining<=5 && daysRemaining>0){
+            holder.expired.text="Expiring Soon"
         }
         else{
             holder.expired.setTextColor(ContextCompat.getColor(c, R.color.g_black))
@@ -111,7 +122,8 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
             calendar.time = date
             calendar.add(Calendar.DAY_OF_MONTH, daysToAdd)
             return sdf.format(calendar.time)
-        } else {
+        }
+        else {
             return ""
         }
     }
@@ -127,6 +139,19 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
             e.printStackTrace()
             return 0
         }
+    }
+    fun differenceDate(dateString1: String, dateString2: String): Int {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+
+        val cal1 = Calendar.getInstance()
+        val cal2 = Calendar.getInstance()
+        cal1.time = dateFormat.parse(dateString1)!!
+        cal2.time = dateFormat.parse(dateString2)!!
+
+        val diffInMillis = cal1.timeInMillis - cal2.timeInMillis
+
+        val daysDifference = TimeUnit.MILLISECONDS.toDays(diffInMillis)
+        return daysDifference.toInt()
     }
     fun setData(data: ArrayList<RechargeDetails>) {
         userList = data

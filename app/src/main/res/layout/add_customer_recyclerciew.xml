@@ -308,6 +308,20 @@
             android:textSize="17sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/saveHof"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="6dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="Submit details"
+            android:textColor="#6D7DFF"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/addCustomerRecyclerview"
             android:layout_width="match_parent"

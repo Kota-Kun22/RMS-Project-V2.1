@@ -17,20 +17,68 @@
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"/>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="143dp"
-        android:paddingEnd="25dp"
-        android:text="All"
-        android:textColor="#B1B1B1"
-        android:textAlignment="textEnd"
-        android:textSize="14sp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="170dp">
+
+        <TextView
+            android:id="@+id/allTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All"
+            android:textColor="#6D7DFF"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textColor="#AAB4FF"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/expiredTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Expired"
+            android:textColor="#AAB4FF"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textColor="#AAB4FF"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/esTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Expiring Soon"
+            android:textStyle="bold"
+            android:textColor="#AAB4FF"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="175dp"
-        tools:listitem="@layout/customers_profile_cardview"/>
+        android:layout_marginTop="215dp"
+        tools:listitem="@layout/temp_expiry_card"/>
 
 </FrameLayout>

@@ -15,7 +15,9 @@ import java.util.Calendar
 
 class AddCustomerRecyclerViewAdapter(
     private val userList: MutableList<NewUser>,
-    private val contextt: Context
+    private val contextt: Context,
+    private val hof: String,
+    private val hofNumber: String,
 ) :
     RecyclerView.Adapter<AddCustomerRecyclerViewAdapter.UserViewHolder>() {
 
@@ -24,7 +26,6 @@ class AddCustomerRecyclerViewAdapter(
             .inflate(R.layout.add_customer_cardview, parent, false)
         return UserViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentUser = userList[position]
         holder.dobEditText.setOnClickListener {
@@ -60,12 +61,11 @@ class AddCustomerRecyclerViewAdapter(
         private val emailEditText: EditText = itemView.findViewById(R.id.emailAddress)
         private val roleSpinner = itemView.findViewById<Spinner>(R.id.assign_Role1)
 
-        val rolePlans = arrayOf("Assign Role","Head of Family","Member")
+        val rolePlans = arrayOf("Individual","Member")
         val arrayAdapter = ArrayAdapter(itemView.context ,android.R.layout.simple_spinner_dropdown_item,rolePlans)
 
-        val telecomPlans = arrayOf("Select","Airtel","Jio","Vi","Bsnl")
+        val telecomPlans = arrayOf("Select","Airtel","Jio","VI","BSNL")
         val arrayAdapter1 = ArrayAdapter(itemView.context,android.R.layout.simple_spinner_dropdown_item,telecomPlans)
-
 
 
         fun bind(user: NewUser) {
@@ -83,7 +83,9 @@ class AddCustomerRecyclerViewAdapter(
                 numberEditText.text.toString(),
                 telecomEditText.selectedItem.toString(),
                 emailEditText.text.toString(),
-                roleSpinner.selectedItem.toString(),"",""
+                roleSpinner.selectedItem.toString(),
+                hof,
+                hofNumber
             )
         }
     }

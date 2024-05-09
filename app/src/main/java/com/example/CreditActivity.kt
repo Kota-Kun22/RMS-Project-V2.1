@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -39,11 +41,18 @@ class CreditActivity : AppCompatActivity() {
         phone_no.text = number
         val amountActual = findViewById<TextView>(R.id.total_credit)
         amountActual.text = "₹$amount"
-
+        val back:ImageView=findViewById(R.id.backMark)
+        back.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+        }
         val enteredAmount = findViewById<EditText>(R.id.entered_amount)
         val remaining = findViewById<TextView>(R.id.remaining_credit)
         remaining.text="₹"+amount
         val a1 = amount?.toIntOrNull() ?: 0
+        val markAll:CheckBox=findViewById(R.id.checkBox)
+        markAll.setOnClickListener {
+            enteredAmount.setText("$amount")
+        }
 
         // Add a TextWatcher to capture changes in the entered amount
         enteredAmount.addTextChangedListener(object : TextWatcher {
