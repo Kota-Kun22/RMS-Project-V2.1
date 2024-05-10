@@ -42,13 +42,14 @@
                     <TextView
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
-                        android:layout_height="18dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="7.5dp"
                         android:fontFamily="@font/poppins_thin"
                         android:text="Amit Jha"
+                        android:textColor="@color/black"
                         android:textFontWeight="500"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <RelativeLayout
@@ -146,7 +147,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:layout_marginTop="6dp"
+                            android:layout_marginTop="3.8dp"
                             android:text="+ 0" />
 
 

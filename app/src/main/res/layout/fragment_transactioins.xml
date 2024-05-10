@@ -215,30 +215,38 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="Name/Date"/>
+            android:gravity="center"
+            android:text="Name/Date"
+            android:textColor="@color/black"
+            android:textFontWeight="500" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="Telecom"/>
+            android:gravity="center"
+            android:text="Telecom"
+            android:textColor="@color/black"
+            android:textFontWeight="500" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="Amount"/>
+            android:gravity="center"
+            android:text="Amount"
+            android:textColor="@color/black"
+            android:textFontWeight="500" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="Payment"/>
+            android:gravity="center"
+            android:text="Payment"
+            android:textColor="@color/black"
+            android:textFontWeight="500" />
 
     </LinearLayout>
     <View

@@ -7,220 +7,211 @@
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
     app:contentPadding="6dp">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="0dp">
-
-    <ImageView
-        android:id="@+id/add_media_image"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/pp_bg"
-        android:contentDescription="@string/media_image"
-        android:padding="7.5dp"
-        android:src="@drawable/add_media_image"
-        app:tint="#6D7DFF" />
-    <TextView
-        android:id="@+id/insert_edit_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="@string/insert_image"
-        android:textColor="#6D7DFF"
-        android:textSize="@dimen/h2TextSize" />
-    <Spinner
-        android:id="@+id/assign_Role1"
-        android:layout_width="123dp"
-        android:layout_height="29dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:autofillHints=""
-        android:background="@drawable/spinner_bg"
-        android:drawableEnd="@drawable/baseline_arrow_downward_24"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/poppins_light"
-        android:hint="@string/assign_role"
-        android:inputType="none"
-        android:padding="6dp"
-        android:textColorHint="@color/colour"
-        android:textSize="17sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="@string/name"
-        android:textColor="@color/black"
-        android:textFontWeight="500"
-        android:textSize="17sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/user_name"
-        android:layout_width="320dp"
-        android:layout_height="32dp"
-        android:autofillHints=""
-        android:background="@drawable/edittext_bg"
-        android:ems="20"
-        android:hint="@string/user_name"
-        android:inputType="textPersonName"
-        android:minHeight="18dp"
-        android:paddingStart="10dp"
-        android:paddingTop="6dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="6dp"
-        android:text=""
-        android:textColorHint="@color/Transparent"
-        android:textSize="@dimen/h2TextSize" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="@string/date_of_birth"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/date_of_birth"
-        android:layout_width="320dp"
-        android:layout_height="32dp"
-        android:autofillHints=""
-        android:background="@drawable/edittext_bg"
-        android:drawableEnd="@drawable/baseline_calendar_month_24"
-        android:ems="20"
-        android:hint="@string/dob"
-        android:inputType="date"
-        android:minHeight="18dp"
-        android:padding="6dp"
-        android:paddingStart="10dp"
-        android:paddingTop="6dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="6dp"
-        android:text=""
-        android:textColorHint="@color/g_gray700"
-        android:textSize="@dimen/h2TextSize" />
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_marginBottom="15dp"
+        android:padding="0dp">
+
+        <ImageView
+            android:id="@+id/add_media_image"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/pp_bg"
+            android:contentDescription="@string/media_image"
+            android:padding="7.5dp"
+            android:src="@drawable/add_media_image"
+            app:tint="#6D7DFF" />
+        <!--    <TextView-->
+        <!--        android:id="@+id/insert_edit_image"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_gravity="center_horizontal"-->
+        <!--        android:layout_marginTop="10dp"-->
+        <!--        android:fontFamily="@font/poppins_light"-->
+        <!--        android:text="@string/insert_image"-->
+        <!--        android:textColor="#6D7DFF"-->
+        <!--        android:textSize="@dimen/h2TextSize" />-->
+        <Spinner
+            android:id="@+id/assign_Role1"
+            android:layout_width="123dp"
+            android:layout_height="29dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:background="@drawable/spinner_bg"
+            android:drawableEnd="@drawable/baseline_arrow_downward_24"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/poppins_light"
+            android:hint="@string/assign_role"
+            android:inputType="none"
+            android:padding="6dp"
+            android:textColorHint="@color/colour"
+            android:textSize="17sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/name"
+            android:textColor="@color/black"
+            android:textFontWeight="500"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="320dp"
+            android:layout_height="32dp"
+            android:autofillHints=""
+            android:background="@drawable/edittext_bg"
+            android:ems="20"
+            android:hint="@string/user_name"
+            android:inputType="textPersonName"
+            android:minHeight="18dp"
+            android:paddingStart="10dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text=""
+            android:textColorHint="@color/Transparent"
+            android:textSize="@dimen/h2TextSize" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/date_of_birth"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/date_of_birth"
+            android:layout_width="320dp"
+            android:layout_height="32dp"
+            android:autofillHints=""
+            android:background="@drawable/edittext_bg"
+            android:drawableEnd="@drawable/baseline_calendar_month_24"
+            android:ems="20"
+            android:hint="@string/dob"
+            android:inputType="date"
+            android:minHeight="18dp"
+            android:padding="6dp"
+            android:paddingStart="10dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text=""
+            android:textColorHint="@color/g_gray700"
+            android:textSize="@dimen/h2TextSize" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginEnd="10dp">
-            <TextView
+            android:orientation="horizontal">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_light"
-                android:text="@string/mob_no"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:layout_marginEnd="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/mob_no"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/mobile_number"
-                android:layout_width="152dp"
-                android:layout_height="32dp"
-                android:autofillHints=""
-                android:background="@drawable/edittext_bg"
-                android:ems="10"
-                android:hint="@string/mobile_number"
-                android:inputType="phone"
-                android:maxLength="10"
-                android:minHeight="18dp"
-                android:paddingStart="10dp"
-                android:paddingTop="6dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="6dp"
-                android:text=""
-                android:textColorHint="@color/Transparent"
-                android:textSize="@dimen/h2TextSize" />
+                <EditText
+                    android:id="@+id/mobile_number"
+                    android:layout_width="152dp"
+                    android:layout_height="32dp"
+                    android:autofillHints=""
+                    android:background="@drawable/edittext_bg"
+                    android:ems="10"
+                    android:hint="@string/mobile_number"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:minHeight="18dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="6dp"
+                    android:text=""
+                    android:textColorHint="@color/Transparent"
+                    android:textSize="@dimen/h2TextSize" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/telecom"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/telecom_type"
+                    android:layout_width="152dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    android:autofillHints=""
+                    android:background="@drawable/spinner_bg"
+                    android:drawableEnd="@drawable/baseline_arrow_downward_24"
+                    android:drawableTint="@color/black"
+                    android:ems="10"
+                    android:hint="@string/select"
+                    android:inputType="none"
+                    android:minHeight="18dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="6dp"
+                    android:text=""
+                    android:textColorHint="@color/g_gray700"
+                    android:textSize="@dimen/h2TextSize" />
+            </LinearLayout>
+
         </LinearLayout>
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_light"
-                android:text="@string/telecom"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+            android:text="@string/email_id"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="17sp"/>
 
-            <Spinner
-                android:id="@+id/telecom_type"
-                android:layout_width="152dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:autofillHints=""
-                android:background="@drawable/spinner_bg"
-                android:drawableEnd="@drawable/baseline_arrow_downward_24"
-                android:drawableTint="@color/black"
-                android:ems="10"
-                android:hint="@string/select"
-                android:inputType="none"
-                android:minHeight="18dp"
-                android:paddingStart="10dp"
-                android:paddingTop="6dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="6dp"
-                android:text=""
-                android:textColorHint="@color/g_gray700"
-                android:textSize="@dimen/h2TextSize" />
-        </LinearLayout>
+        <EditText
+            android:id="@+id/emailAddress"
+            android:layout_width="320dp"
+            android:layout_height="32dp"
+            android:autofillHints=""
+            android:background="@drawable/edittext_bg"
+            android:drawableTint="@color/black"
+            android:ems="20"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:minHeight="18dp"
+            android:paddingStart="10dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text=""
+            android:textColorHint="@color/Transparent"
+            android:textSize="@dimen/h2TextSize" />
 
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/email_id"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:fontFamily="@font/poppins_light"
-        android:textSize="17sp"/>
-
-    <EditText
-        android:id="@+id/emailAddress"
-        android:layout_width="320dp"
-        android:layout_height="32dp"
-        android:autofillHints=""
-        android:background="@drawable/edittext_bg"
-        android:drawableTint="@color/black"
-        android:ems="20"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:minHeight="18dp"
-        android:paddingStart="10dp"
-        android:paddingTop="6dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="6dp"
-        android:text=""
-        android:textColorHint="@color/Transparent"
-        android:textSize="@dimen/h2TextSize" />
-    <TextView
-        android:id="@+id/delete_member"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete_member"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins_light"
-        android:textColor="@color/g_red"
-        android:textSize="@dimen/h2TextSize"/>
-
-</LinearLayout>
 </androidx.cardview.widget.CardView>

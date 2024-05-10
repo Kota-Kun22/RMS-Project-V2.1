@@ -87,7 +87,8 @@
                         android:layout_marginStart="4dp"
                         android:fontFamily="@font/poppins_thin"
                         android:text="Amit Jha"
-                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <RelativeLayout
@@ -235,7 +236,7 @@
                     android:fontFamily="@font/poppins_light"
                     android:text="Remaining credit will be"
                     android:textColor="@color/Gray"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/remaining_credit"
@@ -244,7 +245,7 @@
                     android:layout_margin="6dp"
                     android:text="₹ 122"
                     android:textColor="@color/g_red"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 

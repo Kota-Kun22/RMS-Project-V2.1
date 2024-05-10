@@ -23,9 +23,10 @@
                 android:id="@+id/name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17.5dp"
                 android:text="Aisha Jha"
-                android:textStyle="bold"/>
+                android:textColor="@color/black"
+                android:textSize="17.5dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/date2"
@@ -50,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="Airtel"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="17.5dp"
                 android:textStyle="bold" />
 
@@ -74,6 +76,7 @@
             android:paddingBottom="5dp"
             android:text="&#8377; 256"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="18dp"
             android:textStyle="bold" />
         <TextView
