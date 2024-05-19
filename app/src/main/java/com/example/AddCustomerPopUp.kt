@@ -27,23 +27,13 @@ class AddCustomerPopUp : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AddCustomerRecyclerViewAdapter
     private val familyMembers = mutableListOf<NewUser>()
-    private var flag:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_customer_recyclerciew)
 
-        var count = 0
-
         Fdatabase = FirebaseDatabase.getInstance().getReference("Users")
         firebaseAuth = FirebaseAuth.getInstance()
-
-
-//        recyclerView = findViewById(R.id.addCustomerRecyclerview)
-//        adapter = AddCustomerRecyclerViewAdapter(familyMembers, this)
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-
 
         val roleSpinner = findViewById<Spinner>(R.id.assign_Role)
         val rolePlans = arrayOf("Individual", "Head of Family")
@@ -64,7 +54,7 @@ class AddCustomerPopUp : AppCompatActivity() {
         telecomSpinner.adapter = arrayAdapter1
 
         val addMember: TextView = findViewById(R.id.addMember)
-        addMember.isEnabled=false
+        addMember.isEnabled = false
         addMember.visibility = View.GONE
         val saveHof: TextView = findViewById(R.id.saveHof)
         saveHof.setOnClickListener {
@@ -72,23 +62,22 @@ class AddCustomerPopUp : AppCompatActivity() {
             val number: EditText = findViewById(R.id.mobile_number1)
             val userName = name.text.toString().trim()
             val userNumber = number.text.toString().trim()
-            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length!=10) {
+            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length!= 10) {
                 Toast.makeText(this, "Please enter name and number to add member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             recyclerView = findViewById(R.id.addCustomerRecyclerview)
-            adapter = AddCustomerRecyclerViewAdapter(familyMembers, this,userName, userNumber)
+            adapter = AddCustomerRecyclerViewAdapter(familyMembers, this, userName, userNumber)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(this)
-            addMember.visibility=View.VISIBLE
-            addMember.isEnabled=true
-            saveHof.visibility=View.GONE
-            saveHof.isEnabled=false
+            addMember.visibility = View.VISIBLE
+            addMember.isEnabled = true
+            saveHof.visibility = View.GONE
+            saveHof.isEnabled = false
         }
         addMember.setOnClickListener {
-                familyMembers.add(NewUser("", "", "", "", "", "", 0, listOf(), "","",""))
-                adapter.notifyItemInserted(familyMembers.size - 1)
-                count += 1
+            familyMembers.add(NewUser("", "", "", "", "", "", 0, listOf(), "","",""))
+            adapter.notifyItemInserted(familyMembers.size - 1)
         }
         val dob: TextView = findViewById(R.id.date_of_birth1)
         dob.setOnClickListener {
@@ -114,10 +103,8 @@ class AddCustomerPopUp : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
-
         val saveDetails: TextView = findViewById(R.id.saveDetails)
         saveDetails.setOnClickListener {
-            flag=true
             saveDetails.isEnabled = false
             saveDetails.text = "Loading..."
 
@@ -133,45 +120,26 @@ class AddCustomerPopUp : AppCompatActivity() {
             val userDob = dob.text.toString().trim()
             val userNumber = number.text.toString().trim()
             val userEmail = email.text.toString().trim()
-//
-//            if (userName.isEmpty() || userDob.isEmpty() || userNumber.isEmpty() || userEmail.isEmpty()) {
-//                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-//                saveDetails.isEnabled = true
-//                saveDetails.text = "Save"
-//                return@setOnClickListener
-//            }
-//            if (userNumber.length != 10) {
-//                Toast.makeText(this, "Phone number must be 10 digits", Toast.LENGTH_SHORT).show()
-//                saveDetails.isEnabled = true
-//                saveDetails.text = "Save"
-//                return@setOnClickListener
-//            }
-//            val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-//            if (!userEmail.matches(emailPattern.toRegex())) {
-//                Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show()
-//                saveDetails.isEnabled = true
-//                saveDetails.text = "Save"
-//                return@setOnClickListener
-//            }
 
-            // Continue with saving data
             val membersList = mutableListOf<Member>()
             recyclerView.postDelayed({
-                for (i in 0 until count) {
-                    val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? AddCustomerRecyclerViewAdapter.UserViewHolder
-                    if (viewHolder != null) {
-                        membersList.add(viewHolder.getMember())
-                    } else {
-                        Log.e("RecyclerView", "ViewHolder is null for position: $i")
-                    }
+                Toast.makeText(this, "FM: ${familyMembers.size}", Toast.LENGTH_LONG).show()
+                for (newUser in familyMembers) {
+                    val member = Member(
+                        newUser.name,
+                        newUser.dob,
+                        newUser.phone_no,
+                        newUser.telecom,
+                        newUser.email,
+                        newUser.role,
+                        newUser.hof,
+                        newUser.hofNumber
+                    )
+                    membersList.add(member)
                 }
+                Toast.makeText(this, "ML: ${membersList.size}", Toast.LENGTH_LONG).show()
             }, 100)
-//            if(!flag){
-//                saveDetails.isEnabled = true
-//                saveDetails.text = "Save"
-//                Toast.makeText(this, "Please  fill in all member details", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
+
             firebaseAuth.currentUser?.let { currentUser ->
                 val user = NewUser(
                     currentUser.uid,
@@ -180,7 +148,7 @@ class AddCustomerPopUp : AppCompatActivity() {
                     userNumber,
                     userTelecom,
                     userEmail,
-                    count,
+                    familyMembers.size,
                     membersList,
                     role,
                     "1",
@@ -199,11 +167,6 @@ class AddCustomerPopUp : AppCompatActivity() {
                         saveDetails.text = "Save"
                     }
             }
-            val back: ImageView = findViewById(R.id.back_icon)
-            back.setOnClickListener {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
         }
     }
 }
-

@@ -8,12 +8,15 @@ class NewUser {
     var telecom: String? = null
     var email: String? = null
     var count: Int = 0
-    lateinit var members: List<Member>
+    var members = mutableListOf<Member>()
     var role: String? = null
     var hof: String? = null
     var hofNumber: String? = null
 
     constructor() {}
+
+//    test
+
 
     constructor(
         uid: String?,
@@ -35,7 +38,7 @@ class NewUser {
         this.telecom = telecom
         this.email = email
         this.count = count
-        this.members = members
+        this.members = members.toMutableList()
         this.role = role
         this.hof = hof
         this.hofNumber = hofNumber
