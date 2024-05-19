@@ -34,6 +34,8 @@ class UserAdapter(private val context: Context, private var userList: ArrayList<
         holder.itemView.setOnClickListener {
             if(currentUser.count!=0){
                     val intent= Intent(context, FamilyMemberDetails::class.java)
+                Toast.makeText(context, "CCN: ${currentUser.count}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "MN: ${currentUser.members.size}", Toast.LENGTH_LONG).show()
                     intent.putExtra("count",currentUser.count)
                     intent.putExtra("members",currentUser.members as Serializable)
                     context.startActivity(intent)

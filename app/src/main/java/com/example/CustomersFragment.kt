@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,6 +58,7 @@ class CustomersFragment : Fragment() {
                     }
                 }
                 adapter.notifyDataSetChanged()
+                Toast.makeText(context, "${userList.size}", Toast.LENGTH_LONG).show()
             }
 
             override fun onCancelled(error: DatabaseError) {
