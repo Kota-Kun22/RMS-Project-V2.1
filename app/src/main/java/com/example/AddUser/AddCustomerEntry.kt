@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
 class AddCustomerEntry : AppCompatActivity() {
-
+    //Adding the Customer
     private lateinit var Fdatabase: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var recyclerView: RecyclerView
