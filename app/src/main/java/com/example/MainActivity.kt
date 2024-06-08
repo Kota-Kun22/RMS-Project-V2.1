@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.example.AddUser.AddCustomerEntry
+import com.example.Customer.CustomersFragment
+import com.example.Home.HomeFragment
+import com.example.MenuSetting.MenuFragment
+import com.example.Transcation.TransactionsFragment
 import com.example.rms_project_v2.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -15,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         val addCustomer: ImageView = findViewById(R.id.add_customer)
         addCustomer.setOnClickListener {
-            startActivity(Intent(this, AddCustomerPopUp::class.java))
+            startActivity(Intent(this, AddCustomerEntry::class.java))
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)

@@ -1,4 +1,4 @@
-package com.example
+package com.example.MenuSetting
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.example.Authnic.SignIn_activity
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -29,14 +30,14 @@ class MenuFragment : Fragment() {
             val currentUser = firebaseAuth.currentUser
             if (currentUser != null) {
                 firebaseAuth.signOut()
-                startActivity(Intent(requireContext(),SignIn_activity::class.java))
+                startActivity(Intent(requireContext(), SignIn_activity::class.java))
             } else {
                 Toast.makeText(requireContext(), "No user is currently signed in", Toast.LENGTH_SHORT).show()
             }
         }
 
         password_change.setOnClickListener {
-            startActivity(Intent(requireContext(),PasswordChange::class.java))
+            startActivity(Intent(requireContext(), PasswordChange::class.java))
         }
 
         return rootView

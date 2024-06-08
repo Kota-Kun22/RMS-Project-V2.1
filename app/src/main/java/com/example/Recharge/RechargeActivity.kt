@@ -1,4 +1,4 @@
-package com.example
+package com.example.Recharge
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import com.example.MainActivity
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -81,7 +82,7 @@ class RechargeActivity : AppCompatActivity() {
                             Toast.makeText(this@RechargeActivity, "Recharge details saved successfully.", Toast.LENGTH_SHORT).show()
                             submit.isEnabled = true
                             submit.text = "Submit"
-                            startActivity(Intent(this,MainActivity::class.java))
+                            startActivity(Intent(this, MainActivity::class.java))
                         }
                         .addOnFailureListener {
                             Toast.makeText(this@RechargeActivity, "Failed to save recharge details.", Toast.LENGTH_SHORT).show()
@@ -93,7 +94,7 @@ class RechargeActivity : AppCompatActivity() {
         }
         val back:ImageView=findViewById(R.id.imageView)
         back.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 }

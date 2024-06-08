@@ -1,4 +1,4 @@
-package com.example
+package com.example.Customer
 
 import android.content.Context
 import android.content.Intent
@@ -10,11 +10,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.entities.NewCustomer
+import com.example.Recharge.RechargeActivity
 import com.example.rms_project_v2.R
 import java.io.Serializable
 
-class UserAdapter(private val context: Context, private var userList: ArrayList<NewUser>) :
-    RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class CustomerAdapter(private val context: Context, private var userList: ArrayList<NewCustomer>) :
+    RecyclerView.Adapter<CustomerAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view: View = LayoutInflater.from(context).inflate(R.layout.customers_profile_cardview, parent, false)
@@ -32,8 +34,10 @@ class UserAdapter(private val context: Context, private var userList: ArrayList<
         holder.telecom.text = currentUser.telecom
 
         holder.itemView.setOnClickListener {
+
             if(currentUser.count!=0){
-                    val intent= Intent(context, FamilyMemberDetails::class.java)
+                    val intent= Intent(context, FamilyMemberDetails::class.java)//family memeber
+
                 Toast.makeText(context, "CCN: ${currentUser.count}", Toast.LENGTH_LONG).show()
                 Toast.makeText(context, "MN: ${currentUser.members.size}", Toast.LENGTH_LONG).show()
                     intent.putExtra("count",currentUser.count)
@@ -65,7 +69,7 @@ class UserAdapter(private val context: Context, private var userList: ArrayList<
         holder.count.text="+ "+currentUser.count.toString()
     }
 
-    fun setData(data: ArrayList<NewUser>) {
+    fun setData(data: ArrayList<NewCustomer>) {
         userList = data
         notifyDataSetChanged()
     }

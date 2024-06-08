@@ -1,9 +1,10 @@
-package com.example
+package com.example.Customer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.entities.Member
 import com.example.rms_project_v2.R
 
 class FamilyMemberDetails:AppCompatActivity() {

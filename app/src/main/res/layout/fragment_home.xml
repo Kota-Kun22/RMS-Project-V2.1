@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.HomeFragment"
+    tools:context="com.example.Home.HomeFragment"
     android:background="@color/white">
     <include android:id="@+id/top_bar"
         layout="@layout/search_bar_home"/>

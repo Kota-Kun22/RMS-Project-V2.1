@@ -1,4 +1,4 @@
-package com.example
+package com.example.Transcation.CreditManagement
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
+import com.example.MainActivity
+import com.example.Recharge.RechargeDetails
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -43,7 +44,7 @@ class CreditActivity : AppCompatActivity() {
         amountActual.text = "₹$amount"
         val back:ImageView=findViewById(R.id.backMark)
         back.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
         val enteredAmount = findViewById<EditText>(R.id.entered_amount)
         val remaining = findViewById<TextView>(R.id.remaining_credit)
@@ -91,7 +92,7 @@ class CreditActivity : AppCompatActivity() {
             if (enteredAmountValue <= 0 || enteredAmountValue>amount!!.toInt()) {
                 Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
             } else {
-                val toRemove=RechargeDetails(currentUser?.uid,name,number,telecom,amount,"Credit",validity, date,hof,hofNumber)
+                val toRemove= RechargeDetails(currentUser?.uid,name,number,telecom,amount,"Credit",validity, date,hof,hofNumber)
                 val toRemoveRef = Fdatabase.orderByChild("name").equalTo(toRemove.name)
                 toRemoveRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -127,7 +128,7 @@ class CreditActivity : AppCompatActivity() {
                 Fdatabase.push().setValue(t2)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Recharge details saved successfully.", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this,MainActivity::class.java))
+                        startActivity(Intent(this, MainActivity::class.java))
                     }
                     .addOnFailureListener {
                         Toast.makeText(this, "Failed to save recharge details.", Toast.LENGTH_SHORT).show()

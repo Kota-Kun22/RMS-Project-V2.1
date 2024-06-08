@@ -1,4 +1,4 @@
-package com.example
+package com.example.Home
 
 import android.os.Bundle
 import android.text.Editable
@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.NewUser
+import com.example.Recharge.RechargeDetails
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*

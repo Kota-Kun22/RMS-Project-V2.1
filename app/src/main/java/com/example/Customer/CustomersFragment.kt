@@ -1,4 +1,4 @@
-package com.example
+package com.example.Customer
 
 
 import android.os.Bundle
@@ -11,10 +11,10 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.entities.NewCustomer
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -25,9 +25,12 @@ import com.google.firebase.database.ValueEventListener
 
 
 class CustomersFragment : Fragment() {
+
+    //changes has to be done in this C1 hof list will be shown here
+
     private lateinit var userRecyclerView: RecyclerView
-    private lateinit var userList: ArrayList<NewUser>
-    private lateinit var adapter: UserAdapter
+    private lateinit var userList: ArrayList<NewCustomer>
+    private lateinit var adapter: CustomerAdapter
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
     var count: Int=0
@@ -40,7 +43,7 @@ class CustomersFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().getReference("Users")
         userList = ArrayList()
-        adapter = UserAdapter(requireContext(),userList)
+        adapter = CustomerAdapter(requireContext(),userList)
         userRecyclerView = rootView.findViewById(R.id.customer_rv)
         userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRecyclerView.adapter = adapter
@@ -50,7 +53,7 @@ class CustomersFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userList.clear()
                 for (postSnapshot in snapshot.children) {
-                    val currentUser = postSnapshot.getValue(NewUser::class.java)
+                    val currentUser = postSnapshot.getValue(NewCustomer::class.java)
                     currentUser?.let {
                         userList.add(it)
                         count+=1
@@ -85,7 +88,7 @@ class CustomersFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     userList.clear()
                     for (postSnapshot in snapshot.children) {
-                        val currentUser = postSnapshot.getValue(NewUser::class.java)
+                        val currentUser = postSnapshot.getValue(NewCustomer::class.java)
                         currentUser?.let {
                             userList.add(it)
                             count+=1
@@ -105,7 +108,7 @@ class CustomersFragment : Fragment() {
                         user.phone_no?.contains(query) ?: false ||
                         user.telecom?.contains(query, ignoreCase = true) ?: false
             }
-            adapter.setData(filteredList as ArrayList<NewUser>)
+            adapter.setData(filteredList as ArrayList<NewCustomer>)
         }
     }
 

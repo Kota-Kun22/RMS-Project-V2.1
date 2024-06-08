@@ -1,9 +1,8 @@
-package com.example
+package com.example.AddUser
 
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -14,19 +13,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.MainActivity
+import com.example.entities.Member
+import com.example.entities.NewCustomer
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
-class AddCustomerPopUp : AppCompatActivity() {
+class AddCustomerEntry : AppCompatActivity() {
 
     private lateinit var Fdatabase: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: AddCustomerRecyclerViewAdapter
-    private val familyMembers = mutableListOf<NewUser>()
+    private lateinit var adapter: AddMemeberRecyclerViewAdapter
+    private val familyMembers = mutableListOf<NewCustomer>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,7 @@ class AddCustomerPopUp : AppCompatActivity() {
         val roleSpinner = findViewById<Spinner>(R.id.assign_Role)
         val rolePlans = arrayOf("Individual", "Head of Family")
         val arrayAdapter = ArrayAdapter(
-            this@AddCustomerPopUp,
+            this@AddCustomerEntry,
             android.R.layout.simple_spinner_dropdown_item,
             rolePlans
         )
@@ -47,7 +49,7 @@ class AddCustomerPopUp : AppCompatActivity() {
         val telecomSpinner = findViewById<Spinner>(R.id.telecom_type1)
         val telecomPlans = arrayOf("Select", "Airtel", "Jio", "Vi", "Bsnl")
         val arrayAdapter1 = ArrayAdapter(
-            this@AddCustomerPopUp,
+            this@AddCustomerEntry,
             android.R.layout.simple_spinner_dropdown_item,
             telecomPlans
         )
@@ -67,7 +69,7 @@ class AddCustomerPopUp : AppCompatActivity() {
                 return@setOnClickListener
             }
             recyclerView = findViewById(R.id.addCustomerRecyclerview)
-            adapter = AddCustomerRecyclerViewAdapter(familyMembers, this, userName, userNumber)
+            adapter = AddMemeberRecyclerViewAdapter(familyMembers, this, userName, userNumber)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(this)
             addMember.visibility = View.VISIBLE
@@ -76,7 +78,7 @@ class AddCustomerPopUp : AppCompatActivity() {
             saveHof.isEnabled = false
         }
         addMember.setOnClickListener {
-            familyMembers.add(NewUser("", "", "", "", "", "", 0, listOf(), "","",""))
+            familyMembers.add(NewCustomer("", "", "", "", "", "", 0, listOf(), "","",""))
             adapter.notifyItemInserted(familyMembers.size - 1)
         }
         val dob: TextView = findViewById(R.id.date_of_birth1)
@@ -141,7 +143,7 @@ class AddCustomerPopUp : AppCompatActivity() {
             }, 100)
 
             firebaseAuth.currentUser?.let { currentUser ->
-                val user = NewUser(
+                val user = NewCustomer(
                     currentUser.uid,
                     userName,
                     userDob,

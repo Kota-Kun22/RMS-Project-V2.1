@@ -1,6 +1,6 @@
-package com.example
+package com.example.entities
 
-class NewUser {
+class NewCustomer {
     var uid: String? = null
     var name: String? = null
     var dob: String? = null

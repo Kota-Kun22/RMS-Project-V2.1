@@ -1,4 +1,4 @@
-package com.example
+package com.example.MenuSetting
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rms_project_v2.R
 import android.widget.Toast
+import com.example.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class PasswordChange : AppCompatActivity() {
@@ -45,7 +46,7 @@ class PasswordChange : AppCompatActivity() {
             user?.updatePassword(newPassword)?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     showToast("Password updated successfully")
-                    startActivity(Intent(this,MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                 } else {
                     showToast("Failed to update password")
                 }

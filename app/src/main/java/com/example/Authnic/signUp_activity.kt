@@ -1,4 +1,4 @@
-package com.example
+package com.example.Authnic
 
 import android.content.Intent
 import android.os.Bundle

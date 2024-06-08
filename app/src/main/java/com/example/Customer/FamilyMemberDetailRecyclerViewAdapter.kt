@@ -1,4 +1,4 @@
-package com.example
+package com.example.Customer
 
 import android.content.Context
 import android.content.Intent
@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.entities.Member
+import com.example.Recharge.RechargeActivity
 import com.example.rms_project_v2.R
-import com.google.android.play.integrity.internal.c
 
 
 class FamilyMemberDetailRecyclerViewAdapter(val context: Context, val memberList:List<Member>):
@@ -19,7 +20,7 @@ class FamilyMemberDetailRecyclerViewAdapter(val context: Context, val memberList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.customers_profile_cardview, parent, false)
-        return FamilyMemberDetailRecyclerViewAdapter.MemberViewHolder(view)
+        return MemberViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +33,7 @@ class FamilyMemberDetailRecyclerViewAdapter(val context: Context, val memberList
         holder.number.text = currentUser.phone_no
         holder.telecom.text = currentUser.telecom
         holder.recharge.setOnClickListener {
-            val intent= Intent(context,RechargeActivity::class.java)
+            val intent= Intent(context, RechargeActivity::class.java)
             intent.putExtra("name",currentUser.name)
             intent.putExtra("number",currentUser.phone_no)
             intent.putExtra("telecom",currentUser.telecom)

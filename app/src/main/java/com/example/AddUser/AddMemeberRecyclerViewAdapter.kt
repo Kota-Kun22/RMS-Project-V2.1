@@ -1,4 +1,4 @@
-package com.example
+package com.example.AddUser
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -10,16 +10,18 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.entities.Member
+import com.example.entities.NewCustomer
 import com.example.rms_project_v2.R
 import java.util.Calendar
 
-class AddCustomerRecyclerViewAdapter(
-    private val userList: MutableList<NewUser>,
+class AddMemeberRecyclerViewAdapter(
+    private val userList: MutableList<NewCustomer>,
     private val contextt: Context,
     private val hof: String,
     private val hofNumber: String,
 ) :
-    RecyclerView.Adapter<AddCustomerRecyclerViewAdapter.UserViewHolder>() {
+    RecyclerView.Adapter<AddMemeberRecyclerViewAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -68,7 +70,7 @@ class AddCustomerRecyclerViewAdapter(
         val arrayAdapter1 = ArrayAdapter(itemView.context,android.R.layout.simple_spinner_dropdown_item,telecomPlans)
 
 
-        fun bind(user: NewUser) {
+        fun bind(user: NewCustomer) {
             nameEditText.setText(user.name)
             dobEditText.setText(user.dob)
             numberEditText.setText(user.phone_no)

@@ -1,4 +1,4 @@
-package com.example
+package com.example.Transcation
 
 
 import android.content.Context
@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.Transcation.CreditManagement.CreditActivity
+import com.example.Recharge.RechargeDetails
 import com.example.rms_project_v2.R
 
 class TransactionAdapter(
@@ -35,7 +37,7 @@ class TransactionAdapter(
         if (currentUser.payment_status == "Credit") {
             holder.status.setTextColor(ContextCompat.getColor(c, R.color.g_red))
             holder.itemView.setOnClickListener {
-                val intent=Intent(c,CreditActivity::class.java)
+                val intent=Intent(c, CreditActivity::class.java)
                 intent.putExtra("name",currentUser.name)
                 intent.putExtra("number",currentUser.phone_no)
                 intent.putExtra("amount",currentUser.amount)

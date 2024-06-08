@@ -1,4 +1,4 @@
-package com.example
+package com.example.Recharge
 
 class RechargeDetails {
     var uid: String? = null

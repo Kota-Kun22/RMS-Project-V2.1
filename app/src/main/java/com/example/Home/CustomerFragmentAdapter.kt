@@ -1,4 +1,4 @@
-package com.example
+package com.example.Home
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -14,10 +14,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
+import com.example.Recharge.RechargeActivity
+import com.example.Recharge.RechargeDetails
 import com.example.rms_project_v2.R
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -27,7 +27,7 @@ class CustomerFragmentAdapter(private val c: Context, private var userList: Arra
 RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        return CustomerFragmentAdapter.UserViewHolder(LayoutInflater.from(c).inflate(R.layout.temp_expiry_card, parent, false))
+        return UserViewHolder(LayoutInflater.from(c).inflate(R.layout.temp_expiry_card, parent, false))
     }
 
     override fun getItemCount(): Int {

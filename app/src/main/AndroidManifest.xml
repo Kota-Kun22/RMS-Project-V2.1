@@ -14,12 +14,12 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name="com.example.signUp_activity"
+            android:name="com.example.Authnic.signUp_activity"
             android:exported="false">
         </activity>
 
         <activity
-            android:name="com.example.SignIn_activity"
+            android:name="com.example.Authnic.SignIn_activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,11 +32,11 @@
             android:exported="true">
 
         </activity>
-        <activity android:name="com.example.AddCustomerPopUp"/>
-        <activity android:name="com.example.FamilyMemberDetails"/>
-        <activity android:name="com.example.RechargeActivity"/>
-        <activity android:name="com.example.PasswordChange"/>
-        <activity android:name="com.example.CreditActivity"/>
+        <activity android:name="com.example.AddUser.AddCustomerEntry"/>
+        <activity android:name="com.example.Customer.FamilyMemberDetails"/>
+        <activity android:name="com.example.Recharge.RechargeActivity"/>
+        <activity android:name="com.example.MenuSetting.PasswordChange"/>
+        <activity android:name="com.example.Transcation.CreditManagement.CreditActivity"/>
 
     </application>
 
