@@ -10,8 +10,11 @@ class NewCustomer {
     var count: Int = 0
     var members = mutableListOf<Member>()
     var role: String? = null
+
+    /* removing the
     var hof: String? = null
     var hofNumber: String? = null
+    * */
 
     constructor() {}
 
@@ -28,8 +31,6 @@ class NewCustomer {
         count: Int,
         members: List<Member>,
         role: String?,
-        hof: String?,
-        hofNumber: String?
     ) {
         this.uid = uid
         this.name = name
@@ -40,7 +41,10 @@ class NewCustomer {
         this.count = count
         this.members = members.toMutableList()
         this.role = role
-        this.hof = hof
-        this.hofNumber = hofNumber
+
+        /**
+         *  this.hof = hof
+         *  this.hofNumber = hofNumber
+         * removed */
     }
 }

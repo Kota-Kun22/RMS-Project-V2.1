@@ -10,7 +10,7 @@ class Member(
     var telecom: String? = null,
     var email: String? = null,
     var role: String? = null,
-    var hof: String? = null,
+    var hofname: String? = null,
     var hofNumber: String? = null
 ) : Parcelable {
 
@@ -32,7 +32,7 @@ class Member(
         parcel.writeString(telecom)
         parcel.writeString(email)
         parcel.writeString(role)
-        parcel.writeString(hof)
+        parcel.writeString(hofname)
         parcel.writeString(hofNumber)
     }
 
