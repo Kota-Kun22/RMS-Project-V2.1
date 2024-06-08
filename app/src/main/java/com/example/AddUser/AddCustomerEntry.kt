@@ -37,6 +37,7 @@ class AddCustomerEntry : AppCompatActivity() {
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
         firebaseAuth = FirebaseAuth.getInstance()
 
+
         val roleSpinner = findViewById<Spinner>(R.id.assign_Role)
         val rolePlans = arrayOf("Individual", "Head of Family")
         val arrayAdapter = ArrayAdapter(
@@ -130,6 +131,9 @@ class AddCustomerEntry : AppCompatActivity() {
 
                 val holder = recyclerView.findViewHolderForAdapterPosition(i) as AddMemeberRecyclerViewAdapter.UserViewHolder
                 val member = holder.getMember()
+                member.hofname= findViewById<EditText>(R.id.user_name1).text.toString()
+                member.hofNumber= findViewById<EditText>(R.id.mobile_number1).text.toString()
+
                 familyMembers[i] = member
             }
 
