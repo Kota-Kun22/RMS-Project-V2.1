@@ -163,6 +163,8 @@ class AddCustomerEntry : AppCompatActivity() {
                         saveDetails.text = "Save"
                     }
             }
+            finish()
+
         }
     }
 }

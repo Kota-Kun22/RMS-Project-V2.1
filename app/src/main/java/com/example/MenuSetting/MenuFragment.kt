@@ -30,7 +30,8 @@ class MenuFragment : Fragment() {
             val currentUser = firebaseAuth.currentUser
             if (currentUser != null) {
                 firebaseAuth.signOut()
-                startActivity(Intent(requireContext(), SignIn_activity::class.java))
+
+               startActivity(Intent(requireContext(), SignIn_activity::class.java))
             } else {
                 Toast.makeText(requireContext(), "No user is currently signed in", Toast.LENGTH_SHORT).show()
             }

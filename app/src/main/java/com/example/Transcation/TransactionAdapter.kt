@@ -27,22 +27,25 @@ class TransactionAdapter(
     }
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
-        val currentUser = transactionList[position]
-        holder.user_name.text = currentUser.name
-        holder.number.text = currentUser.number
-        holder.telecom.text = currentUser.telecom
-        holder.date.text = currentUser.date
-        holder.amount.text = "₹" + currentUser.amount
-        holder.status.text = if (currentUser.pending > 0) "Pending" else "Paid"
-        if (currentUser.pending > 0) {
+        val currentTransaction = transactionList[position]
+        holder.user_name.text = currentTransaction.name
+        holder.number2.text = currentTransaction.number
+        holder.telecom.text = currentTransaction.telecom
+        holder.date.text = currentTransaction.date
+        holder.amount.text = "₹" + currentTransaction.amount
+        holder.status.text = if (currentTransaction.pending > 0) "Pending" else "Paid"
+        if (currentTransaction.pending > 0) {
             holder.status.setTextColor(ContextCompat.getColor(c, R.color.g_red))
             holder.itemView.setOnClickListener {
                 val intent = Intent(c, PendingActivity::class.java)
-                intent.putExtra("name", currentUser.name)
-                intent.putExtra("number", currentUser.id)
-                intent.putExtra("amount", currentUser.pending.toString())
-                intent.putExtra("telecom", currentUser.telecom)
-                intent.putExtra("date", currentUser.date)
+                intent.putExtra("name", currentTransaction.name)
+                intent.putExtra("id", currentTransaction.id)
+                intent.putExtra("number", currentTransaction.number)
+                intent.putExtra("pendingAmount", currentTransaction.pending.toString())
+                intent.putExtra("telecom", currentTransaction.telecom)
+                intent.putExtra("date", currentTransaction.date)
+                intent.putExtra("paid", currentTransaction.paid)
+                intent.putExtra("totalAmount", currentTransaction.amount)
                 c.startActivity(intent)
             }
         } else {
@@ -52,7 +55,7 @@ class TransactionAdapter(
 
     class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val user_name = itemView.findViewById<TextView>(R.id.name2)
-        val number = itemView.findViewById<TextView>(R.id.Number2)
+        val number2 = itemView.findViewById<TextView>(R.id.Number2)
         val telecom = itemView.findViewById<TextView>(R.id.telecom2)
         val date = itemView.findViewById<TextView>(R.id.date2)
         val amount = itemView.findViewById<TextView>(R.id.Amount2)

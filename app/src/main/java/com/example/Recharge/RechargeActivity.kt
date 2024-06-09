@@ -93,7 +93,7 @@ class RechargeActivity : AppCompatActivity() {
                         }
                     var paid = if(paymentStatus=="Paid") amount.text.toString().toDouble() else 0.0;
                     var pending  =  if(paymentStatus=="Pending") amount.text.toString().toDouble() else 0.0;
-                    var transaction: Transaction = Transaction(currentUser.uid,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending)
+                    var transaction: Transaction = Transaction(currentUser.uid,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending, customerNumber.text.toString())
 
                     FdatabaseTransaction.push().setValue(transaction)
                         .addOnSuccessListener {

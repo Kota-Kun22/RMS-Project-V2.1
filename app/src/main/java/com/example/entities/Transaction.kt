@@ -5,8 +5,9 @@ data class Transaction(
     val name: String = "",
     val date: String = "",
     val telecom: String = "",
-    val number :String="",
+
     val amount: Double = 0.0,
     val paid: Double = 0.0,
-    val pending: Double = 0.0
+    val pending: Double = 0.0,
+    val number :String=""
 )

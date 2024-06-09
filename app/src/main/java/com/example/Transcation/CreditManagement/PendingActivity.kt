@@ -19,8 +19,36 @@ import com.google.firebase.database.*
 
 class PendingActivity : AppCompatActivity() {
 
-    private lateinit var Fdatabase: DatabaseReference
+    private lateinit var FdatabaseTransaction: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var checkBox:CheckBox
+
+    private fun deleteTransaction(transactionId: String) {
+        val transactionRef = FdatabaseTransaction.orderByChild("id").equalTo(transactionId)
+        transactionRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (childSnapshot in snapshot.children) {
+                        childSnapshot.ref.removeValue()
+                            .addOnSuccessListener {
+                                Toast.makeText(this@PendingActivity, "Transaction deleted successfully.", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this@PendingActivity, MainActivity::class.java))
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(this@PendingActivity, "Failed to delete transaction.", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                } else {
+                    Toast.makeText(this@PendingActivity, "Transaction not found.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@PendingActivity, "$error", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,28 +56,32 @@ class PendingActivity : AppCompatActivity() {
 
         val name = intent.getStringExtra("name")
         val number = intent.getStringExtra("number")
-        val amount = intent.getStringExtra("amount")?.toDouble() ?: 0.0
+        val pendingAmount = intent.getStringExtra("pendingAmount")?.toDouble() ?: 0.0
         val telecom = intent.getStringExtra("telecom")
         val date = intent.getStringExtra("date")
+        val id = intent.getStringExtra("id")
+        val totalAmount = intent.getDoubleExtra("totalAmount",0.0)
+//        val paid = intent.getStringExtra("paid")
+        checkBox = findViewById(R.id.checkBox)
 
         val user_name = findViewById<TextView>(R.id.name6)
         user_name.text = name
         val phone_no = findViewById<TextView>(R.id.Phone_number_temp6)
         phone_no.text = number
         val amountActual = findViewById<TextView>(R.id.total_credit)
-        amountActual.text = "₹$amount"
+        amountActual.text = "₹$pendingAmount"
         val back: ImageView = findViewById(R.id.backMark)
         back.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
         val enteredAmount = findViewById<EditText>(R.id.entered_amount)
-        val remaining = findViewById<TextView>(R.id.remaining_credit)
-        remaining.text = "₹$amount"
-        val a1 = amount
+        val remaining = findViewById<TextView>(R.id.remainingPending)
+        remaining.text = "₹$pendingAmount"
+        val a1 = pendingAmount
 
         val markAll: CheckBox = findViewById(R.id.checkBox)
         markAll.setOnClickListener {
-            enteredAmount.setText("$amount")
+            enteredAmount.setText("$pendingAmount")
         }
 
         enteredAmount.addTextChangedListener(object : TextWatcher {
@@ -73,43 +105,121 @@ class PendingActivity : AppCompatActivity() {
             }
         })
 
-        Fdatabase = FirebaseDatabase.getInstance().getReference("Transactions")
+        FdatabaseTransaction = FirebaseDatabase.getInstance().getReference("Transactions")
         firebaseAuth = FirebaseAuth.getInstance()
 
         val submit = findViewById<TextView>(R.id.save_credit)
         submit.setOnClickListener {
-            val enteredAmountValue = enteredAmount.text.toString().toDoubleOrNull() ?: 0.0
-            if (enteredAmountValue <= 0 || enteredAmountValue > amount) {
-                Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
+            val enteredAmountValue = enteredAmount.text.toString().toDouble()
+            if (enteredAmountValue <= 0 || enteredAmountValue > pendingAmount || (checkBox.isChecked && enteredAmountValue!=pendingAmount)) {
+                Toast.makeText(this, "Please enter a valid amount or recheck checkbox", Toast.LENGTH_SHORT).show()
             } else {
-                val transactionRef = Fdatabase.orderByChild("id").equalTo(number)
-                transactionRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        for (childSnapshot in snapshot.children) {
-                            val transaction = childSnapshot.getValue(Transaction::class.java)
-                            if (transaction != null && transaction.pending == amount) {
-                                val updatedPaid = transaction.paid + enteredAmountValue
-                                val remainingAmount = amount - enteredAmountValue
-                                val updatedTransaction = transaction.copy(paid = updatedPaid, pending = remainingAmount)
-
-                                childSnapshot.ref.setValue(updatedTransaction)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(this@PendingActivity, "Transaction updated successfully.", Toast.LENGTH_SHORT).show()
-                                        startActivity(Intent(this@PendingActivity, MainActivity::class.java))
-                                    }
-                                    .addOnFailureListener {
-                                        Toast.makeText(this@PendingActivity, "Failed to update transaction.", Toast.LENGTH_SHORT).show()
-                                    }
-                            }
+                if(checkBox.isChecked){
+                    var transaction: Transaction = Transaction(id+"german",name!!,date!!,telecom!!,totalAmount!!.toDouble(),pendingAmount, 0.0, number!!)
+                    FdatabaseTransaction.push().setValue(transaction)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@PendingActivity, "transaction details saved successfully.", Toast.LENGTH_SHORT).show()
+                            submit.isEnabled = true
+                            submit.text = "Submit"
+                            startActivity(Intent(this, MainActivity::class.java))
                         }
-                    }
+                        .addOnFailureListener {
+                            Toast.makeText(this@PendingActivity, "Failed to save recharge details.", Toast.LENGTH_SHORT).show()
+                        }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        // Handle error
-                    }
-                })
+                }
+                else{
+
+                    var toBeSet : Double = totalAmount!!.toDouble()-enteredAmountValue
+                    var transactionPaid: Transaction = Transaction(id+"german",name!!,date!!,telecom!!,       enteredAmountValue,       enteredAmountValue,         0.0, number!!)
+                    var transactionPending: Transaction = Transaction(id+"american",name!!,date!!,telecom!!,  toBeSet,                  0.0,                 toBeSet, number!!)
+                    FdatabaseTransaction.push().setValue(transactionPaid)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@PendingActivity, "transaction details saved successfully.", Toast.LENGTH_SHORT).show()
+                            submit.isEnabled = true
+                            submit.text = "Submit"
+                            startActivity(Intent(this, MainActivity::class.java))
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this@PendingActivity, "Failed to save recharge details.", Toast.LENGTH_SHORT).show()
+                        }
+                        if(toBeSet!=0.0){
+                            FdatabaseTransaction.push().setValue(transactionPending)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        this@PendingActivity,
+                                        "transaction details saved successfully.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    submit.isEnabled = true
+                                    submit.text = "Submit"
+                                    startActivity(Intent(this, MainActivity::class.java))
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(
+                                        this@PendingActivity,
+                                        "Failed to save recharge details.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        }
+                }
+                deleteTransaction(id!!)
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                val transactionRef = Fdatabase.orderByChild("id").equalTo(number)
+//                Fdatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+//                    override fun onDataChange(snapshot: DataSnapshot) {
+//                        if (snapshot.exists()) {
+//                            for (childSnapshot in snapshot.children) {
+//                                val transaction = childSnapshot.getValue(Transaction::class.java)
+//                                if (transaction != null && transaction.pending == pendingAmount) {
+//                                    val updatedPaid = transaction.paid + enteredAmountValue
+//                                    val remainingAmount = pendingAmount - enteredAmountValue
+//                                    val updatedTransaction = Transaction(
+//                                        id = transaction.id,
+//                                        name = transaction.name,
+//                                        number = transaction.number,
+//                                        amount = transaction.amount,
+//                                        date = transaction.date,
+//                                        paid = updatedPaid,
+//                                        pending = remainingAmount,
+//                                        telecom = transaction.telecom
+//                                    )
+//
+//                                    childSnapshot.ref.setValue(updatedTransaction)
+//                                        .addOnSuccessListener {
+//                                            Toast.makeText(this@PendingActivity, "Transaction updated successfully.", Toast.LENGTH_SHORT).show()
+//                                            startActivity(Intent(this@PendingActivity, MainActivity::class.java))
+//                                        }
+//                                        .addOnFailureListener {
+//                                            Toast.makeText(this@PendingActivity, "Failed to update transaction.", Toast.LENGTH_SHORT).show()
+//                                        }
+//                                }
+//                            }
+//                        } else {
+//                            Toast.makeText(this@PendingActivity, "Transaction not found.", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//
+//                    override fun onCancelled(error: DatabaseError) {
+//                        Toast.makeText(this@PendingActivity, "$error", Toast.LENGTH_SHORT).show()
+//                    }
+//                })
             }
         }
+
     }
 }
 

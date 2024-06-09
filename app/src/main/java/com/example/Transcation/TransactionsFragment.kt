@@ -2,6 +2,7 @@
 package com.example.Transcation
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +12,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.MainActivity
 import com.example.entities.Transaction
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
@@ -28,6 +31,7 @@ class TransactionsFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
     private var pending: Double = 0.0
+    private lateinit var deleteHistory: ImageView
     private var paid: Double = 0.0
 
     override fun onCreateView(
@@ -43,6 +47,7 @@ class TransactionsFragment : Fragment() {
         userRecyclerView = rootView.findViewById(R.id.transaction_rv)
         userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRecyclerView.adapter = adapter
+        deleteHistory = rootView.findViewById(R.id.delete_history)
 
         val date_set: ImageView = rootView.findViewById(R.id.date_set)
 
@@ -85,6 +90,9 @@ class TransactionsFragment : Fragment() {
             }, year, month, day)
             datePickerDialog.show()
         }
+        deleteHistory.setOnClickListener {
+            deleteAllTransactions()
+        }
 
         return rootView
     }
@@ -94,6 +102,33 @@ class TransactionsFragment : Fragment() {
         adapter = TransactionAdapter(requireContext(), ArrayList(filteredList))
         userRecyclerView.adapter = adapter
     }
+    private fun deleteAllTransactions() {
+        val td = FirebaseDatabase.getInstance().getReference("Transactions")
+        td.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (childSnapshot in snapshot.children) {
+                        childSnapshot.ref.removeValue()
+                            .addOnSuccessListener {
+//                                Toast.makeText(requireContext(), "Transaction deleted successfully.", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener {
+//                                Toast.makeText(requireContext(), "Failed to delete transaction.", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                    Toast.makeText(requireContext(), "All transactions deleted successfully.", Toast.LENGTH_SHORT).show()
+                    adapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(requireContext(), "No transactions found.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "$error", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
 }
 
 //
