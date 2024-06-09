@@ -11,6 +11,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import com.example.MainActivity
+import com.example.entities.Transaction
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -19,6 +20,7 @@ import java.util.Calendar
 
 class RechargeActivity : AppCompatActivity() {
     private lateinit var Fdatabase: DatabaseReference
+    private lateinit var FdatabaseTransaction: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class RechargeActivity : AppCompatActivity() {
         customerTelecom.text=telecom
 
         Fdatabase = FirebaseDatabase.getInstance().getReference("Recharge")
+        FdatabaseTransaction = FirebaseDatabase.getInstance().getReference("Transactions")
         firebaseAuth = FirebaseAuth.getInstance()
 
         val submit: Button =findViewById(R.id.submit)
@@ -77,9 +80,24 @@ class RechargeActivity : AppCompatActivity() {
                     val day = calendar.get(Calendar.DAY_OF_MONTH)
                     val dateString = "$day/$month/$year"
                     val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString,hof,hofNumber)
+
                     Fdatabase.push().setValue(recharge)
                         .addOnSuccessListener {
                             Toast.makeText(this@RechargeActivity, "Recharge details saved successfully.", Toast.LENGTH_SHORT).show()
+                            submit.isEnabled = true
+                            submit.text = "Submit"
+//                            startActivity(Intent(this, MainActivity::class.java))
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this@RechargeActivity, "Failed to save recharge details.", Toast.LENGTH_SHORT).show()
+                        }
+                    var paid = if(paymentStatus=="Paid") amount.text.toString().toDouble() else 0.0;
+                    var pending  =  if(paymentStatus=="Pending") amount.text.toString().toDouble() else 0.0;
+                    var transaction: Transaction = Transaction(currentUser.uid,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending)
+
+                    FdatabaseTransaction.push().setValue(transaction)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@RechargeActivity, "transaction details saved successfully.", Toast.LENGTH_SHORT).show()
                             submit.isEnabled = true
                             submit.text = "Submit"
                             startActivity(Intent(this, MainActivity::class.java))
