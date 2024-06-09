@@ -7,17 +7,35 @@
     <include android:id="@+id/top_bar"
         layout="@layout/search_bar_home"/>
 
-    <TextView
-        android:id="@+id/t1"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="135dp"
-        android:text="Head of Family :"
-        android:layout_marginStart="10dp"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:fontFamily="@font/poppins_thin"
-        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/hofTypeSelector"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="135dp"
+            android:text="Head of Family "
+            android:layout_marginStart="10dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:fontFamily="@font/poppins_thin"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/individualTypeSelector"
+            android:layout_width="wrap_content"
+
+            android:layout_height="30dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="135dp"
+            android:fontFamily="@font/poppins_thin"
+            android:gravity="end"
+            android:text="Individual"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/listSize"

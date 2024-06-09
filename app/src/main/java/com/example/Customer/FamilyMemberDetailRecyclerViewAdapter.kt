@@ -14,7 +14,7 @@ import com.example.Recharge.RechargeActivity
 import com.example.rms_project_v2.R
 
 
-class FamilyMemberDetailRecyclerViewAdapter(val context: Context, val memberList:List<Member>):
+class FamilyMemberDetailRecyclerViewAdapter(val context: Context, private val memberList:List<Member>):
     RecyclerView.Adapter<FamilyMemberDetailRecyclerViewAdapter.MemberViewHolder>() {
 
 

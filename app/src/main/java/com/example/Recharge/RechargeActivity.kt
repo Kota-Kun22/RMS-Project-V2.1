@@ -27,7 +27,7 @@ class RechargeActivity : AppCompatActivity() {
         val validitySpinner = findViewById<Spinner>(R.id.spinner_Validity)
         val paymentStatusSpinner = findViewById<Spinner>(R.id.spinner_paymentStatus)
         val validityPlans = arrayOf("Select Validity","28 Days","56 Days","84 Days","180 Days","365 Days")
-        val paymentStatus = arrayOf("Payment Status","Paid","Credit")
+        val paymentStatus = arrayOf("Payment Status","Paid","Pending")
         val arrayAdap1 =
 
                 ArrayAdapter(this@RechargeActivity,android.R.layout.simple_spinner_dropdown_item,validityPlans)

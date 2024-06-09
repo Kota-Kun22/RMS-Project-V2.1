@@ -1,3 +1,4 @@
+
 package com.example.Transcation
 
 
@@ -9,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.Transcation.CreditManagement.CreditActivity
+import com.example.Transcation.CreditManagement.PendingActivity
 import com.example.Recharge.RechargeDetails
 import com.example.rms_project_v2.R
 
@@ -34,10 +35,10 @@ class TransactionAdapter(
         holder.date.text = currentUser.date
         holder.amount.text = "₹"+currentUser.amount
         holder.status.text = currentUser.payment_status
-        if (currentUser.payment_status == "Credit") {
+        if (currentUser.payment_status == "Pending") {
             holder.status.setTextColor(ContextCompat.getColor(c, R.color.g_red))
             holder.itemView.setOnClickListener {
-                val intent=Intent(c, CreditActivity::class.java)
+                val intent=Intent(c, PendingActivity::class.java)
                 intent.putExtra("name",currentUser.name)
                 intent.putExtra("number",currentUser.phone_no)
                 intent.putExtra("amount",currentUser.amount)

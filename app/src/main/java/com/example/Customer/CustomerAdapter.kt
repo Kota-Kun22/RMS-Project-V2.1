@@ -3,16 +3,19 @@ package com.example.Customer
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.NavType
 import androidx.recyclerview.widget.RecyclerView
 import com.example.entities.NewCustomer
 import com.example.Recharge.RechargeActivity
 import com.example.rms_project_v2.R
+import com.google.gson.Gson
 import java.io.Serializable
 
 class CustomerAdapter(private val context: Context, private var userList: ArrayList<NewCustomer>) :
@@ -37,7 +40,10 @@ class CustomerAdapter(private val context: Context, private var userList: ArrayL
             if (currentUser.count != 0) {
                 val intent = Intent(context, FamilyMemberDetails::class.java)
                 intent.putExtra("count", currentUser.count)
-                intent.putExtra("members", currentUser.members as Serializable)
+
+                val gson = Gson()
+                val jsonString = gson.toJson(currentUser.members)
+                intent.putExtra("memberListJson", jsonString)
                 context.startActivity(intent)
             } else {
                 Toast.makeText(context, "No members added", Toast.LENGTH_SHORT).show()

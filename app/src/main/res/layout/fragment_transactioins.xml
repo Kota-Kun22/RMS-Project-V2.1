@@ -89,7 +89,7 @@
                 android:layout_marginBottom="10dp"/>
 
             <TextView
-                android:id="@+id/paid"
+                android:id="@+id/paidAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Credit"
+                android:text="Pending"
                 android:textColor="#FF0000"
                 android:gravity="center"
                 android:textSize="13sp"
@@ -129,7 +129,7 @@
                 android:layout_marginBottom="10dp"/>
 
             <TextView
-                android:id="@+id/credit"
+                android:id="@+id/pendingAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -189,11 +189,11 @@
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/creditTextView"
+            android:id="@+id/pendingTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Credit"
+            android:text="Pending"
             android:textStyle="bold"
             android:textColor="#AAB4FF"
             android:gravity="center"

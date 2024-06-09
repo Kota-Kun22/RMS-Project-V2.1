@@ -36,7 +36,7 @@
         <activity android:name="com.example.Customer.FamilyMemberDetails"/>
         <activity android:name="com.example.Recharge.RechargeActivity"/>
         <activity android:name="com.example.MenuSetting.PasswordChange"/>
-        <activity android:name="com.example.Transcation.CreditManagement.CreditActivity"/>
+        <activity android:name="com.example.Transcation.CreditManagement.PendingActivity"/>
 
     </application>
 
