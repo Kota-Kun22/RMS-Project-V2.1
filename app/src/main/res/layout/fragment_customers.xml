@@ -52,5 +52,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="203dp"
         tools:listitem="@layout/customers_profile_cardview"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateTint="@color/progressBarColor" />
 
 </FrameLayout>

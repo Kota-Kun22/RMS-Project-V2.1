@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
@@ -19,6 +20,11 @@ import com.example.Recharge.RechargeDetails
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -26,7 +32,7 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment() {
-
+    private lateinit var progressBar: ProgressBar
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var userList: ArrayList<RechargeDetails>
     private lateinit var adapter: CustomerFragmentAdapter
@@ -45,8 +51,9 @@ class HomeFragment : Fragment() {
         userRecyclerView = rootView.findViewById(R.id.home_rv)
         userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRecyclerView.adapter = adapter
-
+        progressBar = rootView.findViewById(R.id.progressBar)
         loadAllCustomers()
+
 
         val allTv: TextView = rootView.findViewById(R.id.allTv)
         val expiredTv: TextView = rootView.findViewById(R.id.expiredTv)
@@ -59,82 +66,122 @@ class HomeFragment : Fragment() {
             loadAllCustomers()
         }
         expiredTv.setOnClickListener {
-            allTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
-            expiredTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_dark))
-            esTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+            GlobalScope.launch {
+                withContext(Dispatchers.Main) {
+                    startProgressBar()
+                    allTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                    expiredTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_dark))
+                    esTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                }
 
-            userList.clear()
-            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    userList.clear()
+                userList.clear()
+                mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            userList.clear()
 
-                    for (childSnapshot in snapshot.children) {
-                        val rechargeDetails = childSnapshot.getValue(RechargeDetails::class.java)
-                        rechargeDetails?.let {
-                            val currentDate = Calendar.getInstance()
-                            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                            val validityDays = rechargeDetails.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
-                            val expiry: String = addDaysToDate(rechargeDetails.date!!, validityDays)
-                            val formattedCurrentDate = sdf.format(currentDate.time)
-                            val check = compareDates(expiry, formattedCurrentDate)
-                            if (check <= 0) {
-                                userList.add(it)
-                                userList.sortBy { rechargeDetails ->
-                                    val validityDays = rechargeDetails.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
-                                    val expiry: String = addDaysToDate(rechargeDetails.date!!, validityDays)
-                                    val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                                    val date: Date = format.parse(expiry)
-                                    date
+                            for (childSnapshot in snapshot.children) {
+                                val rechargeDetails =
+                                    childSnapshot.getValue(RechargeDetails::class.java)
+                                rechargeDetails?.let {
+                                    val currentDate = Calendar.getInstance()
+                                    val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                    val validityDays =
+                                        rechargeDetails.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
+                                    val expiry: String =
+                                        addDaysToDate(rechargeDetails.date!!, validityDays)
+                                    val formattedCurrentDate = sdf.format(currentDate.time)
+                                    val check = compareDates(expiry, formattedCurrentDate)
+                                    if (check <= 0) {
+                                        userList.add(it)
+                                        userList.sortBy { details ->
+                                            val validityDays =
+                                                details.validity?.split(" ")?.get(0)
+                                                    ?.toIntOrNull() ?: 0
+                                            val expiry: String =
+                                                addDaysToDate(details.date!!, validityDays)
+                                            val format =
+                                                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                            val date: Date = format.parse(expiry)
+                                            date
+                                        }
+                                    }
                                 }
                             }
+                            adapter.notifyDataSetChanged()
+                            stopProgressBar()
                         }
                     }
-                    adapter.notifyDataSetChanged()
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("FirebaseError", "Database operation cancelled: $error")
-                }
-            })
+
+                    override fun onCancelled(error: DatabaseError) {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            Log.e("FirebaseError", "Database operation cancelled: $error")
+                            stopProgressBar()
+                        }
+                    }
+                })
+            }
         }
+
         esTv.setOnClickListener {
-            allTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
-            expiredTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
-            esTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_dark))
-            userList.clear()
-            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    userList.clear()
+            GlobalScope.launch {
+                withContext(Dispatchers.Main) {
+                    startProgressBar()
+                    allTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                    expiredTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                    esTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_dark))
+                }
 
-                    for (childSnapshot in snapshot.children) {
-                        val rechargeDetails = childSnapshot.getValue(RechargeDetails::class.java)
-                        rechargeDetails?.let {
+                userList.clear()
+                mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            userList.clear()
 
-                            val currentDate = Calendar.getInstance()
-                            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                            val formattedCurrentDate = sdf.format(currentDate.time)
-                            val validityDays = rechargeDetails.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
-                            val expiry: String = addDaysToDate(rechargeDetails.date!!, validityDays)
-                            val daysRemaining = differenceDate(expiry, formattedCurrentDate)
-                            if (daysRemaining <= 5 && daysRemaining > 0) {
-                                userList.add(it)
-                                userList.sortBy { rechargeDetails ->
-                                    val validityDays = rechargeDetails.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
-                                    val expiry: String = addDaysToDate(rechargeDetails.date!!, validityDays)
-                                    val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                                    val date: Date = format.parse(expiry)
-                                    date
+                            for (childSnapshot in snapshot.children) {
+                                val rechargeDetails =
+                                    childSnapshot.getValue(RechargeDetails::class.java)
+                                rechargeDetails?.let {
+
+                                    val currentDate = Calendar.getInstance()
+                                    val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                    val formattedCurrentDate = sdf.format(currentDate.time)
+                                    val validityDays =
+                                        rechargeDetails.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
+                                    val expiry: String =
+                                        addDaysToDate(rechargeDetails.date!!, validityDays)
+                                    val daysRemaining = differenceDate(expiry, formattedCurrentDate)
+                                    if (daysRemaining <= 5 && daysRemaining > 0) {
+                                        userList.add(it)
+                                        userList.sortBy { details ->
+                                            val validityDays =
+                                                details.validity?.split(" ")?.get(0)
+                                                    ?.toIntOrNull() ?: 0
+                                            val expiry: String =
+                                                addDaysToDate(details.date!!, validityDays)
+                                            val format =
+                                                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                            val date: Date = format.parse(expiry)
+                                            date
+                                        }
+                                    }
                                 }
                             }
+                            adapter.notifyDataSetChanged()
+                            stopProgressBar()
                         }
                     }
-                    adapter.notifyDataSetChanged()
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("FirebaseError", "Database operation cancelled: $error")
-                }
-            })
 
+                    override fun onCancelled(error: DatabaseError) {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            Log.e("FirebaseError", "Database operation cancelled: $error")
+                            stopProgressBar()
+                        }
+                    }
+                })
+            }
         }
+
 
         val searchEditText = rootView.findViewById<EditText>(R.id.search_bar)
         searchEditText.addTextChangedListener(object : TextWatcher {
@@ -160,32 +207,50 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun loadAllCustomers() {
-        mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                userList.clear()
 
-                for (childSnapshot in snapshot.children) {
-                    val rechargeDetails = childSnapshot.getValue(RechargeDetails::class.java)
-                    rechargeDetails?.let {
-                        userList.add(it)
-                        userList.sortBy { rechargeDetails ->
-                            val validityDays = rechargeDetails.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
-                            val expiry: String = addDaysToDate(rechargeDetails.date!!, validityDays)
-                            val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                            val date: Date = format.parse(expiry)
-                            date
+    private fun loadAllCustomers() {
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                startProgressBar()
+            }
+
+            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        userList.clear()
+
+                        for (childSnapshot in snapshot.children) {
+                            val rechargeDetails = childSnapshot.getValue(RechargeDetails::class.java)
+                            rechargeDetails?.let {
+                                userList.add(it)
+                                userList.sortBy { details ->
+                                    val validityDays =
+                                        details.validity?.split(" ")?.get(0)?.toIntOrNull() ?: 0
+                                    val expiry: String =
+                                        addDaysToDate(details.date!!, validityDays)
+                                    val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                    val date: Date = format.parse(expiry)
+                                    date
+                                }
+                            }
                         }
+                        adapter.notifyDataSetChanged()
+                        stopProgressBar()
                     }
                 }
-                adapter.notifyDataSetChanged()
-            }
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("FirebaseError", "Database operation cancelled: $error")
-            }
-        })
 
+                override fun onCancelled(error: DatabaseError) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Log.e("FirebaseError", "Database operation cancelled: $error")
+                        stopProgressBar()
+                    }
+                }
+            })
+        }
     }
+
+
+
 
     fun differenceDate(dateString1: String, dateString2: String): Int {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy")
@@ -227,6 +292,16 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private suspend fun stopProgressBar() {
+        withContext(Dispatchers.Main) {
+            progressBar.visibility = View.GONE
+        }
+    }
+    private suspend fun startProgressBar() {
+        withContext(Dispatchers.Main) {
+            progressBar.visibility = View.VISIBLE
+        }
+    }
     fun compareDates(dateString1: String, dateString2: String): Int {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 

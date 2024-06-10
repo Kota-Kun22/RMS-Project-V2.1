@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,10 @@ import com.example.entities.Transaction
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 import java.util.Calendar
 
@@ -33,6 +39,11 @@ class TransactionsFragment : Fragment() {
     private var pending: Double = 0.0
     private lateinit var deleteHistory: ImageView
     private var paid: Double = 0.0
+    private lateinit var progressBar: ProgressBar
+    private lateinit var allTextView: TextView
+    private lateinit var paidTextView: TextView
+    private lateinit var pendingTextView: TextView
+    private lateinit var totalAmount: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,36 +59,105 @@ class TransactionsFragment : Fragment() {
         userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRecyclerView.adapter = adapter
         deleteHistory = rootView.findViewById(R.id.delete_history)
+        progressBar = rootView.findViewById(R.id.progressBar)
+        allTextView = rootView.findViewById<TextView>(R.id.allTransactions)
+        paidTextView = rootView.findViewById<TextView>(R.id.paidTransactions)
+        pendingTextView = rootView.findViewById<TextView>(R.id.pendingTransactions)
+        totalAmount = rootView.findViewById<TextView>(R.id.total)
+
+        allTextView.setOnClickListener {
+            filterTransactions("All")
+        }
+
+        paidTextView.setOnClickListener {
+            filterTransactions("Paid")
+        }
+
+        pendingTextView.setOnClickListener {
+            filterTransactions("Pending")
+        }
 
         val date_set: ImageView = rootView.findViewById(R.id.date_set)
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                startProgressBar()
+            }
+            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        transactionList.clear()
+                        pending = 0.0
+                        paid = 0.0
 
-        mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                transactionList.clear()
-                pending = 0.0
-                paid = 0.0
+                        for (childSnapshot in snapshot.children) {
+                            val transaction = childSnapshot.getValue(Transaction::class.java)
+                            transaction?.let {
+                                transactionList.add(it)
+                                pending += it.pending
+                                paid += it.paid
+                            }
+                        }
+                        adapter.notifyDataSetChanged()
 
-                for (childSnapshot in snapshot.children) {
-                    val transaction = childSnapshot.getValue(Transaction::class.java)
-                    transaction?.let {
-                        transactionList.add(it)
-                        pending += it.pending
-                        paid += it.paid
+                        val paidCredit = rootView.findViewById<TextView>(R.id.paidAmount)
+                        val pendingCredit = rootView.findViewById<TextView>(R.id.pendingAmount)
+                        paidCredit.text = "₹$paid"
+                        pendingCredit.text = "₹$pending"
+                        totalAmount.text = "₹ $paid"
+                        stopProgressBar()
                     }
                 }
-                adapter.notifyDataSetChanged()
 
-                val paidCredit = rootView.findViewById<TextView>(R.id.paidAmount)
-                val pendingCredit = rootView.findViewById<TextView>(R.id.pendingAmount)
-                paidCredit.text = "₹$paid"
-                pendingCredit.text = "₹$pending"
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Log.e("TransactionsFragment", "Error fetching data", error.toException())
+                        Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show()
+                        stopProgressBar()
+                    }
+                }
+            })
+        }
+//        GlobalScope.launch {
+//            withContext(Dispatchers.Main) {
+//                startProgressBar()
+//            }
+//            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    GlobalScope.launch(Dispatchers.Main) {
+//                        transactionList.clear()
+//                        pending = 0.0
+//                        paid = 0.0
+//
+//                        for (childSnapshot in snapshot.children) {
+//                            val transaction = childSnapshot.getValue(Transaction::class.java)
+//                            transaction?.let {
+//                                transactionList.add(it)
+//                                pending += it.pending
+//                                paid += it.paid
+//                            }
+//                        }
+//                        adapter.notifyDataSetChanged()
+//
+//                        val paidCredit = rootView.findViewById<TextView>(R.id.paidAmount)
+//                        val pendingCredit = rootView.findViewById<TextView>(R.id.pendingAmount)
+//                        paidCredit.text = "₹$paid"
+//                        pendingCredit.text = "₹$pending"
+//                        stopProgressBar()
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    GlobalScope.launch(Dispatchers.Main) {
+//                        Log.e("TransactionsFragment", "Error fetching data", error.toException())
+//                        Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show()
+//                        stopProgressBar()
+//                    }
+//                }
+//            })
+//        }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("TransactionsFragment", "Error fetching data", error.toException())
-                Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show()
-            }
-        })
+
+
 
         date_set.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -103,30 +183,85 @@ class TransactionsFragment : Fragment() {
         userRecyclerView.adapter = adapter
     }
     private fun deleteAllTransactions() {
-        val td = FirebaseDatabase.getInstance().getReference("Transactions")
-        td.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (childSnapshot in snapshot.children) {
-                        childSnapshot.ref.removeValue()
-                            .addOnSuccessListener {
-//                                Toast.makeText(requireContext(), "Transaction deleted successfully.", Toast.LENGTH_SHORT).show()
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                startProgressBar()
+            }
+            val td = FirebaseDatabase.getInstance().getReference("Transactions")
+            td.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        if (snapshot.exists()) {
+                            for (childSnapshot in snapshot.children) {
+                                childSnapshot.ref.removeValue()
+                                    .addOnSuccessListener {
+                                        // Update UI if needed
+                                    }
+                                    .addOnFailureListener {
+                                        // Update UI if needed
+                                    }
                             }
-                            .addOnFailureListener {
-//                                Toast.makeText(requireContext(), "Failed to delete transaction.", Toast.LENGTH_SHORT).show()
-                            }
+                            Toast.makeText(
+                                requireContext(),
+                                "All transactions deleted successfully.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            adapter.notifyDataSetChanged()
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "No transactions found.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        stopProgressBar()
                     }
-                    Toast.makeText(requireContext(), "All transactions deleted successfully.", Toast.LENGTH_SHORT).show()
-                    adapter.notifyDataSetChanged()
-                } else {
-                    Toast.makeText(requireContext(), "No transactions found.", Toast.LENGTH_SHORT).show()
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(requireContext(), "$error", Toast.LENGTH_SHORT).show()
+                override fun onCancelled(error: DatabaseError) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), "$error", Toast.LENGTH_SHORT).show()
+                        stopProgressBar()
+                    }
+                }
+            })
+        }
+    }
+    private suspend fun stopProgressBar() {
+        withContext(Dispatchers.Main) {
+            progressBar.visibility = View.GONE
+        }
+    }
+    private suspend fun startProgressBar() {
+        withContext(Dispatchers.Main) {
+            progressBar.visibility = View.VISIBLE
+        }
+    }
+    private fun filterTransactions(type: String) {
+        val filteredList = when (type) {
+            "All" -> {
+
+                allTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_dark))
+                paidTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                pendingTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                transactionList
             }
-        })
+            "Paid" -> {
+                allTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                paidTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_dark))
+                pendingTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                transactionList.filter { it.paid > 0 }
+            }
+            "Pending" -> {
+                allTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                paidTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_light))
+                pendingTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.g_dark))
+                transactionList.filter { it.pending > 0 }
+            }
+            else -> ArrayList()
+        }
+        adapter = TransactionAdapter(requireContext(), ArrayList(filteredList))
+        userRecyclerView.adapter = adapter
     }
 
 }

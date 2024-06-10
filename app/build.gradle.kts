@@ -53,7 +53,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     implementation("com.google.code.gson:gson:2.8.8")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.google.firebase:firebase-database:20.3.0")
 

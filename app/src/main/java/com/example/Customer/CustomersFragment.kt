@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,9 +22,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CustomersFragment : Fragment() {
-
+    private lateinit var progressBar: ProgressBar
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var userList: ArrayList<NewCustomer>
     private lateinit var adapter: CustomerAdapter
@@ -51,6 +55,7 @@ class CustomersFragment : Fragment() {
         individualTypeSelector = rootView.findViewById(R.id.individualTypeSelector)
         hofTypeSelector = rootView.findViewById(R.id.hofTypeSelector)
         listSize = rootView.findViewById(R.id.listSize)
+        progressBar = rootView.findViewById(R.id.progressBar)
 
         val blueColor = ContextCompat.getColor(requireContext(), R.color.typeSelectorColor)
         val blackColor = ContextCompat.getColor(requireContext(), R.color.black)
@@ -58,7 +63,10 @@ class CustomersFragment : Fragment() {
         // Set default selection to HOF and load HOF users
         hofTypeSelector.setTextColor(blueColor)
         individualTypeSelector.setTextColor(blackColor)
-        loadHofUsers()
+        GlobalScope.launch {
+            loadHofUsers()
+        }
+
 
         hofTypeSelector.setOnClickListener {
             individualTypeSelector.setTextColor(blackColor)
@@ -87,54 +95,78 @@ class CustomersFragment : Fragment() {
     }
 
     private fun loadHofUsers() {
-        mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                userList.clear()
-                count = 0
-                for (postSnapshot in snapshot.children) {
-                    val currentUser = postSnapshot.getValue(NewCustomer::class.java)
-                    currentUser?.let {
-                        if (it.role == "Head of Family") {
-                            userList.add(it)
-                            count++
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                startProgressBar()
+            }
+            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        userList.clear()
+                        count = 0
+                        for (postSnapshot in snapshot.children) {
+                            val currentUser = postSnapshot.getValue(NewCustomer::class.java)
+                            currentUser?.let {
+                                if (it.role == "Head of Family") {
+                                    userList.add(it)
+                                    count++
+                                }
+                            }
                         }
+                        listSize.text = "All (${count})"
+                        adapter.setData(userList)
+                        adapter.notifyDataSetChanged()
+                        stopProgressBar()
                     }
                 }
-                listSize.text = "All (${count})"
-                adapter.setData(userList)
-                adapter.notifyDataSetChanged()
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("FirebaseError", "Database operation cancelled: $error")
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Log.e("FirebaseError", "Database operation cancelled: $error")
+                        stopProgressBar()
+                    }
+                }
+            })
+        }
     }
+
 
     private fun loadIndividualUsers() {
-        mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                userList.clear()
-                count = 0
-                for (postSnapshot in snapshot.children) {
-                    val currentUser = postSnapshot.getValue(NewCustomer::class.java)
-                    currentUser?.let {
-                        if (it.role == "Individual") {
-                            userList.add(it)
-                            count++
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                startProgressBar()
+            }
+            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        userList.clear()
+                        count = 0
+                        for (postSnapshot in snapshot.children) {
+                            val currentUser = postSnapshot.getValue(NewCustomer::class.java)
+                            currentUser?.let {
+                                if (it.role == "Individual") {
+                                    userList.add(it)
+                                    count++
+                                }
+                            }
                         }
+                        listSize.text = "All (${count})"
+                        adapter.setData(userList)
+                        adapter.notifyDataSetChanged()
+                        stopProgressBar()
                     }
                 }
-                listSize.text = "All (${count})"
-                adapter.setData(userList)
-                adapter.notifyDataSetChanged()
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("FirebaseError", "Database operation cancelled: $error")
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Log.e("FirebaseError", "Database operation cancelled: $error")
+                        stopProgressBar()
+                    }
+                }
+            })
+        }
     }
+
 
     private fun filterCustomers(query: String) {
         if (query.isEmpty()) {
@@ -148,6 +180,16 @@ class CustomersFragment : Fragment() {
             adapter.setData(filteredList as ArrayList<NewCustomer>)
         }
         adapter.notifyDataSetChanged()
+    }
+    private suspend fun stopProgressBar() {
+        withContext(Dispatchers.Main) {
+            progressBar.visibility = View.GONE
+        }
+    }
+    private suspend fun startProgressBar() {
+        withContext(Dispatchers.Main) {
+            progressBar.visibility = View.VISIBLE
+        }
     }
 }
 

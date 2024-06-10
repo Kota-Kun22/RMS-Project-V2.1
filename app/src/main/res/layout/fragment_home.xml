@@ -7,6 +7,7 @@
     <include android:id="@+id/top_bar"
         layout="@layout/search_bar_home"/>
 
+
     <TextView
         android:id="@+id/t1"
         android:layout_width="wrap_content"
@@ -80,5 +81,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="215dp"
         tools:listitem="@layout/temp_expiry_card"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateTint="@color/progressBarColor" />
 
 </FrameLayout>

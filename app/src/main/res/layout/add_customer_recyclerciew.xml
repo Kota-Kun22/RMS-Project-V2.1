@@ -292,7 +292,15 @@ android:background="@color/white">
                 android:textColorHint="@color/Transparent"
                 android:textSize="@dimen/h2TextSize" />
 
+
         </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/progressBarColor" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -326,6 +334,7 @@ android:background="@color/white">
         android:id="@+id/addCustomerRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 
 </LinearLayout>
 </ScrollView>

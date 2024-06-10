@@ -4,9 +4,11 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +22,8 @@ import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class AddCustomerEntry : AppCompatActivity() {
@@ -30,6 +34,7 @@ class AddCustomerEntry : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AddMemeberRecyclerViewAdapter
     private val familyMembers = mutableListOf<Member>()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +42,7 @@ class AddCustomerEntry : AppCompatActivity() {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
         firebaseAuth = FirebaseAuth.getInstance()
-
+        progressBar = findViewById(R.id.progressBar)
 
         val roleSpinner = findViewById<Spinner>(R.id.assign_Role)
         val rolePlans = arrayOf("Individual", "Head of Family")
@@ -61,6 +66,23 @@ class AddCustomerEntry : AppCompatActivity() {
         addMember.isEnabled = false
         addMember.visibility = View.GONE
         val saveHof: TextView = findViewById(R.id.saveHof)
+
+        roleSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedRole = parent?.getItemAtPosition(position).toString()
+                if (selectedRole == "Head of Family") {
+                    saveHof.visibility = View.VISIBLE
+                    saveHof.isEnabled = true
+                } else {
+                    saveHof.visibility = View.GONE
+                    saveHof.isEnabled = false
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
         saveHof.setOnClickListener {
             val name: EditText = findViewById(R.id.user_name1)
             val number: EditText = findViewById(R.id.mobile_number1)
@@ -78,6 +100,8 @@ class AddCustomerEntry : AppCompatActivity() {
             addMember.isEnabled = true
             saveHof.visibility = View.GONE
             saveHof.isEnabled = false
+            addMember.visibility = View.VISIBLE
+            addMember.isEnabled = true
         }
         addMember.setOnClickListener {
             familyMembers.add(Member())
@@ -110,9 +134,10 @@ class AddCustomerEntry : AppCompatActivity() {
         val saveDetails: TextView = findViewById(R.id.saveDetails)
 
         saveDetails.setOnClickListener {
-
+            // Disable the save button and show the ProgressBar
             saveDetails.isEnabled = false
             saveDetails.text = "Loading..."
+            progressBar.visibility = View.VISIBLE
 
             val role = roleSpinner.selectedItem.toString()
             val userTelecom = telecomSpinner.selectedItem.toString()
@@ -129,7 +154,6 @@ class AddCustomerEntry : AppCompatActivity() {
 
             // Collect family members' data
             for (i in 0 until adapter.itemCount) {
-
                 val holder = recyclerView.findViewHolderForAdapterPosition(i) as AddMemeberRecyclerViewAdapter.UserViewHolder
                 val member = holder.getMember()
                 member.hofname= findViewById<EditText>(R.id.user_name1).text.toString()
@@ -153,20 +177,24 @@ class AddCustomerEntry : AppCompatActivity() {
 
                 databaseReference.child(currentUser.uid).setValue(user)
                     .addOnSuccessListener {
-                        Toast.makeText(this, "Successfully Saved", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, MainActivity::class.java))
+                        // Toast message for successful save
+                        Toast.makeText(this@AddCustomerEntry, "Successfully Saved", Toast.LENGTH_SHORT).show()
+                        // Navigate to MainActivity
+                        startActivity(Intent(this@AddCustomerEntry, MainActivity::class.java))
                     }
                     .addOnFailureListener {
-                        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+                        // Toast message for save failure
+                        Toast.makeText(this@AddCustomerEntry, "Failed", Toast.LENGTH_SHORT).show()
                     }
                     .addOnCompleteListener {
+                        // Enable the save button and hide the ProgressBar
                         saveDetails.isEnabled = true
                         saveDetails.text = "Save"
+                        progressBar.visibility = View.GONE
                     }
             }
-            finish()
-
         }
+
     }
 }
 

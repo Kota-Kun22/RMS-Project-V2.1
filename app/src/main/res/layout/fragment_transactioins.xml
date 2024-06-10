@@ -151,7 +151,7 @@
         android:layout_marginTop="310dp">
 
         <TextView
-            android:id="@+id/allTextView"
+            android:id="@+id/allTransactions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -170,7 +170,7 @@
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/paidTextView"
+            android:id="@+id/paidTransactions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -189,7 +189,7 @@
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/pendingTextView"
+            android:id="@+id/pendingTransactions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -260,4 +260,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="405dp"
         tools:listitem="@layout/transaction_cardview"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateTint="@color/progressBarColor" />
 </FrameLayout>
