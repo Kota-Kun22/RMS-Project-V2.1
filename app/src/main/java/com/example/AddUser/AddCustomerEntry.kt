@@ -24,6 +24,7 @@ import java.util.Calendar
 
 class AddCustomerEntry : AppCompatActivity() {
     // Adding the Customer
+    //adding the comment here for checking
     private lateinit var databaseReference: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var recyclerView: RecyclerView
