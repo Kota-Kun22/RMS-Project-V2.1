@@ -6,15 +6,15 @@
     <path
         android:pathData="M27.563,14C27.563,21.49 21.49,27.563 14,27.563C6.51,27.563 0.438,21.49 0.438,14C0.438,6.51 6.51,0.438 14,0.438C21.49,0.438 27.563,6.51 27.563,14Z"
         android:strokeWidth="0.875"
-        android:fillColor="#00000000"
-        android:strokeColor="#6D7DFF"/>
+        android:fillColor="@color/black"
+        android:strokeColor="@color/black"/>
     <group>
         <clip-path
             android:pathData="M7,7h14v14h-14z"/>
         <path
             android:pathData="M9.625,14.875L16.624,7.438L16.625,7.438L16.625,7.438L15.049,12.559L14.875,13.125H15.467H18.375H18.375L18.375,13.125L11.375,20.563L11.375,20.563L11.375,20.562L12.95,15.441L13.125,14.875H12.532H9.625H9.625L9.625,14.875Z"
             android:strokeWidth="0.875"
-            android:fillColor="#00000000"
-            android:strokeColor="#6D7DFF"/>
+            android:fillColor="@color/white"
+            android:strokeColor="@color/white"/>
     </group>
 </vector>

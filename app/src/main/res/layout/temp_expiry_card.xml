@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="40dp"
-
+        app:cardBackgroundColor="@color/whiteSmoke"
         android:layout_margin="8dp"
         app:cardCornerRadius="16dp">
 
@@ -50,7 +50,7 @@
                         android:text="Amit Jha"
                         android:textColor="@color/black"
                         android:textFontWeight="500"
-                        android:textSize="14sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <RelativeLayout
@@ -65,8 +65,8 @@
                             android:layout_marginTop="7.5dp"
                             android:fontFamily="@font/poppins_light"
                             android:text="@string/mob_number_profile_display"
-                            android:textColor="@color/Gray"
-                            android:textFontWeight="500"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <TextView
@@ -78,8 +78,10 @@
                             android:layout_marginEnd="24dp"
                             android:layout_toEndOf="@id/mob_number_label"
                             android:fontFamily="@font/poppins_light"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:text=" 9588779890"
-                            android:textColor="@color/Gray"
+
                             android:textSize="14sp" />
 
                         <LinearLayout
@@ -93,9 +95,7 @@
                                 android:id="@+id/recharge3"
                                 android:layout_width="28dp"
                                 android:layout_height="match_parent"
-                                android:backgroundTint="#6D7DFF"
-                                android:src="@drawable/flash_ic"
-                                app:tint="#6D7DFF" />
+                                android:src="@drawable/flash_ic"/>
 
                             <ImageView
                                 android:id="@+id/message3"
@@ -103,8 +103,7 @@
                                 android:layout_height="28dp"
                                 android:layout_marginStart="12dp"
                                 android:layout_marginEnd="4dp"
-                                android:src="@drawable/comment_ic"
-                                app:tint="#6D7DFF" />
+                                android:src="@drawable/comment_ic"/>
 
                         </LinearLayout>
                     </RelativeLayout>
@@ -121,8 +120,9 @@
                             android:layout_height="18dp"
                             android:layout_marginTop="7.5dp"
                             android:fontFamily="@font/poppins_light"
-                            android:text="Telecom:"
-                            android:textColor="@color/Gray"
+                            android:text="Telecom : "
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
                             android:textSize="15sp" />
 
                         <TextView
@@ -132,7 +132,8 @@
                             android:layout_marginTop="7.5dp"
                             android:fontFamily="@font/poppins_light"
                             android:text="Airtel"
-                            android:textColor="@color/Gray"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -140,8 +141,9 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="7.5dp"
                             android:fontFamily="@font/poppins_light"
-                            android:text="Validity:"
-                            android:textColor="@color/Gray"
+                            android:text="Validity : "
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
                             android:textSize="15sp" />
 
                         <TextView
@@ -151,7 +153,8 @@
                             android:layout_marginTop="7.5dp"
                             android:fontFamily="@font/poppins_light"
                             android:text="56 days"
-                            android:textColor="@color/Gray"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -164,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:elevation="20dp">
+                app:cardBackgroundColor="@color/whiteSmoke">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -178,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:layout_gravity="center"
-
+                        android:textSize="14sp"
                         android:fontFamily="@font/poppins_thin"
                         android:text="Head Of Family"
                         android:textColor="@color/black"
@@ -205,14 +208,18 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="18dp"
-                                android:text="Name:"
+                                android:text="Name : "
                                 android:textSize="15dp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
                                 android:fontFamily="@font/poppins_light"/>
                             <TextView
                                 android:id="@+id/name22"
                                 android:layout_width="wrap_content"
                                 android:layout_height="18dp"
                                 android:text=" Aisha Jha"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
                                 android:textSize="15dp"
                                 android:fontFamily="@font/poppins_light" />
                         </LinearLayout>
@@ -227,8 +234,9 @@
                                 android:layout_height="18dp"
                                 android:layout_marginTop="4dp"
                                 android:fontFamily="@font/poppins_light"
-                                android:text="Mob. No."
-                                android:textColor="@color/Gray"
+                                android:text="Mob. No : "
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
                                 android:textSize="14dp"/>
                             <TextView
                                 android:id="@+id/Mobile98"
@@ -237,7 +245,8 @@
                                 android:layout_marginTop="4dp"
                                 android:fontFamily="@font/poppins_light"
                                 android:text="9588779890"
-                                android:textColor="@color/Gray"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
                                 android:textSize="14dp" />
                         </LinearLayout>
 
@@ -248,19 +257,17 @@
                         android:layout_width="28dp"
                         android:layout_height="match_parent"
                         android:backgroundTint="#6D7DFF"
-                        android:src="@drawable/comment_ic"
-                        app:tint="#6D7DFF" />
+                        android:src="@drawable/comment_ic"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/expired3"
                 android:layout_width="match_parent"
-                android:layout_height="21dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_thin"
                 android:text="Expired"
-                android:paddingEnd="16dp"
-                android:textFontWeight="500"
+                android:paddingEnd="35dp"
                 android:textAlignment="textEnd"
                 android:textColor="#FF0000"
                 android:textSize="13sp" />

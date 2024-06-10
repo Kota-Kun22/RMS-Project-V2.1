@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:background="@color/white">
     <androidx.cardview.widget.CardView
        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ab90d4"
+        android:backgroundTint="@color/background_color"
         android:elevation="100dp"
         app:cardMaxElevation="100dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,11 +23,11 @@
             android:layout_marginEnd="25dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-
             android:background="@drawable/border_edittext"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="7.5dp"
             android:hint="Enter name, number or HOF"
+            android:textColorHint="@color/Gray"
             android:paddingStart="10dp"
             android:paddingEnd="15dp"
             app:layout_constraintBottom_toBottomOf="parent"

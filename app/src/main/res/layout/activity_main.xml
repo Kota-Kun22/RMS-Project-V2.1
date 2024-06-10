@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context="com.example.MainActivity">
 
     <FrameLayout
@@ -38,10 +39,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="0dp"
-                app:backgroundTint="@color/white"
+                app:backgroundTint="@color/background_color"
                 app:itemIconSize="30dp"
                 app:itemIconTint="@color/icons_color"
-                app:itemRippleColor="#6D7DFF"
                 app:itemTextColor="@color/icons_color"
                 app:labelVisibilityMode="selected"
                 app:menu="@menu/bottom_nav" />
@@ -53,9 +53,9 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/floating_action_button"
             android:src="@drawable/add_ic"
-            app:backgroundTint="#6D7DFF"
+            app:backgroundTint="@color/whiteSmoke"
             app:layout_anchor="@id/bottomAppbar"
-            app:tint="@color/white" />
+            app:tint="@color/black" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

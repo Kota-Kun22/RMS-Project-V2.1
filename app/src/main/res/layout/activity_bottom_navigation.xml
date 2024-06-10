@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     android:theme="@style/AppTheme.BottomBar">
 
     <com.google.android.material.bottomappbar.BottomAppBar
@@ -23,11 +24,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="0dp"
-            app:backgroundTint="@color/white"
+            app:backgroundTint="@color/background_color"
             app:itemIconSize="30dp"
             app:itemIconTint="@color/icons_color"
-            app:itemRippleColor="#6D7DFF"
-            app:itemTextColor="@color/icons_color"
+            app:itemRippleColor="@color/black"
+            app:itemTextColor="@color/black"
             app:labelVisibilityMode="selected"
             app:menu="@menu/bottom_nav" />
     </com.google.android.material.bottomappbar.BottomAppBar>
