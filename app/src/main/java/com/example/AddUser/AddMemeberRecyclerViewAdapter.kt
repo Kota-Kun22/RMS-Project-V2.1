@@ -24,7 +24,7 @@ class AddMemeberRecyclerViewAdapter(
             .inflate(R.layout.add_customer_cardview, parent, false)
         return UserViewHolder(view)
     }
-    //dummy
+
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentUser = userList[position]
