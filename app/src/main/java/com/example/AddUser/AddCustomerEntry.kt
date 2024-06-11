@@ -54,7 +54,7 @@ class AddCustomerEntry : AppCompatActivity() {
         roleSpinner.adapter = arrayAdapter
 
         val telecomSpinner = findViewById<Spinner>(R.id.telecom_type1)
-        val telecomPlans = arrayOf("Select", "Airtel", "Jio", "Vi", "Bsnl")
+        val telecomPlans = arrayOf("Select", "Airtel", "Jio", "VI", "BSNL")
         val arrayAdapter1 = ArrayAdapter(
             this@AddCustomerEntry,
             android.R.layout.simple_spinner_dropdown_item,
@@ -83,6 +83,13 @@ class AddCustomerEntry : AppCompatActivity() {
                 // Do nothing
             }
         }
+
+        // yaha kiya hain change : Initialize RecyclerView and Adapter in onCreate
+        recyclerView = findViewById(R.id.addCustomerRecyclerview)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = AddMemeberRecyclerViewAdapter(familyMembers, this)
+        recyclerView.adapter = adapter
+
         saveHof.setOnClickListener {
             val name: EditText = findViewById(R.id.user_name1)
             val number: EditText = findViewById(R.id.mobile_number1)
@@ -92,21 +99,17 @@ class AddCustomerEntry : AppCompatActivity() {
                 Toast.makeText(this, "Please enter name and number to add member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            recyclerView = findViewById(R.id.addCustomerRecyclerview)
-            adapter = AddMemeberRecyclerViewAdapter(familyMembers, this)
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(this)
             addMember.visibility = View.VISIBLE
             addMember.isEnabled = true
             saveHof.visibility = View.GONE
             saveHof.isEnabled = false
-            addMember.visibility = View.VISIBLE
-            addMember.isEnabled = true
         }
+
         addMember.setOnClickListener {
             familyMembers.add(Member())
             adapter.notifyItemInserted(familyMembers.size - 1)
         }
+
         val dob: TextView = findViewById(R.id.date_of_birth1)
         dob.setOnClickListener {
             var selectedDate: String = ""
@@ -126,13 +129,13 @@ class AddCustomerEntry : AppCompatActivity() {
             )
             datePickerDialog.show()
         }
+
         val back: ImageView = findViewById(R.id.back_icon)
         back.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
         val saveDetails: TextView = findViewById(R.id.saveDetails)
-
         saveDetails.setOnClickListener {
             // Disable the save button and show the ProgressBar
             saveDetails.isEnabled = false
@@ -156,8 +159,8 @@ class AddCustomerEntry : AppCompatActivity() {
             for (i in 0 until adapter.itemCount) {
                 val holder = recyclerView.findViewHolderForAdapterPosition(i) as AddMemeberRecyclerViewAdapter.UserViewHolder
                 val member = holder.getMember()
-                member.hofname= findViewById<EditText>(R.id.user_name1).text.toString()
-                member.hofNumber= findViewById<EditText>(R.id.mobile_number1).text.toString()
+                member.hofname = findViewById<EditText>(R.id.user_name1).text.toString()
+                member.hofNumber = findViewById<EditText>(R.id.mobile_number1).text.toString()
 
                 familyMembers[i] = member
             }
@@ -194,7 +197,6 @@ class AddCustomerEntry : AppCompatActivity() {
                     }
             }
         }
-
     }
 }
 

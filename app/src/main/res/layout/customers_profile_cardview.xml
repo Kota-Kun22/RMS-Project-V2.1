@@ -6,7 +6,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/customers_profile_card"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="20dp"
         android:layout_margin="8dp"
@@ -48,7 +48,6 @@
                         android:fontFamily="@font/poppins_thin"
                         android:text="Amit Jha"
                         android:textColor="@color/black"
-                        android:textFontWeight="500"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -64,8 +63,8 @@
                             android:layout_marginTop="7.5dp"
                             android:fontFamily="@font/poppins_light"
                             android:text="@string/mob_number_profile_display"
-                            android:textColor="@color/Gray"
-                            android:textFontWeight="500"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
                             android:textSize="15sp" />
 
                         <TextView
@@ -78,7 +77,8 @@
                             android:layout_toEndOf="@id/mob_number_label"
                             android:fontFamily="@font/poppins_light"
                             android:text=" 9588779890"
-                            android:textColor="@color/Gray"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <LinearLayout
@@ -93,7 +93,7 @@
                                 android:layout_height="match_parent"
                                 android:backgroundTint="#6D7DFF"
                                 android:src="@drawable/flash_ic"
-                                app:tint="#6D7DFF" />
+                                 />
 
                             <ImageView
                                 android:id="@+id/message"
@@ -102,13 +102,13 @@
                                 android:layout_marginStart="6dp"
                                 android:layout_marginEnd="4dp"
                                 android:src="@drawable/comment_ic"
-                                app:tint="#6D7DFF" />
+                                 />
 
                         </LinearLayout>
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:orientation="horizontal">
@@ -117,10 +117,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:fontFamily="@font/poppins_light"
-                            android:text="Telecom:"
+                            android:text="Telecom : "
                             android:layout_marginBottom="7.5dp"
-                            android:textFontWeight="500"
-                            android:textColor="@color/Gray"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:layout_marginTop="7.5dp"
                             android:textSize="15sp" />
 
@@ -132,7 +132,8 @@
                             android:layout_marginBottom="7.5dp"
                             android:fontFamily="@font/poppins_light"
                             android:text="Airtel"
-                            android:textColor="@color/Gray"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <ImageView
@@ -148,6 +149,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="3.8dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:text="+ 0" />
 
 

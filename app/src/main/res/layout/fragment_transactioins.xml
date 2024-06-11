@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.Transcation.TransactionsFragment"
-    android:background="@color/white">
+    android:background="@color/background_color">
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,12 +12,13 @@
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="20dp"
         android:text="Transactions"
-        android:textSize="20sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         android:textColor="@color/black"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:orientation="horizontal"
         android:gravity="end">
@@ -26,7 +27,7 @@
             android:id="@+id/date_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_calendar_month_24"/>
+            android:src="@drawable/baseline_calendar_month_24" />
 
         <ImageView
             android:id="@+id/delete_history"
@@ -83,10 +84,10 @@
             <ImageView
                 android:layout_width="34dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_up"
                 android:layout_gravity="center"
                 android:layout_marginRight="30dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_up" />
 
             <TextView
                 android:id="@+id/paidAmount"
@@ -125,8 +126,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_down"
                 android:layout_gravity="center"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="20dp"/>
 
             <TextView
                 android:id="@+id/pendingAmount"
@@ -156,7 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="All"
-            android:textColor="#6D7DFF"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="center"
             android:padding="8dp"
@@ -166,7 +167,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="|"
-            android:textColor="#AAB4FF"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
 
         <TextView
@@ -175,7 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Paid"
-            android:textColor="#AAB4FF"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="center"
             android:padding="8dp"
@@ -185,7 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="|"
-            android:textColor="#AAB4FF"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
 
         <TextView
@@ -195,7 +196,7 @@
             android:layout_weight="1"
             android:text="Pending"
             android:textStyle="bold"
-            android:textColor="#AAB4FF"
+            android:textColor="@color/black"
             android:gravity="center"
             android:padding="8dp"
             android:textSize="16sp"/>
@@ -254,12 +255,15 @@
         android:layout_height="1dp"
         android:layout_marginTop="400dp"
         android:background="#C2C2C2" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transaction_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="405dp"
-        tools:listitem="@layout/transaction_cardview"/>
+        android:background="@color/background_color"
+        tools:listitem="@layout/transaction_cardview" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"

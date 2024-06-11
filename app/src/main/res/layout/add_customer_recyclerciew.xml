@@ -14,8 +14,7 @@ android:background="@color/white">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="0dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -23,14 +22,13 @@ android:background="@color/white">
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="25dp"
             android:contentDescription="@string/back_icon"
             android:src="@drawable/back_icon"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="#6D7DFF" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
@@ -51,14 +49,13 @@ android:background="@color/white">
         <TextView
             android:id="@+id/saveDetails"
             android:layout_width="wrap_content"
-            android:layout_height="21dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
             android:fontFamily="@font/poppins_light"
             android:text="@string/save"
             android:textAlignment="center"
-            android:textColor="#6D7DFF"
-            android:textFontWeight="400"
-            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,26 +80,14 @@ android:background="@color/white">
             <ImageView
                 android:id="@+id/add_media_image"
                 android:layout_width="52dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="20dp"
                 android:layout_height="52dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/pp_bg"
                 android:contentDescription="@string/media_image"
                 android:padding="7.5dp"
                 android:src="@drawable/add_media_image"
-                app:tint="@color/colour" />
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/insert_edit_image"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="18dp"-->
-            <!--                    android:layout_gravity="center_horizontal"-->
-            <!--                    android:layout_marginTop="10dp"-->
-            <!--                    android:textFontWeight="400"-->
-            <!--                    android:fontFamily="@font/poppins_light"-->
-            <!--                    android:text="@string/insert_image"-->
-            <!--                    android:textColor="#6D7DFF"-->
-            <!--                    android:textSize="16sp" />-->
+                 />
 
             <Spinner
                 android:id="@+id/assign_Role"

@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.Home.HomeFragment"
     android:background="@color/background_color">
-    <include android:id="@+id/top_bar"
+
+    <include
+        android:id="@+id/top_bar"
         layout="@layout/search_bar_home"/>
 
 

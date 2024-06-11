@@ -49,7 +49,6 @@
                         android:fontFamily="@font/poppins_thin"
                         android:text="Amit Jha"
                         android:textColor="@color/black"
-                        android:textFontWeight="500"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
