@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.Customer.CustomersFragment"
-    android:background="@color/white">
+    android:background="@color/background_color">
     <include android:id="@+id/top_bar"
         layout="@layout/search_bar_home"/>
 
