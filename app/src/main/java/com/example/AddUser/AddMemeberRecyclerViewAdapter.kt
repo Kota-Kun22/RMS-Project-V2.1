@@ -61,7 +61,7 @@ class AddMemeberRecyclerViewAdapter(
         private val emailEditText: EditText = itemView.findViewById(R.id.emailAddress)
         private val roleSpinner = itemView.findViewById<Spinner>(R.id.assign_Role1)
 
-        val rolePlans = arrayOf("Individual", "Member")
+        val rolePlans = arrayOf( "Member")
         val arrayAdapter = ArrayAdapter(itemView.context, android.R.layout.simple_spinner_dropdown_item, rolePlans)
 
         val telecomPlans = arrayOf("Select", "Airtel", "Jio", "VI", "BSNL")
@@ -89,6 +89,12 @@ class AddMemeberRecyclerViewAdapter(
                 telecom = telecomEditText.selectedItem.toString(),
                 email = emailEditText.text.toString().trim(),
                 role = roleSpinner.selectedItem.toString()
+//                name = "userddd",
+//                dob = "10/2/2002",
+//                phone_no = "9999999999",
+//                telecom = "Airtel",
+//                email = "fds@gmail.com",
+//                role = roleSpinner.selectedItem.toString()
             )
         }
     }
