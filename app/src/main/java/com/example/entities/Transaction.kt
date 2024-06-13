@@ -9,5 +9,6 @@ data class Transaction(
     val amount: Double = 0.0,
     val paid: Double = 0.0,
     val pending: Double = 0.0,
-    val number :String=""
+    val number :String="",
+    val hofNumber:String=""
 )

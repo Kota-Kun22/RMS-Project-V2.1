@@ -28,7 +28,7 @@
     <string name="mob_number_profile_display">Mob. No :</string>
     <string name="profile_image">Profile_image</string>
     <string name="telecom_type">Telecom :</string>
-     <string name="submit">SUBMIT</string>
+    <string name="submit">SUBMIT</string>
     <string name="validity">Validity</string>
     <string name="payment_status">Payment Status</string>
     <string name="enter_amount">Enter Amount</string>

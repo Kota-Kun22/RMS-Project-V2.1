@@ -43,6 +43,8 @@ class CustomerAdapter(private val context: Context, private var userList: ArrayL
 
                 val gson = Gson()
                 val jsonString = gson.toJson(currentUser.members)
+                intent.putExtra("HOF_Name",currentUser.name.toString() )
+                intent.putExtra("HOF_Number", currentUser.phone_no.toString())
                 intent.putExtra("memberListJson", jsonString)
                 context.startActivity(intent)
             } else {

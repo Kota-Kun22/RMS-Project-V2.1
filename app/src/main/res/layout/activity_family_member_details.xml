@@ -1,30 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/background_color">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/poppins_light"
-        android:paddingStart="15dp"
-        android:text="Family Members :"
-        android:textColor="#000000"
-        android:textFontWeight="600"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="47dp" />
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:layout_gravity="center">
+
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/back_icon"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/hofHeadingName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_light"
+            android:paddingStart="15dp"
+            android:text="Family Members "
+            android:textColor="#000000"
+            android:textFontWeight="600"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1.3"/>
+        <ImageView
+            android:id="@+id/family_transaction_history"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/family_history"
+            android:layout_gravity="center_vertical"/>
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/hofProfile"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:src="@drawable/profile_hof"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="H.O.F"
+            android:layout_marginTop="9dp"
+            android:textSize="19sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+
+
+        <TextView
+            android:id="@+id/HOFName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name of HOF"
+            android:layout_marginTop="9dp"
+            android:textSize="19sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+
+
+        <TextView
+            android:id="@+id/HOFNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HOFPhoneNumber"
+            android:layout_marginTop="9dp"
+            android:textSize="19sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/totalPending"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="TotalPending"-->
+<!--            android:layout_marginTop="9dp"-->
+<!--            android:textSize="19sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_gravity="center"/>-->
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/messageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/message_customer" />
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/familyMember_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="94dp"
+        android:layout_marginTop="30dp"
         tools:listitem="@layout/customers_profile_cardview" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
