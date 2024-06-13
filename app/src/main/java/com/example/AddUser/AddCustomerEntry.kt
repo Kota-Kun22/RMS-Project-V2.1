@@ -175,7 +175,10 @@ class AddCustomerEntry : AppCompatActivity() {
                     email = userEmail,
                     count = familyMembers.size,
                     members = familyMembers,
-                    role = role
+                    role = role,
+                    hof = userName,
+                    hofNumber = userNumber
+
                 )
 
                 val newUserRef = databaseReference.push()
@@ -194,72 +197,6 @@ class AddCustomerEntry : AppCompatActivity() {
                     }
             }
         }
-    }
-    fun temp():NewCustomer{
-        // Create the head of family
-        val hof = NewCustomer().apply {
-            uid = "12345"
-            name = "John Doe"
-            dob = "01/01/1980"
-            phone_no = "1234567890"
-            telecom = "Airtel"
-            email = "johndoe@example.com"
-            role = "Head of Family"
-        }
-
-// Create dummy family members
-        val member1 = Member(
-            name = "Jane Doe",
-            dob = "01/01/2000",
-            phone_no = "0987654321",
-            telecom = "Jio",
-            email = "janedoe@example.com",
-            role = "Family Member",
-            hofname = hof.name,
-            hofNumber = hof.phone_no
-        )
-
-        val member2 = Member(
-            name = "Jim Doe",
-            dob = "01/01/2005",
-            phone_no = "1112223334",
-            telecom = "Vi",
-            email = "jimdoe@example.com",
-            role = "Family Member",
-            hofname = hof.name,
-            hofNumber = hof.phone_no
-        )
-
-        val member3 = Member(
-            name = "Jill Doe",
-            dob = "01/01/2010",
-            phone_no = "5556667778",
-            telecom = "Bsnl",
-            email = "jilldoe@example.com",
-            role = "Family Member",
-            hofname = hof.name,
-            hofNumber = hof.phone_no
-        )
-
-        val member4 = Member(
-            name = "Jack Doe",
-            dob = "01/01/2015",
-            phone_no = "9998887776",
-            telecom = "Airtel",
-            email = "jackdoe@example.com",
-            role = "Family Member",
-            hofname = hof.name,
-            hofNumber = hof.phone_no
-        )
-
-// Add members to the HoF
-        hof.members.add(member1)
-        hof.members.add(member2)
-        hof.members.add(member3)
-        hof.members.add(member4)
-        hof.count = hof.members.size
-    return  hof
-
     }
 }
 

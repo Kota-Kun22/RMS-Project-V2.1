@@ -55,6 +55,7 @@ class CustomerAdapter(private val context: Context, private var userList: ArrayL
         holder.recharge.setOnClickListener {
             val intent = Intent(context, RechargeActivity::class.java)
             intent.putExtra("name", currentUser.name)
+            intent.putExtra("HOF_Number", currentUser.phone_no.toString())
             intent.putExtra("number", currentUser.phone_no)
             intent.putExtra("telecom", currentUser.telecom)
             context.startActivity(intent)

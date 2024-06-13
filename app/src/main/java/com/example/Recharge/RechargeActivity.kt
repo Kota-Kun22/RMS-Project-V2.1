@@ -47,7 +47,7 @@ class RechargeActivity : AppCompatActivity() {
         val number=intent.getStringExtra("number")
         val telecom=intent.getStringExtra("telecom")
         val hof=intent.getStringExtra("hof")
-        val hofNumber=intent.getStringExtra("hofNumber")
+        val hofNumber=intent.getStringExtra("HOF_Number")
         progressBar  = findViewById(R.id.progressBar)
 
         val customerName:TextView=findViewById(R.id.customer_name)

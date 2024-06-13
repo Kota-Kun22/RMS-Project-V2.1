@@ -49,7 +49,7 @@ class FamilyTrasactionHistory : AppCompatActivity() {
         mDbRef = FirebaseDatabase.getInstance().getReference("Transactions")
         transactionList = ArrayList()
         transactionListTemp = ArrayList()
-        adapter = FamilyTransactionHistoryAdapter(this, transactionList)
+        adapter = FamilyTransactionHistoryAdapter(this, transactionListTemp)
         userRecyclerView = findViewById(R.id.transaction_rv)
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.adapter = adapter
@@ -76,9 +76,12 @@ class FamilyTrasactionHistory : AppCompatActivity() {
                             }
                         }
                         Log.d("trTest1",transactionList.toString())
-                        transactionList = transactionList.filter {
-                            it.hofNumber==hofNumber
-                        } as ArrayList<Transaction>
+//                        Log.d("trTest1HOF",hofNumber.toString())
+
+                        transactionListTemp.addAll(transactionList.filter {
+                            Log.d("trTest","${it.hofNumber} == $hofNumber")
+                            it.hofNumber == hofNumber })
+                        Log.d("trTest1",transactionListTemp.toString())
                         adapter.notifyDataSetChanged()
 
 
