@@ -27,8 +27,7 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class AddCustomerEntry : AppCompatActivity() {
-    // Adding the Customer
-    //adding the comment here for checking
+
     private lateinit var databaseReference: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var recyclerView: RecyclerView
@@ -139,9 +138,7 @@ class AddCustomerEntry : AppCompatActivity() {
         saveDetails.setOnClickListener {
 
             // Disable the save button and show the ProgressBar
-            saveDetails.isEnabled = false
-            saveDetails.text = "Loading..."
-            progressBar.visibility = View.VISIBLE
+
 
             val role = roleSpinner.selectedItem.toString()
             val userTelecom = telecomSpinner.selectedItem.toString()
@@ -159,7 +156,9 @@ class AddCustomerEntry : AppCompatActivity() {
                 Toast.makeText(this, "Please enter name and number to add member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
+            saveDetails.isEnabled = false
+            saveDetails.text = "Loading..."
+            progressBar.visibility = View.VISIBLE
             // Collect family members' data
             for (i in 0 until adapter.itemCount) {
                 val holder = recyclerView.findViewHolderForAdapterPosition(i) as AddMemeberRecyclerViewAdapter.UserViewHolder

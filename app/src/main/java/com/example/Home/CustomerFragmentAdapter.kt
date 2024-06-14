@@ -40,17 +40,7 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         holder.number.text = currentUser.phone_no
         holder.telecom.text = currentUser.telecom
         holder.validity.text = currentUser.validity
-        holder.hof.text = currentUser.hof
-        holder.hofNo.text=currentUser.hofNumber
-        holder.card.parent?.let { parent ->
-            if (currentUser.hof == "1") {
-                if (parent is ViewGroup) {
-                    parent.removeView(holder.card)
-                } else {
-                    Log.e("CustomerFragmentAdapter", "Parent view is not a ViewGroup")
-                }
-            }
-        }
+
 
         val validityString = currentUser.validity
         val validityValue = validityString?.split(" ")?.get(0)?.toIntOrNull() ?: 0
@@ -93,15 +83,7 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
             intent.data = Uri.parse(url)
             c.startActivity(intent)
         }
-        holder.hofNumber.setOnClickListener {
-            copyToClipboard(currentUser.phone_no!!)
 
-            val intent = Intent(Intent.ACTION_VIEW)
-            val number="+91"+currentUser.hofNumber
-            val url = "https://api.whatsapp.com/send?phone=$number"
-            intent.data = Uri.parse(url)
-            c.startActivity(intent)
-        }
 
 
     }
@@ -166,9 +148,6 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         val expired = itemView.findViewById<TextView>(R.id.expired3)
         val recharge=itemView.findViewById<ImageView>(R.id.recharge3)
         val message=itemView.findViewById<ImageView>(R.id.message3)
-        val hof=itemView.findViewById<TextView>(R.id.name22)
-        val hofNumber=itemView.findViewById<ImageView>(R.id.recharge45)
-        val card=itemView.findViewById<CardView>(R.id.hof)
-        val hofNo=itemView.findViewById<TextView>(R.id.Mobile98)
+
     }
 }
