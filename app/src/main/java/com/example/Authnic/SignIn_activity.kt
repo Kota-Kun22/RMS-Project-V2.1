@@ -19,12 +19,10 @@ class SignIn_activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        progressBar=binding.progressBar
 
         firebaseAuth=FirebaseAuth.getInstance()
-         /*binding.signInPageSignUpButton.setOnClickListener {
-             val intent= Intent(this,signUp_activity::class.java)
-             startActivity(intent)
-         }*/
+
 
         binding.LogINButton.setOnClickListener {
 

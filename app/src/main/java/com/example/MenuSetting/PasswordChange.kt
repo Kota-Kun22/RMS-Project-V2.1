@@ -43,13 +43,21 @@ class PasswordChange : AppCompatActivity() {
             }
 
             val user = FirebaseAuth.getInstance().currentUser
-            user?.updatePassword(newPassword)?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    showToast("Password updated successfully")
-                    startActivity(Intent(this, MainActivity::class.java))
-                } else {
-                    showToast("Failed to update password")
-                }
+            if (user != null) {
+                user.updatePassword(newPassword)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            showToast("Password changed successfully")
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            showToast("Error: ${task.exception?.message}")
+                        }
+                    }
+            } else {
+                showToast("No authenticated user found")
             }
         }
     }
