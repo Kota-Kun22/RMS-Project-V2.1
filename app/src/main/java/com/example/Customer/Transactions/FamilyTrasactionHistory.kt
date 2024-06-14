@@ -40,7 +40,7 @@ class FamilyTrasactionHistory : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
 
         setContentView(R.layout.activity_family_trasaction_history)
         val intent = intent
