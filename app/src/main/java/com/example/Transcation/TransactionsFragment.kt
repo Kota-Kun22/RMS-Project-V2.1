@@ -27,8 +27,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class TransactionsFragment : Fragment() {
 
@@ -45,6 +48,8 @@ class TransactionsFragment : Fragment() {
     private lateinit var paidTextView: TextView
     private lateinit var pendingTextView: TextView
     private lateinit var totalAmount: TextView
+
+    private lateinit var dateSetImageView: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +70,7 @@ class TransactionsFragment : Fragment() {
         paidTextView = rootView.findViewById<TextView>(R.id.paidTransactions)
         pendingTextView = rootView.findViewById<TextView>(R.id.pendingTransactions)
         totalAmount = rootView.findViewById<TextView>(R.id.total)
+        dateSetImageView = rootView.findViewById(R.id.date_set)
 
         allTextView.setOnClickListener {
             filterTransactions("All")
@@ -78,7 +84,6 @@ class TransactionsFragment : Fragment() {
             filterTransactions("Pending")
         }
 
-        val date_set: ImageView = rootView.findViewById(R.id.date_set)
         GlobalScope.launch {
             withContext(Dispatchers.Main) {
                 startProgressBar()
@@ -118,59 +123,13 @@ class TransactionsFragment : Fragment() {
                 }
             })
         }
-//        GlobalScope.launch {
-//            withContext(Dispatchers.Main) {
-//                startProgressBar()
-//            }
-//            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        transactionList.clear()
-//                        pending = 0.0
-//                        paid = 0.0
-//
-//                        for (childSnapshot in snapshot.children) {
-//                            val transaction = childSnapshot.getValue(Transaction::class.java)
-//                            transaction?.let {
-//                                transactionList.add(it)
-//                                pending += it.pending
-//                                paid += it.paid
-//                            }
-//                        }
-//                        adapter.notifyDataSetChanged()
-//
-//                        val paidCredit = rootView.findViewById<TextView>(R.id.paidAmount)
-//                        val pendingCredit = rootView.findViewById<TextView>(R.id.pendingAmount)
-//                        paidCredit.text = "₹$paid"
-//                        pendingCredit.text = "₹$pending"
-//                        stopProgressBar()
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        Log.e("TransactionsFragment", "Error fetching data", error.toException())
-//                        Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show()
-//                        stopProgressBar()
-//                    }
-//                }
-//            })
-//        }
-
-
-
-
-        date_set.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
-            val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = "$selectedDay-${selectedMonth + 1}-$selectedYear"
-                filterTransactionsByDate(selectedDate)
-            }, year, month, day)
-            datePickerDialog.show()
+        dateSetImageView.setOnClickListener {
+            openDatePicker()
         }
+
+
+
+
         deleteHistory.setOnClickListener {
             deleteAllTransactions()
         }
@@ -178,11 +137,9 @@ class TransactionsFragment : Fragment() {
         return rootView
     }
 
-    private fun filterTransactionsByDate(selectedDate: String) {
-        val filteredList = transactionList.filter { it.date == selectedDate }
-        adapter = TransactionAdapter(requireContext(), ArrayList(filteredList))
-        userRecyclerView.adapter = adapter
-    }
+
+
+
     private fun deleteAllTransactions() {
         // Show the confirmation dialog
         AlertDialog.Builder(requireContext())
@@ -280,5 +237,53 @@ class TransactionsFragment : Fragment() {
         userRecyclerView.adapter = adapter
     }
 
+    private fun openDatePicker() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+            calendar.set(selectedYear, selectedMonth, selectedDay)
+            filterTransactionsByDate(calendar.time)
+        }, year, month, day)
+
+        datePickerDialog.show()
+    }
+
+    private fun filterTransactionsByDate(date: Date) {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val selectedDate = dateFormat.format(date)
+        val filteredList = transactionList.filter {
+            val transactionDate = dateFormat.parse(it.date)
+            transactionDate?.let { transDate -> transDate.before(date) || transDate == date } ?: false
+        }
+        adapter = TransactionAdapter(requireContext(), ArrayList(filteredList))
+        userRecyclerView.adapter = adapter
+    }
 }
 
+
+//private fun filterTransactionsByDate(selectedDate: String) {
+//    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+//    val selectedDateObject: Date = dateFormat.parse(selectedDate)
+//
+//    val filteredList = transactionList.filter {
+//        val transactionDateObject: Date = dateFormat.parse(it.date)
+//        !transactionDateObject.after(selectedDateObject)
+//    }
+//
+//    adapter = TransactionAdapter(requireContext(), ArrayList(filteredList))
+//    userRecyclerView.adapter = adapter
+//}
+//date_set.setOnClickListener {
+//    val calendar = Calendar.getInstance()
+//    val year = calendar.get(Calendar.YEAR)
+//    val month = calendar.get(Calendar.MONTH)
+//    val day = calendar.get(Calendar.DAY_OF_MONTH)
+//    val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+//        val selectedDate = "$selectedDay-${selectedMonth + 1}-$selectedYear"
+//        filterTransactionsByDate(selectedDate)
+//    }, year, month, day)
+//    datePickerDialog.show()
+//}
