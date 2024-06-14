@@ -137,6 +137,7 @@ class AddCustomerEntry : AppCompatActivity() {
 
         val saveDetails: TextView = findViewById(R.id.saveDetails)
         saveDetails.setOnClickListener {
+
             // Disable the save button and show the ProgressBar
             saveDetails.isEnabled = false
             saveDetails.text = "Loading..."
@@ -154,6 +155,10 @@ class AddCustomerEntry : AppCompatActivity() {
             val userDob = dob.text.toString().trim()
             val userNumber = number.text.toString().trim()
             val userEmail = email.text.toString().trim()
+            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10 || userEmail.isEmpty() || userDob.isEmpty()) {
+                Toast.makeText(this, "Please enter name and number to add member", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             // Collect family members' data
             for (i in 0 until adapter.itemCount) {

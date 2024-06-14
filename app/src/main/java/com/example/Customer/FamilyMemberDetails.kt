@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.Customer.Transactions.FamilyTrasactionHistory
+import com.example.MainActivity
 import com.example.entities.Member
 import com.example.entities.Transaction
 import com.example.rms_project_v2.R
@@ -48,6 +49,10 @@ class FamilyMemberDetails:AppCompatActivity() {
             val url = "https://api.whatsapp.com/send?phone=$number"
             intent.data = Uri.parse(url)
             startActivity(intent)
+        }
+        val back: ImageView = findViewById(R.id.backButton)
+        back.setOnClickListener {
+            super.onBackPressed()
         }
         findViewById<ImageView>(R.id.family_transaction_history).setOnClickListener {
             val intent  = Intent(this@FamilyMemberDetails,FamilyTrasactionHistory::class.java)

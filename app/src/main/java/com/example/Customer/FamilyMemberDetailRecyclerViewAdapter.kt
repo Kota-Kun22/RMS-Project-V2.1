@@ -32,6 +32,8 @@ class FamilyMemberDetailRecyclerViewAdapter(val context: Context, private val me
         holder.user_name.text = currentUser.name
         holder.number.text = currentUser.phone_no
         holder.telecom.text = currentUser.telecom
+        holder.memberCountImage.visibility=View.GONE
+        holder.count.visibility=View.GONE
         holder.recharge.setOnClickListener {
             val intent= Intent(context, RechargeActivity::class.java)
             intent.putExtra("name",currentUser.name)
@@ -55,6 +57,8 @@ class FamilyMemberDetailRecyclerViewAdapter(val context: Context, private val me
         val telecom = itemView.findViewById<TextView>(R.id.telecom_temp)
         val recharge=itemView.findViewById<ImageView>(R.id.recharge)
         val message=itemView.findViewById<ImageView>(R.id.message)
+        val count=itemView.findViewById<TextView>(R.id.count)
+        val memberCountImage=itemView.findViewById<ImageView>(R.id.memberCountImage)
     }
 
 }
