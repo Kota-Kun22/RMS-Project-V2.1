@@ -102,16 +102,16 @@
             android:layout_gravity="center"/>
 
 
-<!--        <TextView-->
-<!--            android:id="@+id/totalPending"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="TotalPending"-->
-<!--            android:layout_marginTop="9dp"-->
-<!--            android:textSize="19sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textStyle="bold"-->
-<!--            android:layout_gravity="center"/>-->
+        <TextView
+            android:id="@+id/totalPending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TotalPending"
+            android:layout_marginTop="9dp"
+            android:textSize="19sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
@@ -22,6 +23,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.UUID
+
 
 class PendingActivity : AppCompatActivity() {
 
@@ -86,6 +89,7 @@ class PendingActivity : AppCompatActivity() {
         val telecom = intent.getStringExtra("telecom")
         val date = intent.getStringExtra("date")
         val id = intent.getStringExtra("id")
+        val hofNumber = intent.getStringExtra("HOF_NUMBER")
         val totalAmount = intent.getDoubleExtra("totalAmount",0.0)
 //        val paid = intent.getStringExtra("paid")
         checkBox = findViewById(R.id.checkBox)
@@ -152,15 +156,17 @@ class PendingActivity : AppCompatActivity() {
                     }
                 } else {
                     if (checkBox.isChecked) {
+                        val transactionID = UUID.randomUUID().toString()
                         var transaction: Transaction = Transaction(
-                            id + "german",
+                            transactionID,
                             name!!,
                             date!!,
                             telecom!!,
-                            totalAmount!!.toDouble(),
+                            totalAmount.toDouble(),
                             pendingAmount,
                             0.0,
-                            number!!
+                            number!!,
+                            hofNumber
                         )
                         FdatabaseTransaction.push().setValue(transaction)
                             .addOnSuccessListener {
@@ -186,25 +192,34 @@ class PendingActivity : AppCompatActivity() {
                             }
                     } else {
                         var toBeSet: Double = totalAmount!!.toDouble() - enteredAmountValue
-                        var transactionPaid: Transaction = Transaction(
-                            id + "german",
+                        val transactionPaidId = UUID.randomUUID().toString()
+                        val transactionPendingId = UUID.randomUUID().toString()
+
+                        Log.d("t1tst", "Transaction ID: $transactionPaidId") // Debug print
+                        Log.d("t1tst", "Transaction ID: $transactionPaidId")
+
+                        val transactionPaid: Transaction = Transaction(
+                            transactionPaidId,
                             name!!,
                             date!!,
                             telecom!!,
                             enteredAmountValue,
                             enteredAmountValue,
                             0.0,
-                            number!!
+                            number!!,
+                            hofNumber
                         )
-                        var transactionPending: Transaction = Transaction(
-                            id + "american",
+
+                        val transactionPending: Transaction = Transaction(
+                            transactionPendingId,
                             name!!,
                             date!!,
                             telecom!!,
                             toBeSet,
                             0.0,
                             toBeSet,
-                            number!!
+                            number,
+                            hofNumber
                         )
                         FdatabaseTransaction.push().setValue(transactionPaid)
                             .addOnSuccessListener {

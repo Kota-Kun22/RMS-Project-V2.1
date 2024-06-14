@@ -46,6 +46,7 @@ class TransactionAdapter(
                 intent.putExtra("date", currentTransaction.date)
                 intent.putExtra("paid", currentTransaction.paid)
                 intent.putExtra("totalAmount", currentTransaction.amount)
+                intent.putExtra("HOF_NUMBER", currentTransaction.hofNumber)
                 c.startActivity(intent)
             }
         } else {

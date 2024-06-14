@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -183,49 +184,64 @@ class TransactionsFragment : Fragment() {
         userRecyclerView.adapter = adapter
     }
     private fun deleteAllTransactions() {
-        GlobalScope.launch {
-            withContext(Dispatchers.Main) {
-                startProgressBar()
-            }
-            val td = FirebaseDatabase.getInstance().getReference("Transactions")
-            td.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    GlobalScope.launch(Dispatchers.Main) {
-                        if (snapshot.exists()) {
-                            for (childSnapshot in snapshot.children) {
-                                childSnapshot.ref.removeValue()
-                                    .addOnSuccessListener {
-                                        // Update UI if needed
-                                    }
-                                    .addOnFailureListener {
-                                        // Update UI if needed
-                                    }
-                            }
-                            Toast.makeText(
-                                requireContext(),
-                                "All transactions deleted successfully.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            adapter.notifyDataSetChanged()
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "No transactions found.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        stopProgressBar()
-                    }
-                }
+        // Show the confirmation dialog
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete All Transactions")
+            .setMessage("Are you sure you want to delete all transactions?")
+            .setPositiveButton("Yes") { _, _ ->
+                // If the user confirms, show the progress dialog and start the deletion process
+                val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_progress, null)
+                val progressDialog = AlertDialog.Builder(requireContext())
+                    .setView(dialogView)
+                    .setCancelable(false)
+                    .create()
 
-                override fun onCancelled(error: DatabaseError) {
-                    GlobalScope.launch(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "$error", Toast.LENGTH_SHORT).show()
-                        stopProgressBar()
-                    }
+                progressDialog.show()
+
+                GlobalScope.launch {
+                    val td = FirebaseDatabase.getInstance().getReference("Transactions")
+                    td.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            GlobalScope.launch(Dispatchers.Main) {
+                                if (snapshot.exists()) {
+                                    for (childSnapshot in snapshot.children) {
+                                        childSnapshot.ref.removeValue()
+                                            .addOnSuccessListener {
+                                                // Update UI if needed
+                                            }
+                                            .addOnFailureListener {
+                                                // Update UI if needed
+                                            }
+                                    }
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "All transactions deleted successfully.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    transactionList.clear()
+                                    adapter.notifyDataSetChanged()
+                                } else {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "No transactions found.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                progressDialog.dismiss()
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            GlobalScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "$error", Toast.LENGTH_SHORT).show()
+                                progressDialog.dismiss()
+                            }
+                        }
+                    })
                 }
-            })
-        }
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
     private suspend fun stopProgressBar() {
         withContext(Dispatchers.Main) {

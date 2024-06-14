@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.Calendar
+import java.util.UUID
 
 class RechargeActivity : AppCompatActivity() {
     private lateinit var Fdatabase: DatabaseReference
@@ -88,6 +89,7 @@ class RechargeActivity : AppCompatActivity() {
                     val month = calendar.get(Calendar.MONTH) + 1
                     val day = calendar.get(Calendar.DAY_OF_MONTH)
                     val dateString = "$day/$month/$year"
+
                     val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString,hof,hofNumber)
 
                     // Save recharge details
@@ -99,7 +101,8 @@ class RechargeActivity : AppCompatActivity() {
                             // Save transaction details
                             var paid = if(paymentStatus=="Paid") amount.text.toString().toDouble() else 0.0;
                             var pending  =  if(paymentStatus=="Pending") amount.text.toString().toDouble() else 0.0;
-                            var transaction: Transaction = Transaction(currentUser.uid,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending, customerNumber.text.toString(),hofNumber.toString())
+                            val transactionID = UUID.randomUUID().toString()
+                            var transaction: Transaction = Transaction(transactionID,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending, customerNumber.text.toString(),hofNumber.toString())
 
                             FdatabaseTransaction.push().setValue(transaction)
                                 .addOnSuccessListener {
