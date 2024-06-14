@@ -263,27 +263,3 @@ class TransactionsFragment : Fragment() {
     }
 }
 
-
-//private fun filterTransactionsByDate(selectedDate: String) {
-//    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
-//    val selectedDateObject: Date = dateFormat.parse(selectedDate)
-//
-//    val filteredList = transactionList.filter {
-//        val transactionDateObject: Date = dateFormat.parse(it.date)
-//        !transactionDateObject.after(selectedDateObject)
-//    }
-//
-//    adapter = TransactionAdapter(requireContext(), ArrayList(filteredList))
-//    userRecyclerView.adapter = adapter
-//}
-//date_set.setOnClickListener {
-//    val calendar = Calendar.getInstance()
-//    val year = calendar.get(Calendar.YEAR)
-//    val month = calendar.get(Calendar.MONTH)
-//    val day = calendar.get(Calendar.DAY_OF_MONTH)
-//    val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-//        val selectedDate = "$selectedDay-${selectedMonth + 1}-$selectedYear"
-//        filterTransactionsByDate(selectedDate)
-//    }, year, month, day)
-//    datePickerDialog.show()
-//}

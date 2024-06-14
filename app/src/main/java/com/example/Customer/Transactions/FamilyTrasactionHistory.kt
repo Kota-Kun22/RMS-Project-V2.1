@@ -1,5 +1,6 @@
 package com.example.Customer.Transactions
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,6 +27,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class FamilyTrasactionHistory : AppCompatActivity() {
     private lateinit var userRecyclerView: RecyclerView
@@ -37,12 +42,17 @@ class FamilyTrasactionHistory : AppCompatActivity() {
 //    private var pending: Double = 0.0
     private lateinit var deleteHistory: ImageView
     private lateinit var progressBar: ProgressBar
+    private lateinit var backButton: ImageView
+    private lateinit var dateSetImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContentView(R.layout.activity_family_trasaction_history)
+
+        backButton = findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            finish()
+        }
         val intent = intent
         val hofNumber = intent.getStringExtra("hofNumber")
         firebaseAuth = FirebaseAuth.getInstance()
@@ -54,10 +64,15 @@ class FamilyTrasactionHistory : AppCompatActivity() {
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.adapter = adapter
         progressBar = findViewById(R.id.progressBar)
+        backButton = findViewById(R.id.backButton)
+
+        dateSetImageView = findViewById(R.id.date_set)
 
 
 
-
+        dateSetImageView.setOnClickListener {
+            openDatePicker()
+        }
         GlobalScope.launch {
             withContext(Dispatchers.Main) {
                 startProgressBar()
@@ -109,5 +124,30 @@ class FamilyTrasactionHistory : AppCompatActivity() {
         withContext(Dispatchers.Main) {
             progressBar.visibility = View.VISIBLE
         }
+    }
+
+    private fun openDatePicker() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            calendar.set(selectedYear, selectedMonth, selectedDay)
+            filterTransactionsByDate(calendar.time)
+        }, year, month, day)
+
+        datePickerDialog.show()
+    }
+
+    private fun filterTransactionsByDate(date: Date) {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val selectedDate = dateFormat.format(date)
+        val filteredList = transactionListTemp.filter {
+            val transactionDate = dateFormat.parse(it.date)
+            transactionDate?.let { transDate -> transDate.before(date) || transDate == date } ?: false
+        }
+        adapter = FamilyTransactionHistoryAdapter(this, ArrayList(filteredList))
+        userRecyclerView.adapter = adapter
     }
 }

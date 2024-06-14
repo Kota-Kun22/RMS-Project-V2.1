@@ -90,11 +90,12 @@ class AddCustomerEntry : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         saveHof.setOnClickListener {
+            val email: EditText = findViewById(R.id.emailAddress1)
             val name: EditText = findViewById(R.id.user_name1)
             val number: EditText = findViewById(R.id.mobile_number1)
             val userName = name.text.toString().trim()
             val userNumber = number.text.toString().trim()
-            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10) {
+            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10 || telecomSpinner.selectedItem.toString() == "Select" || email.text.toString().trim().isEmpty()) {
                 Toast.makeText(this, "Please enter name and number to add member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -167,6 +168,10 @@ class AddCustomerEntry : AppCompatActivity() {
                 member.hofNumber = findViewById<EditText>(R.id.mobile_number1).text.toString()
 
                 familyMembers[i] = member
+            }
+            if (familyMembers.isEmpty()) {
+                Toast.makeText(this, "No family members added", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
             firebaseAuth.currentUser?.let { currentUser ->
