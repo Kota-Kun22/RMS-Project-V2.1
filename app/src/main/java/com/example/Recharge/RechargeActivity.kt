@@ -102,7 +102,7 @@ class RechargeActivity : AppCompatActivity() {
                             var paid = if(paymentStatus=="Paid") amount.text.toString().toDouble() else 0.0;
                             var pending  =  if(paymentStatus=="Pending") amount.text.toString().toDouble() else 0.0;
                             val transactionID = UUID.randomUUID().toString()
-                            var transaction: Transaction = Transaction(transactionID,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending, customerNumber.text.toString(),hofNumber.toString())
+                            var transaction: Transaction = Transaction(transactionID,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending, customerNumber.text.toString(),hof.toString(),hofNumber.toString())
 
                             FdatabaseTransaction.push().setValue(transaction)
                                 .addOnSuccessListener {

@@ -89,6 +89,7 @@ class PendingActivity : AppCompatActivity() {
         val telecom = intent.getStringExtra("telecom")
         val date = intent.getStringExtra("date")
         val id = intent.getStringExtra("id")
+        val hofName = intent.getStringExtra("HOF_NAME")
         val hofNumber = intent.getStringExtra("HOF_NUMBER")
         val totalAmount = intent.getDoubleExtra("totalAmount",0.0)
 //        val paid = intent.getStringExtra("paid")
@@ -166,6 +167,7 @@ class PendingActivity : AppCompatActivity() {
                             pendingAmount,
                             0.0,
                             number!!,
+                            hofName,
                             hofNumber
                         )
                         FdatabaseTransaction.push().setValue(transaction)
@@ -207,6 +209,7 @@ class PendingActivity : AppCompatActivity() {
                             enteredAmountValue,
                             0.0,
                             number!!,
+                            hofName,
                             hofNumber
                         )
 
@@ -219,6 +222,7 @@ class PendingActivity : AppCompatActivity() {
                             0.0,
                             toBeSet,
                             number,
+                            hofName,
                             hofNumber
                         )
                         FdatabaseTransaction.push().setValue(transactionPaid)

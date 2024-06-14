@@ -28,8 +28,8 @@ class TransactionAdapter(
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         val currentTransaction = transactionList[position]
-        holder.user_name.text = currentTransaction.name
-        holder.number2.text = currentTransaction.number
+        holder.user_name.text = currentTransaction.hofName
+        holder.number2.text = currentTransaction.hofNumber
         holder.telecom.text = currentTransaction.telecom
         holder.date.text = currentTransaction.date
         holder.amount.text = "₹" + currentTransaction.amount
@@ -47,6 +47,7 @@ class TransactionAdapter(
                 intent.putExtra("paid", currentTransaction.paid)
                 intent.putExtra("totalAmount", currentTransaction.amount)
                 intent.putExtra("HOF_NUMBER", currentTransaction.hofNumber)
+                intent.putExtra("HOF_NAME", currentTransaction.hofName)
                 c.startActivity(intent)
             }
         } else {
@@ -61,6 +62,7 @@ class TransactionAdapter(
         val date = itemView.findViewById<TextView>(R.id.date2)
         val amount = itemView.findViewById<TextView>(R.id.Amount2)
         val status = itemView.findViewById<TextView>(R.id.Status2)
+
     }
 }
 
