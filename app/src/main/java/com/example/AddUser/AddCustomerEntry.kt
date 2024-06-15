@@ -169,7 +169,7 @@ class AddCustomerEntry : AppCompatActivity() {
 
                 familyMembers[i] = member
             }
-            if (familyMembers.isEmpty()) {
+            if (familyMembers.isEmpty() && roleSpinner.selectedItem.toString() == "Head of Family" ) {
                 Toast.makeText(this, "No family members added", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

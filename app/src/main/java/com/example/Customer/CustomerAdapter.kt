@@ -58,6 +58,7 @@ class CustomerAdapter(private val context: Context, private var userList: ArrayL
             intent.putExtra("HOF_Number", currentUser.phone_no.toString())
             intent.putExtra("number", currentUser.phone_no)
             intent.putExtra("telecom", currentUser.telecom)
+            intent.putExtra("hof", currentUser.hof)
             context.startActivity(intent)
         }
 

@@ -12,18 +12,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.Customer.FamilyMemberDetails
 import com.example.Recharge.RechargeActivity
 import com.example.Recharge.RechargeDetails
+import com.example.entities.NewCustomer
 import com.example.rms_project_v2.R
+import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-class CustomerFragmentAdapter(private val c: Context, private var userList: ArrayList<RechargeDetails>) :
+class CustomerFragmentAdapter(
+    private val c: Context,
+    private var userList: ArrayList<RechargeDetails>,
+    private var userListForFamilyRedirect: ArrayList<NewCustomer>
+) :
 RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -40,6 +46,7 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         holder.number.text = currentUser.phone_no
         holder.telecom.text = currentUser.telecom
         holder.validity.text = currentUser.validity
+
 
 
         val validityString = currentUser.validity
@@ -83,6 +90,25 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
             intent.data = Uri.parse(url)
             c.startActivity(intent)
         }
+        holder.familyRedirect.setOnClickListener{
+
+            val user = userListForFamilyRedirect.find { it.phone_no == currentUser.hofNumber }
+            Log.d("userredirect",userListForFamilyRedirect.toString())
+            if (user!=null) {
+
+                val intent = Intent(c, FamilyMemberDetails::class.java)
+                intent.putExtra("count", user.members.size)
+
+                val gson = Gson()
+                val jsonString = gson.toJson(user.members)
+                intent.putExtra("HOF_Name",user.name.toString() )
+                intent.putExtra("HOF_Number", user.phone_no.toString())
+                intent.putExtra("memberListJson", jsonString)
+                c.startActivity(intent)
+            } else {
+                Toast.makeText(c, "This is individual user", Toast.LENGTH_SHORT).show()
+            }
+        }
 
 
 
@@ -94,7 +120,10 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         clipboardManager.setPrimaryClip(clipData)
         Toast.makeText(c, "Number copied to clipboard", Toast.LENGTH_SHORT).show()
     }
-
+    fun setFamilyRedirectList(newList: ArrayList<NewCustomer>) {
+        userListForFamilyRedirect = newList
+        notifyDataSetChanged()
+    }
 
     fun addDaysToDate(dateString: String, daysToAdd: Int): String {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -148,6 +177,7 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
         val expired = itemView.findViewById<TextView>(R.id.expired3)
         val recharge=itemView.findViewById<ImageView>(R.id.recharge3)
         val message=itemView.findViewById<ImageView>(R.id.message3)
+        val familyRedirect=itemView.findViewById<ImageView>(R.id.familyRedirect)
 
     }
 }

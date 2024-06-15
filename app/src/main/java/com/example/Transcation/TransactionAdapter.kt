@@ -28,8 +28,8 @@ class TransactionAdapter(
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         val currentTransaction = transactionList[position]
-        holder.user_name.text = currentTransaction.hofName
-        holder.number2.text = currentTransaction.hofNumber
+        holder.user_name.text = if(currentTransaction.hofName==null || currentTransaction.hofName=="") currentTransaction.name else currentTransaction.hofName
+        holder.number2.text = currentTransaction.hofNumber ?: currentTransaction.number
         holder.telecom.text = currentTransaction.telecom
         holder.date.text = currentTransaction.date
         holder.amount.text = "₹" + currentTransaction.amount

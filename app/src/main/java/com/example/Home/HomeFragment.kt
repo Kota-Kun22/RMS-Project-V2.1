@@ -1,6 +1,5 @@
 package com.example.Home
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,12 +16,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.Recharge.RechargeDetails
+import com.example.entities.NewCustomer
 import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
@@ -38,7 +37,7 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: CustomerFragmentAdapter
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
-
+    private lateinit var userListForFamilyRedirect: ArrayList<NewCustomer>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,12 +46,15 @@ class HomeFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().getReference("Recharge")
         userList = ArrayList()
-        adapter = CustomerFragmentAdapter(requireContext(), userList)
+        userListForFamilyRedirect = ArrayList()
+        adapter = CustomerFragmentAdapter(requireContext(), userList,userListForFamilyRedirect)
         userRecyclerView = rootView.findViewById(R.id.home_rv)
         userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRecyclerView.adapter = adapter
         progressBar = rootView.findViewById(R.id.progressBar)
         loadAllCustomers()
+        loadUsers()
+
 
 
         val allTv: TextView = rootView.findViewById(R.id.allTv)
@@ -316,6 +318,37 @@ class HomeFragment : Fragment() {
         } catch (e: Exception) {
             e.printStackTrace()
             return 0
+        }
+    }
+    private fun loadUsers() {
+        val users = ArrayList<NewCustomer>()
+        val mDbRefu = FirebaseDatabase.getInstance().getReference("Users")
+        GlobalScope.launch {
+            mDbRefu.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        users.clear()
+                        for (postSnapshot in snapshot.children) {
+                            val currentUser = postSnapshot.getValue(NewCustomer::class.java)
+                            currentUser?.let {
+                                if (it.role == "Head of Family") {
+                                    users.add(it)
+                                }
+                            }
+                        }
+                        userListForFamilyRedirect = users
+                        Log.d("UsersRR", users.toString())
+                        Log.d("UsersRR", userListForFamilyRedirect.toString())
+                        adapter.setFamilyRedirectList(userListForFamilyRedirect)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Log.e("FirebaseError", "Database operation cancelled: $error")
+                    }
+                }
+            })
         }
     }
 }
