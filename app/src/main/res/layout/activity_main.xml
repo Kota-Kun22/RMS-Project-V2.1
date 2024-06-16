@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:backgroundTint="@color/white"
+            app:backgroundTint="@color/background_color"
             app:contentInsetEnd="0dp"
             app:contentInsetStart="0dp"
             app:fabAlignmentMode="center"

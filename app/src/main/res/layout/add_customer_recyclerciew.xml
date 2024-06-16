@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@color/background_color">
 
-<RelativeLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -16,25 +16,23 @@ android:background="@color/background_color">
         android:id="@+id/tran"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/saveDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_light"
             android:text="@string/save"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
             android:id="@+id/back_icon"
@@ -54,7 +52,7 @@ android:background="@color/background_color">
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginLeft="60dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/poppins_thin"
             android:text="@string/Heading_Add_Customer"
@@ -62,31 +60,36 @@ android:background="@color/background_color">
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/saveDetails"
+            app:layout_constraintHorizontal_bias="0.411"
             app:layout_constraintStart_toEndOf="@+id/back_icon"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.333" />
+            app:layout_constraintVertical_bias="0.2" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/saveDetails"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="45dp"-->
-<!--            android:fontFamily="@font/poppins_light"-->
-<!--            android:text="@string/save"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/textView2"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/saveDetails"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="45dp"-->
+        <!--            android:fontFamily="@font/poppins_light"-->
+        <!--            android:text="@string/save"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="20sp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/textView2"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
         app:cardCornerRadius="10dp"
         android:layout_below="@+id/tran"
         app:cardElevation="2dp"
@@ -302,39 +305,15 @@ android:background="@color/background_color">
                 android:text=""
                 android:textColorHint="@color/Transparent"
                 android:textSize="@dimen/h2TextSize" />
-            <TextView
-                android:id="@+id/addMember"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"
-                android:fontFamily="@font/poppins_light"
-                android:text="@string/add_member"
-                android:textColor="#6D7DFF"
-                android:textSize="17sp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/saveHof"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="6dp"
-                android:fontFamily="@font/poppins_light"
-                android:text="Submit details"
-                android:textColor="#6D7DFF"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="10dp"
-
                 app:cardElevation="10dp"
-                android:padding="3dp">
+                android:padding="3dp"
+                android:layout_marginBottom="30dp">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/addCustomerRecyclerview"
                     android:layout_width="match_parent"
@@ -352,14 +331,42 @@ android:background="@color/background_color">
             android:layout_gravity="center"
             android:indeterminateTint="@color/progressBarColor" />
     </androidx.cardview.widget.CardView>
+    </ScrollView>
+</LinearLayout>
 
+    <TextView
+        android:id="@+id/saveHof"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/poppins_light"
+        android:text="Submit details"
+        android:gravity="center"
+        android:textColor="#6D7DFF"
+        android:background="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/addMember"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/add_member"
+        android:textColor="#6D7DFF"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-
-
-</RelativeLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
