@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RMS_project_V2</string>
+    <string name="app_name">RMS</string>
     <string name="type_your_email">Type Your Email</string>
     <string name="Heading_Add_Customer">Add Customer</string>
     <string name="save">Save</string>
