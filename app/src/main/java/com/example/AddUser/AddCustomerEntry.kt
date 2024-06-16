@@ -169,6 +169,9 @@ class AddCustomerEntry : AppCompatActivity() {
             }
             if (familyMembers.isEmpty() && roleSpinner.selectedItem.toString() == "Head of Family" ) {
                 Toast.makeText(this, "No family members added", Toast.LENGTH_SHORT).show()
+                saveDetails.isEnabled = true
+                saveDetails.text = "Save"
+                progressBar.visibility = View.GONE
                 return@setOnClickListener
             }
 
