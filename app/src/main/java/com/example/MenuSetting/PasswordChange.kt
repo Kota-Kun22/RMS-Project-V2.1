@@ -1,6 +1,7 @@
 package com.example.MenuSetting
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +21,7 @@ class PasswordChange : AppCompatActivity() {
     private lateinit var confirmPasswordInput: TextInputLayout
     private lateinit var saveButton: TextView
     private lateinit var firebaseAuth: FirebaseAuth
+//    private lateinit var appenius: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,13 @@ class PasswordChange : AppCompatActivity() {
         confirmPasswordInput = findViewById(R.id.confirmPassword)
         saveButton = findViewById(R.id.save)
         firebaseAuth = FirebaseAuth.getInstance()
+//        appenius = findViewById(R.id.appeniusPrivateLimited)
+//        appenius.setOnClickListener{
+//            val intent = Intent(Intent.ACTION_VIEW)
+//            val url = "https://appeniusprivatelimited.com/"
+//            intent.data = Uri.parse(url)
+//            this.startActivity(intent)
+//        }
 
         saveButton.setOnClickListener {
             val currentPassword = currentPasswordInput.editText?.text.toString()
