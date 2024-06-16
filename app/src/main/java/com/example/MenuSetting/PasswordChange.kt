@@ -21,7 +21,7 @@ class PasswordChange : AppCompatActivity() {
     private lateinit var confirmPasswordInput: TextInputLayout
     private lateinit var saveButton: TextView
     private lateinit var firebaseAuth: FirebaseAuth
-//    private lateinit var appenius: TextView
+    private lateinit var appenius: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
