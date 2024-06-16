@@ -3,6 +3,7 @@ package com.example.Recharge
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -47,10 +48,10 @@ class RechargeActivity : AppCompatActivity() {
         val name=intent.getStringExtra("name")
         val number=intent.getStringExtra("number")
         val telecom=intent.getStringExtra("telecom")
-        val hof=intent.getStringExtra("hof")
-        val hofNumber=intent.getStringExtra("HOF_Number")
+        val hofName=intent.getStringExtra("hofName")
+        val hofNumber=intent.getStringExtra("hofNumber")
         progressBar  = findViewById(R.id.progressBar)
-
+        Log.d("RechargeTest1", "${hofName} + ${hofNumber}")
         val customerName:TextView=findViewById(R.id.customer_name)
         customerName.text=name
         val customerNumber:TextView=findViewById(R.id.editText)
@@ -90,7 +91,7 @@ class RechargeActivity : AppCompatActivity() {
                     val day = calendar.get(Calendar.DAY_OF_MONTH)
                     val dateString = "$day/$month/$year"
 
-                    val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString,hof,hofNumber)
+                    val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString,hofName,hofNumber)
 
                     // Save recharge details
                     Fdatabase.push().setValue(recharge)
@@ -102,7 +103,7 @@ class RechargeActivity : AppCompatActivity() {
                             var paid = if(paymentStatus=="Paid") amount.text.toString().toDouble() else 0.0;
                             var pending  =  if(paymentStatus=="Pending") amount.text.toString().toDouble() else 0.0;
                             val transactionID = UUID.randomUUID().toString()
-                            var transaction: Transaction = Transaction(transactionID,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending, customerNumber.text.toString(),hof.toString(),hofNumber.toString())
+                            var transaction: Transaction = Transaction(transactionID,customerName.text.toString(),dateString,customerTelecom.text.toString(),amount.text.toString().toDouble(),paid, pending, customerNumber.text.toString(),hofName.toString(),hofNumber.toString())
 
                             FdatabaseTransaction.push().setValue(transaction)
                                 .addOnSuccessListener {

@@ -39,8 +39,8 @@ class FamilyMemberDetailRecyclerViewAdapter(val context: Context, private val me
             intent.putExtra("name",currentUser.name)
             intent.putExtra("number",currentUser.phone_no)
             intent.putExtra("telecom",currentUser.telecom)
-            intent.putExtra("hof",currentUser.hofname)
-            intent.putExtra("HOF_Number",currentUser.hofNumber)
+            intent.putExtra("hofName",currentUser.hofName)
+            intent.putExtra("hofNumber",currentUser.hofNumber)
             context.startActivity(intent)
         }
         holder.message.setOnClickListener {

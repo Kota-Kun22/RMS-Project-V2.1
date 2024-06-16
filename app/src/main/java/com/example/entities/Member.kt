@@ -2,8 +2,6 @@ package com.example.entities
 
 //import android.os.Parcel
 //import android.os.Parcelable
-import android.os.Parcel
-import java.io.Serializable
 
 class Member(
     var name: String? = null,
@@ -12,7 +10,7 @@ class Member(
     var telecom: String? = null,
     var email: String? = null,
     var role: String? = null,
-    var hofname: String? = null,
+    var hofName: String? = null,
     var hofNumber: String? = null
 ) {
 

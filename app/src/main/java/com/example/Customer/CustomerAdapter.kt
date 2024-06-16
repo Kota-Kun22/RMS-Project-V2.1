@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,6 @@ class CustomerAdapter(private val context: Context, private var userList: ArrayL
             if (currentUser.count != 0) {
                 val intent = Intent(context, FamilyMemberDetails::class.java)
                 intent.putExtra("count", currentUser.count)
-
                 val gson = Gson()
                 val jsonString = gson.toJson(currentUser.members)
                 intent.putExtra("HOF_Name",currentUser.name.toString() )
@@ -55,10 +55,11 @@ class CustomerAdapter(private val context: Context, private var userList: ArrayL
         holder.recharge.setOnClickListener {
             val intent = Intent(context, RechargeActivity::class.java)
             intent.putExtra("name", currentUser.name)
-            intent.putExtra("HOF_Number", currentUser.phone_no.toString())
             intent.putExtra("number", currentUser.phone_no)
             intent.putExtra("telecom", currentUser.telecom)
-            intent.putExtra("hof", currentUser.hof)
+            intent.putExtra("hofName", currentUser.hofName)
+            intent.putExtra("hofNumber", currentUser.hofNumber)
+            Log.d("CustomerTest1", "${currentUser.hofName} + ${currentUser.hofNumber}")
             context.startActivity(intent)
         }
 

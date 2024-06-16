@@ -79,7 +79,7 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
             intent.putExtra("name",currentUser.name)
             intent.putExtra("number",currentUser.phone_no)
             intent.putExtra("telecom",currentUser.telecom)
-            intent.putExtra("hof",currentUser.hof)
+            intent.putExtra("hofName",currentUser.hofName)
             intent.putExtra("hofNumber",currentUser.hofNumber)
             c.startActivity(intent)
         }

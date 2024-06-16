@@ -9,7 +9,7 @@ class RechargeDetails {
     var payment_status: String? = null
     var validity: String? = null
     var date: String? = null
-    var hof: String? = null // Added hof field
+    var hofName: String? = null // Added hof field
     var hofNumber: String? = null // Added hofNumber field
 
     constructor() {}
@@ -34,7 +34,7 @@ class RechargeDetails {
         this.payment_status = payment_status
         this.validity = validity
         this.date = date
-        this.hof = hof // Assign hof to the property
+        this.hofName = hof // Assign hof to the property
         this.hofNumber = hofNumber // Assign hofNumber to the property
     }
 
@@ -47,7 +47,7 @@ class RechargeDetails {
                 && payment_status == other.payment_status
                 && validity == other.validity
                 && date == other.date
-                && hof == other.hof // Check hof equality
+                && hofName == other.hofName // Check hof equality
                 && hofNumber == other.hofNumber) // Check hofNumber equality
     }
 }

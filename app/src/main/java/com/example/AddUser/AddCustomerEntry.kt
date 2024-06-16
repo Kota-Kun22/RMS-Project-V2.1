@@ -22,8 +22,6 @@ import com.example.rms_project_v2.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class AddCustomerEntry : AppCompatActivity() {
@@ -164,7 +162,7 @@ class AddCustomerEntry : AppCompatActivity() {
             for (i in 0 until adapter.itemCount) {
                 val holder = recyclerView.findViewHolderForAdapterPosition(i) as AddMemeberRecyclerViewAdapter.UserViewHolder
                 val member = holder.getMember()
-                member.hofname = findViewById<EditText>(R.id.user_name1).text.toString()
+                member.hofName = findViewById<EditText>(R.id.user_name1).text.toString()
                 member.hofNumber = findViewById<EditText>(R.id.mobile_number1).text.toString()
 
                 familyMembers[i] = member
@@ -185,7 +183,7 @@ class AddCustomerEntry : AppCompatActivity() {
                     count = familyMembers.size,
                     members = familyMembers,
                     role = role,
-                    hof = userName,
+                    hofName = userName,
                     hofNumber = userNumber
 
                 )

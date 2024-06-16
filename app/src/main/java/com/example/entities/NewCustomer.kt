@@ -10,7 +10,7 @@ class NewCustomer {
     var count: Int = 0
     var members = mutableListOf<Member>()
     var role: String? = null
-    var hof: String? = null
+    var hofName: String? = null
     var hofNumber: String? = null
 
 
@@ -29,7 +29,7 @@ class NewCustomer {
         count: Int,
         members: List<Member>,
         role: String?,
-        hof: String? = null,
+        hofName: String? = null,
         hofNumber: String? = null
     ) {
         this.uid = uid
@@ -41,7 +41,7 @@ class NewCustomer {
         this.count = count
         this.members = members.toMutableList()
         this.role = role
-        this.hof = hof
+        this.hofName = hofName
         this.hofNumber = hofNumber
 
         /**
