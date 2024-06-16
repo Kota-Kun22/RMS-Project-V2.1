@@ -37,7 +37,7 @@ class SignIn_activity : AppCompatActivity() {
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show()
 
                     }
                 }
