@@ -75,6 +75,7 @@
             android:background="@drawable/edittext_bg"
             android:hint="@string/customer_name"
             android:padding="6dp"
+            android:paddingStart="10dp"
             android:layout_marginEnd="20dp"
             android:textAlignment="textStart"
             android:textColorHint="@color/g_gray700"
@@ -133,6 +134,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="6dp"
+            android:text="XXXXXXXXX"
+            android:paddingStart="10dp"
             android:background="@drawable/edittext_bg"
             android:textAlignment="textStart"
             android:textColorHint="@color/g_gray700" />
@@ -145,6 +148,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="9dp"
             android:layout_weight="1"
+            android:text="XXXXXX"
+            android:paddingStart="10dp"
             android:background="@drawable/edittext_bg"
             android:textColor="@color/black"
             android:padding="6dp"
@@ -177,7 +182,7 @@
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="28dp"
             android:layout_weight="1"
             android:fontFamily="@font/poppins_thin"
             android:text="@string/payment_status"
@@ -207,6 +212,7 @@
             android:padding="6dp"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
+            android:paddingStart="10dp"
             android:textColorHint="@color/g_gray700"
             android:textSize="15sp" />
 
@@ -214,8 +220,8 @@
             android:id="@+id/spinner_paymentStatus"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="9dp"
             android:layout_weight="1"
             android:background="@drawable/spinner_bg"
             android:textAlignment="textStart" />

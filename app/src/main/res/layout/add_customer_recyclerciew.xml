@@ -147,14 +147,14 @@ android:background="@color/background_color">
 
             <EditText
                 android:id="@+id/user_name1"
-                android:layout_width="320dp"
-                android:layout_height="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:autofillHints=""
                 android:background="@drawable/edittext_bg"
                 android:ems="20"
+                android:layout_marginEnd="10dp"
                 android:hint="@string/user_name"
                 android:inputType="textPersonName"
-                android:minHeight="18dp"
                 android:paddingStart="10dp"
                 android:paddingTop="6dp"
                 android:paddingEnd="10dp"
@@ -176,15 +176,15 @@ android:background="@color/background_color">
 
             <TextView
                 android:id="@+id/date_of_birth1"
-                android:layout_width="320dp"
-                android:layout_height="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:autofillHints=""
                 android:background="@drawable/edittext_bg"
                 android:drawableEnd="@drawable/baseline_calendar_month_24"
                 android:ems="20"
                 android:hint="@string/dob"
+                android:layout_marginEnd="10dp"
                 android:inputType="date"
-                android:minHeight="48dp"
                 android:paddingStart="10dp"
                 android:paddingTop="6dp"
                 android:paddingEnd="10dp"
@@ -194,21 +194,22 @@ android:background="@color/background_color">
                 android:textSize="@dimen/h2TextSize" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-
-                >
+                android:weightSum="2"
+                android:layout_marginEnd="10dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="24dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_thin"
                         android:text="@string/mob_no"
@@ -219,8 +220,8 @@ android:background="@color/background_color">
 
                     <EditText
                         android:id="@+id/mobile_number1"
-                        android:layout_width="152dp"
-                        android:layout_height="32dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:autofillHints=""
                         android:background="@drawable/edittext_bg"
                         android:ems="10"
@@ -238,13 +239,14 @@ android:background="@color/background_color">
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="24dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_thin"
@@ -254,8 +256,8 @@ android:background="@color/background_color">
 
                     <Spinner
                         android:id="@+id/telecom_type1"
-                        android:layout_width="152dp"
-                        android:layout_height="32dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
                         android:autofillHints=""
                         android:background="@drawable/spinner_bg"
