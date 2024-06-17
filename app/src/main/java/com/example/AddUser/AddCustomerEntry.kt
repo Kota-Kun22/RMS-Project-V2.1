@@ -160,13 +160,15 @@ class AddCustomerEntry : AppCompatActivity() {
             saveDetails.text = "Loading..."
             progressBar.visibility = View.VISIBLE
             // Collect family members' data
+//            val familyMembers = ArrayList<Member>()
             for (i in 0 until adapter.itemCount) {
-                val holder = recyclerView.findViewHolderForAdapterPosition(i) as AddMemeberRecyclerViewAdapter.UserViewHolder
-                val member = holder.getMember()
-                member.hofName = findViewById<EditText>(R.id.user_name1).text.toString()
-                member.hofNumber = findViewById<EditText>(R.id.mobile_number1).text.toString()
-
-                familyMembers[i] = member
+                val holder = recyclerView.findViewHolderForAdapterPosition(i) as? AddMemeberRecyclerViewAdapter.UserViewHolder
+                if (holder != null) {
+                    val member = holder.getMember()
+                    member.hofName = userName
+                    member.hofNumber = userNumber
+                    familyMembers.add(member)
+                }
             }
             if (familyMembers.isEmpty() && roleSpinner.selectedItem.toString() == "Head of Family" ) {
                 Toast.makeText(this, "No family members added", Toast.LENGTH_SHORT).show()
@@ -174,6 +176,17 @@ class AddCustomerEntry : AppCompatActivity() {
                 saveDetails.text = "Save"
                 progressBar.visibility = View.GONE
                 return@setOnClickListener
+            }
+            else if(roleSpinner.selectedItem.toString() == "Head of Family"){
+                for(member in familyMembers){
+                    if(member.name==null || member.dob==null || member.phone_no==null || member.telecom==null || member.name=="" || member.dob=="" || member.phone_no=="" || member.telecom==""){
+                        Toast.makeText(this, "Please fill all the details of each member", Toast.LENGTH_SHORT).show()
+                        saveDetails.isEnabled = true
+                        saveDetails.text = "Save"
+                        progressBar.visibility = View.GONE
+                        return@setOnClickListener
+                    }
+                }
             }
 
             firebaseAuth.currentUser?.let { currentUser ->
