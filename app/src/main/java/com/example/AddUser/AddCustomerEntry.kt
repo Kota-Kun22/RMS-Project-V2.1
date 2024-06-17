@@ -82,11 +82,20 @@ class AddCustomerEntry : AppCompatActivity() {
             }
         }
 
-        // yaha kiya hain change : Initialize RecyclerView and Adapter in onCreate
         recyclerView = findViewById(R.id.addCustomerRecyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = AddMemeberRecyclerViewAdapter(familyMembers, this)
+        adapter = AddMemeberRecyclerViewAdapter(familyMembers, this) { position ->
+            familyMembers.removeAt(position as Int)
+            adapter.notifyItemRemoved(position as Int)
+            adapter.notifyItemRangeChanged(position as Int, familyMembers.size)
+        }
         recyclerView.adapter = adapter
+
+        addMember.setOnClickListener {
+            familyMembers.add(Member())
+            adapter.notifyItemInserted(familyMembers.size - 1)
+            recyclerView.scrollToPosition(familyMembers.size - 1)  // Scroll to the newly added member
+        }
 
         saveHof.setOnClickListener {
             val email: EditText = findViewById(R.id.emailAddress1)
@@ -103,13 +112,6 @@ class AddCustomerEntry : AppCompatActivity() {
             saveHof.visibility = View.GONE
             saveHof.isEnabled = false
         }
-
-        addMember.setOnClickListener {
-            familyMembers.add(Member())
-            adapter.notifyItemInserted(familyMembers.size - 1)
-            recyclerView.scrollToPosition(familyMembers.size - 1)
-        }
-
 
         val dob: TextView = findViewById(R.id.date_of_birth1)
         dob.setOnClickListener {
@@ -132,7 +134,8 @@ class AddCustomerEntry : AppCompatActivity() {
         }
 
         val back: ImageView = findViewById(R.id.back_icon)
-        back.setOnClickListener {finish()
+        back.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
         val saveDetails: TextView = findViewById(R.id.saveDetails)
@@ -224,6 +227,7 @@ class AddCustomerEntry : AppCompatActivity() {
         }
     }
 }
+
 
 
 
