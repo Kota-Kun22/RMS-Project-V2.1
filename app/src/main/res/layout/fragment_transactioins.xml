@@ -257,7 +257,7 @@
         android:background="#C2C2C2" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/transaction_rv"
+        android:id="@+id/transactionRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="405dp"

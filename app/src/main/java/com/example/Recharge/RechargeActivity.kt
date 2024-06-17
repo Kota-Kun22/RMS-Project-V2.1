@@ -91,7 +91,7 @@ class RechargeActivity : AppCompatActivity() {
                     val day = calendar.get(Calendar.DAY_OF_MONTH)
                     val dateString = "$day/$month/$year"
 
-                    val recharge = RechargeDetails(currentUser.uid, customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString,hofName,hofNumber)
+                    val recharge = RechargeDetails(UUID.randomUUID().toString(), customerName.text.toString(),customerNumber.text.toString(),customerTelecom.text.toString(),amount.text.toString(),paymentStatus?:"",validity?:"",dateString,hofName,hofNumber)
 
                     // Save recharge details
                     Fdatabase.push().setValue(recharge)

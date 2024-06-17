@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
+import java.util.UUID
 
 class AddCustomerEntry : AppCompatActivity() {
 
@@ -177,7 +178,7 @@ class AddCustomerEntry : AppCompatActivity() {
 
             firebaseAuth.currentUser?.let { currentUser ->
                 val user = NewCustomer(
-                    uid = currentUser.uid,
+                    uid = UUID.randomUUID().toString(),
                     name = userName,
                     dob = userDob,
                     phone_no = userNumber,
