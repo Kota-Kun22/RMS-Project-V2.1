@@ -52,7 +52,7 @@ class FamilyMemberDetails:AppCompatActivity() {
         }
         val back: ImageView = findViewById(R.id.backButton)
         back.setOnClickListener {
-            super.onBackPressed()
+            finish()
         }
         findViewById<ImageView>(R.id.family_transaction_history).setOnClickListener {
             val intent  = Intent(this@FamilyMemberDetails,FamilyTrasactionHistory::class.java)

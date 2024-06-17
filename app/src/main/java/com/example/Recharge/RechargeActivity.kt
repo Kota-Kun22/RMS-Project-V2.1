@@ -145,7 +145,7 @@ class RechargeActivity : AppCompatActivity() {
 
         val back:ImageView=findViewById(R.id.imageView)
         back.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
     private suspend fun stopProgressBar() {
