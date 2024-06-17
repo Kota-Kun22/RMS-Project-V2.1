@@ -84,6 +84,11 @@ class TransactionsFragment : Fragment() {
                                 paid += it.paid
                             }
                         }
+
+                        // Sort transactions by date in descending order
+                        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                        transactionList.sortByDescending { dateFormat.parse(it.date) }
+
                         adapter.notifyDataSetChanged()
 
                         binding.paidAmount.text = "₹$paid"
@@ -113,6 +118,7 @@ class TransactionsFragment : Fragment() {
 
         return rootView
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
