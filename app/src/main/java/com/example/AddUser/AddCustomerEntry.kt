@@ -94,7 +94,7 @@ class AddCustomerEntry : AppCompatActivity() {
             val number: EditText = findViewById(R.id.mobile_number1)
             val userName = name.text.toString().trim()
             val userNumber = number.text.toString().trim()
-            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10 || telecomSpinner.selectedItem.toString() == "Select" || email.text.toString().trim().isEmpty()) {
+            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10 || telecomSpinner.selectedItem.toString() == "Select") {
                 Toast.makeText(this, "Please enter name and number to add member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -107,7 +107,9 @@ class AddCustomerEntry : AppCompatActivity() {
         addMember.setOnClickListener {
             familyMembers.add(Member())
             adapter.notifyItemInserted(familyMembers.size - 1)
+            recyclerView.scrollToPosition(familyMembers.size - 1)
         }
+
 
         val dob: TextView = findViewById(R.id.date_of_birth1)
         dob.setOnClickListener {
@@ -130,8 +132,7 @@ class AddCustomerEntry : AppCompatActivity() {
         }
 
         val back: ImageView = findViewById(R.id.back_icon)
-        back.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+        back.setOnClickListener {finish()
         }
 
         val saveDetails: TextView = findViewById(R.id.saveDetails)
@@ -152,7 +153,7 @@ class AddCustomerEntry : AppCompatActivity() {
             val userDob = dob.text.toString().trim()
             val userNumber = number.text.toString().trim()
             val userEmail = email.text.toString().trim()
-            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10 || userEmail.isEmpty() || userDob.isEmpty()) {
+            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10  || userDob.isEmpty()) {
                 Toast.makeText(this, "Please enter name and number to add member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

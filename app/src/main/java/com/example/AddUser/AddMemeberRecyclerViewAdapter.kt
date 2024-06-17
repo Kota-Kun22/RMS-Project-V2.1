@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
@@ -24,7 +25,6 @@ class AddMemeberRecyclerViewAdapter(
             .inflate(R.layout.add_customer_cardview, parent, false)
         return UserViewHolder(view)
     }
-
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentUser = userList[position]
@@ -46,6 +46,11 @@ class AddMemeberRecyclerViewAdapter(
             )
             datePickerDialog.show()
         }
+        holder.deleteButton.setOnClickListener {
+            userList.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, userList.size)
+        }
         holder.bind(currentUser)
     }
 
@@ -60,8 +65,9 @@ class AddMemeberRecyclerViewAdapter(
         private val telecomEditText: Spinner = itemView.findViewById(R.id.telecom_type)
         private val emailEditText: EditText = itemView.findViewById(R.id.emailAddress)
         private val roleSpinner = itemView.findViewById<Spinner>(R.id.assign_Role1)
+        val deleteButton: Button = itemView.findViewById(R.id.delete_member)
 
-        val rolePlans = arrayOf( "Member")
+        val rolePlans = arrayOf("Member")
         val arrayAdapter = ArrayAdapter(itemView.context, android.R.layout.simple_spinner_dropdown_item, rolePlans)
 
         val telecomPlans = arrayOf("Select", "Airtel", "Jio", "VI", "BSNL")
@@ -89,16 +95,11 @@ class AddMemeberRecyclerViewAdapter(
                 telecom = telecomEditText.selectedItem.toString(),
                 email = emailEditText.text.toString().trim(),
                 role = roleSpinner.selectedItem.toString()
-//                name = "userddd",
-//                dob = "10/2/2002",
-//                phone_no = "9999999999",
-//                telecom = "Airtel",
-//                email = "fds@gmail.com",
-//                role = roleSpinner.selectedItem.toString()
             )
         }
     }
 }
+
 
 
 
