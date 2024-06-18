@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:hint="Name" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextDob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="date"
         android:hint="Date of Birth" />
 
     <EditText
@@ -23,28 +24,10 @@
         android:layout_height="wrap_content"
         android:hint="Phone Number" />
 
-    <EditText
+    <Spinner
         android:id="@+id/editTextTelecom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Telecom" />
-
-<!--    <EditText-->
-<!--        android:id="@+id/editTextEmail"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Email" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/editTextRole"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Role" />-->
-
-    <Button
-        android:id="@+id/buttonAddMember"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Member" />
 
 </LinearLayout>

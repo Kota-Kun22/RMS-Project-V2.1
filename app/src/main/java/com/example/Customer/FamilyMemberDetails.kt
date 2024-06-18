@@ -1,12 +1,15 @@
 package com.example.Customer
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -29,6 +32,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Calendar
 import java.util.UUID
 
 class FamilyMemberDetails : AppCompatActivity() {
@@ -39,6 +43,8 @@ class FamilyMemberDetails : AppCompatActivity() {
     private lateinit var hofTelecom: String
     private lateinit var messageButton: ImageView
     private lateinit var editHOFButton: Button
+    private lateinit var editTextHOFNameTelecom: Spinner
+    private lateinit var editTextTelecom: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +57,8 @@ class FamilyMemberDetails : AppCompatActivity() {
 
         findViewById<TextView>(R.id.HOFName).text = hofName
         findViewById<TextView>(R.id.HOFNumber).text = hofNumber
+
+
 
         findViewById<ImageView>(R.id.messageButton).setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
@@ -65,7 +73,7 @@ class FamilyMemberDetails : AppCompatActivity() {
         }
         editHOFButton = findViewById(R.id.editHOFButton)
         editHOFButton.setOnClickListener {
-            showEditHOFDialog(hofName, hofNumber,hofTelecom)
+            showEditHOFDialog(hofTelecom)
         }
         findViewById<ImageView>(R.id.family_transaction_history).setOnClickListener {
             val intent = Intent(this@FamilyMemberDetails, FamilyTrasactionHistory::class.java)
@@ -195,19 +203,47 @@ class FamilyMemberDetails : AppCompatActivity() {
         val dialog = dialogBuilder.create()
         dialog.setOnShowListener {
             val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            editTextTelecom = dialogView.findViewById<Spinner>(R.id.editTextTelecom)
+            val telecomPlans = arrayOf("Select", "Airtel", "Jio", "VI", "BSNL")
+            val arrayAdapter2 = ArrayAdapter(
+                this@FamilyMemberDetails,
+                android.R.layout.simple_spinner_dropdown_item,
+                telecomPlans
+            )
+            editTextTelecom.adapter = arrayAdapter2
+
+            val editTextDob: TextView = dialogView.findViewById(R.id.editTextDob)
+            editTextDob.setOnClickListener {
+                var selectedDate: String = ""
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH)
+                val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+                val datePickerDialog = DatePickerDialog(
+                    this,
+                    { _, selectedYear, selectedMonth, selectedDay ->
+                        selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                        editTextDob.text = selectedDate
+                    },
+                    year,
+                    month,
+                    dayOfMonth
+                )
+                datePickerDialog.show()
+            }
             button.setOnClickListener {
                 val name = dialogView.findViewById<EditText>(R.id.editTextName).text.toString()
-                val dob = dialogView.findViewById<EditText>(R.id.editTextDob).text.toString()
+                val dob = dialogView.findViewById<TextView>(R.id.editTextDob).text.toString()
                 val phone = dialogView.findViewById<EditText>(R.id.editTextPhone).text.toString()
-                val telecom = dialogView.findViewById<EditText>(R.id.editTextTelecom).text.toString()
 
-                if (name.isNotEmpty() && phone.isNotEmpty() && telecom.isNotEmpty()) {
+
+                if (name.isNotEmpty() && phone.isNotEmpty() && editTextTelecom.selectedItem.toString()!= "Select") {
                     val newMember = Member(
                         uid = UUID.randomUUID().toString(),
                         name = name,
                         dob = dob,
                         phone_no = phone,
-                        telecom = telecom,
+                        telecom = editTextTelecom.selectedItem.toString(),
                         role = "Member",
                         hofName = hofName.toString(),
                         hofNumber = hofNumber.toString()
@@ -266,24 +302,30 @@ class FamilyMemberDetails : AppCompatActivity() {
         val dialog = dialogBuilder.create()
         dialog.setOnShowListener {
             val nameEditText = dialogView.findViewById<EditText>(R.id.editTextName)
-            val dobEditText = dialogView.findViewById<EditText>(R.id.editTextDob)
+            val dobEditText = dialogView.findViewById<TextView>(R.id.editTextDob)
             val phoneEditText = dialogView.findViewById<EditText>(R.id.editTextPhone)
-            val telecomEditText = dialogView.findViewById<EditText>(R.id.editTextTelecom)
+            editTextTelecom = dialogView.findViewById<Spinner>(R.id.editTextTelecom)
+            val telecomPlans = arrayOf("Select", "Airtel", "Jio", "VI", "BSNL")
+            val arrayAdapter2 = ArrayAdapter(
+                this@FamilyMemberDetails,
+                android.R.layout.simple_spinner_dropdown_item,
+                telecomPlans
+            )
+            editTextTelecom.adapter = arrayAdapter2
 
             // Populate the fields with current member details
             nameEditText.visibility = EditText.GONE
             dobEditText.visibility = EditText.GONE
 
             phoneEditText.setText(member.phone_no)
-            telecomEditText.setText(member.telecom)
 
             val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             button.setOnClickListener {
 
                 val phone = phoneEditText.text.toString()
-                val telecom = telecomEditText.text.toString()
+                val telecom = editTextTelecom.selectedItem.toString()
 
-                if (phone.isNotEmpty() && telecom.isNotEmpty()) {
+                if (phone.isNotEmpty() && telecom!="Select") {
                     member.name = member.name
                     member.dob = member.dob
                     member.phone_no = phone
@@ -336,7 +378,7 @@ class FamilyMemberDetails : AppCompatActivity() {
         })
     }
 
-    private fun showEditHOFDialog(hofName: String, hofNumber: String, telecom: String) {
+    private fun showEditHOFDialog(telecom: String) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_edit_hof, null)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -346,16 +388,24 @@ class FamilyMemberDetails : AppCompatActivity() {
 
         val dialog = dialogBuilder.create()
         dialog.setOnShowListener {
-            val telecomEditText = dialogView.findViewById<EditText>(R.id.editTextHOFNameTelecom)
+            editTextHOFNameTelecom = dialogView.findViewById<Spinner>(R.id.editTextHOFNameTelecom)
+            val telecomPlans = arrayOf("Select", "Airtel", "Jio", "VI", "BSNL")
+            val arrayAdapter1 = ArrayAdapter(
+                this@FamilyMemberDetails,
+                android.R.layout.simple_spinner_dropdown_item,
+                telecomPlans
+            )
+            editTextHOFNameTelecom.adapter = arrayAdapter1
+
+
 
             // Populate the fields with current HOF details
-            telecomEditText.setText(telecom)
 
             val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             button.setOnClickListener {
-                val newTelecom = telecomEditText.text.toString()
+                val newTelecom = editTextHOFNameTelecom.selectedItem.toString()
 
-                if ( newTelecom.isNotEmpty()) {
+                if ( newTelecom!= "Select") {
                     updateHOFDetails( newTelecom)
                     dialog.dismiss()
                 } else {
@@ -401,151 +451,3 @@ class FamilyMemberDetails : AppCompatActivity() {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//class FamilyMemberDetails:AppCompatActivity() {
-//    private lateinit var recyclerView: RecyclerView
-//    private lateinit var adapter: FamilyMemberDetailRecyclerViewAdapter
-//    private lateinit var hofName:TextView
-//    private lateinit var hofNumber:TextView
-//    private lateinit var messageButton:ImageView
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_family_member_details)
-//        val count = intent.getIntExtra("count", 0)
-//        val jsonString = intent.getStringExtra("memberListJson")
-//        val hofName = intent.getStringExtra("HOF_Name")
-//        val hofNumber = intent.getStringExtra("HOF_Number")
-//        findViewById<TextView>(R.id.HOFName).text = hofName
-//        findViewById<TextView>(R.id.HOFNumber).text = hofNumber
-//        findViewById<ImageView>(R.id.messageButton).setOnClickListener {
-//            val intent = Intent(Intent.ACTION_VIEW)
-//            val number = "+91" + hofNumber
-//            val url = "https://api.whatsapp.com/send?phone=$number"
-//            intent.data = Uri.parse(url)
-//            startActivity(intent)
-//        }
-//        val back: ImageView = findViewById(R.id.backButton)
-//        back.setOnClickListener {
-//            finish()
-//        }
-//        findViewById<ImageView>(R.id.family_transaction_history).setOnClickListener {
-//            val intent  = Intent(this@FamilyMemberDetails,FamilyTrasactionHistory::class.java)
-//            intent.putExtra("hofNumber",hofNumber.toString())
-//            startActivity(intent)
-//        }
-//        showTotalPending(hofNumber)
-//
-//        // Convert the JSON string back to a list of Member objects using Gson
-//        val listType = object : TypeToken<List<Member>>() {}.type
-//        val gson = Gson()
-//        val members = gson.fromJson<List<Member>>(jsonString, listType)
-//
-//
-//
-//
-//        Log.d("Testpreet","In FamilyMemberDetails")
-//        Log.d("Testpreet",members.toString())
-//        recyclerView = findViewById(R.id.familyMember_rv)
-//        adapter = FamilyMemberDetailRecyclerViewAdapter(this,members!!)
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//    }
-//
-//    private fun showTotalPending(hofNumber: String?) {
-//        val transactionList = mutableListOf<Transaction>()
-//        val transactionListTemp = mutableListOf<Transaction>()
-//        val mDbRef = FirebaseDatabase.getInstance().getReference("Transactions")
-//        val totalPending = findViewById<TextView>(R.id.totalPending)
-//        totalPending.text = "Loading Total Pending..."
-//        GlobalScope.launch {
-//            withContext(Dispatchers.Main) {
-//
-//            }
-//            mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        transactionList.clear()
-//
-//
-//                        for (childSnapshot in snapshot.children) {
-//                            val transaction = childSnapshot.getValue(Transaction::class.java)
-//                            transaction?.let {
-//                                transactionList.add(it)
-//
-//                            }
-//                        }
-////                        Log.d("trTest1",transactionList.toString())
-//
-//
-//                        transactionListTemp.addAll(transactionList.filter {
-//                            Log.d("trTest","${it.hofNumber} == $hofNumber")
-//                            it.hofNumber == hofNumber && it.pending>0})
-//                        val totalPendingAmount = transactionListTemp.sumOf { it.pending }
-//                        totalPending.text = "Total Pending: ₹$totalPendingAmount"
-////                        Log.d("trTest1",transactionListTemp.toString())
-//
-//
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        Log.e("TransactionsFragment", "Error fetching data", error.toException())
-//                        Toast.makeText(this@FamilyMemberDetails, "Failed to load data", Toast.LENGTH_SHORT).show()
-//
-//                    }
-//                }
-//            })
-//        }
-//    }
-//}
