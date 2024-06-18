@@ -6,8 +6,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.R.color
+import android.os.Build
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.MainActivity
@@ -22,6 +24,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.UUID
 
 class PendingActivity : AppCompatActivity() {
@@ -30,6 +35,7 @@ class PendingActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var binding: CreditActivityBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = CreditActivityBinding.inflate(layoutInflater)
@@ -90,6 +96,8 @@ class PendingActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         binding.saveCredit.setOnClickListener {
+            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            val currentDate = LocalDateTime.now().format(formatter)
             GlobalScope.launch {
                 withContext(Dispatchers.Main) {
                     startProgressBar()
@@ -104,12 +112,13 @@ class PendingActivity : AppCompatActivity() {
                         ).show()
                     }
                 } else {
+
                     if (binding.checkBox.isChecked) {
                         val transactionID = UUID.randomUUID().toString()
                         val transaction = Transaction(
                             transactionID,
                             name!!,
-                            date!!,
+                            currentDate,
                             telecom!!,
                             totalAmount.toDouble(),
                             pendingAmount,
@@ -128,7 +137,6 @@ class PendingActivity : AppCompatActivity() {
                                     ).show()
                                     binding.saveCredit.isEnabled = true
                                     binding.saveCredit.text = "Submit"
-                                    startActivity(Intent(this@PendingActivity, MainActivity::class.java))
                                 }
                             }
                             .addOnFailureListener {
@@ -150,7 +158,7 @@ class PendingActivity : AppCompatActivity() {
                         val transactionPaid = Transaction(
                             transactionPaidId,
                             name!!,
-                            date!!,
+                            currentDate,
                             telecom!!,
                             enteredAmountValue,
                             enteredAmountValue,
@@ -182,7 +190,6 @@ class PendingActivity : AppCompatActivity() {
                                     ).show()
                                     binding.saveCredit.isEnabled = true
                                     binding.saveCredit.text = "Submit"
-                                    startActivity(Intent(this@PendingActivity, MainActivity::class.java))
                                 }
                             }
                             .addOnFailureListener {
@@ -205,7 +212,6 @@ class PendingActivity : AppCompatActivity() {
 //                                        ).show()
                                         binding.saveCredit.isEnabled = true
                                         binding.saveCredit.text = "Submit"
-                                        startActivity(Intent(this@PendingActivity, MainActivity::class.java))
                                     }
                                 }
                                 .addOnFailureListener {
@@ -222,6 +228,7 @@ class PendingActivity : AppCompatActivity() {
                     deleteTransaction(id)
                 }
                 stopProgressBar()
+                finish()
             }
         }
     }
@@ -235,32 +242,15 @@ class PendingActivity : AppCompatActivity() {
                         for (childSnapshot in snapshot.children) {
                             childSnapshot.ref.removeValue()
                                 .addOnSuccessListener {
-//                                    Toast.makeText(
-//                                        this@PendingActivity,
-//                                        "Transaction deleted successfully.",
-//                                        Toast.LENGTH_SHORT
-//                                    ).show()
-                                    startActivity(
-                                        Intent(
-                                            this@PendingActivity,
-                                            MainActivity::class.java
-                                        )
-                                    )
+
+
                                 }
                                 .addOnFailureListener {
-//                                    Toast.makeText(
-//                                        this@PendingActivity,
-//                                        "Failed to delete transaction.",
-//                                        Toast.LENGTH_SHORT
-//                                    ).show()
+
                                 }
                         }
                     } else {
-//                        Toast.makeText(
-//                            this@PendingActivity,
-//                            "Transaction not found.",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
+
                     }
                 }
 

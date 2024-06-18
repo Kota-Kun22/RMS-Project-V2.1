@@ -17,8 +17,7 @@ import java.util.Calendar
 
 class AddMemeberRecyclerViewAdapter(
     private val userList: MutableList<Member>,
-    private val contextt: Context,
-    param: (Any) -> Unit
+    private val contextt: Context
 ) : RecyclerView.Adapter<AddMemeberRecyclerViewAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -100,6 +99,7 @@ class AddMemeberRecyclerViewAdapter(
         }
     }
 }
+
 
 
 

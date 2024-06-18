@@ -37,7 +37,6 @@ class FamilyMemberDetails:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_family_member_details)
         val count = intent.getIntExtra("count", 0)
-//        val members = intent.getSerializableExtra("members") as? List<Member>
         val jsonString = intent.getStringExtra("memberListJson")
         val hofName = intent.getStringExtra("HOF_Name")
         val hofNumber = intent.getStringExtra("HOF_Number")

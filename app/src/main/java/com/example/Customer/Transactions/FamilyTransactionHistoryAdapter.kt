@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.Transcation.CreditManagement.PendingActivity
 import com.example.entities.Transaction
 import com.example.rms_project_v2.R
+import com.google.gson.Gson
 
 class FamilyTransactionHistoryAdapter(
     val c: Context,
@@ -41,6 +42,16 @@ class FamilyTransactionHistoryAdapter(
 
         } else {
             holder.status.setTextColor(ContextCompat.getColor(c, R.color.g_green))
+        }
+
+        holder.itemView.setOnClickListener {
+            if(currentTransaction.pending>0.0) {
+                val intent = Intent(c, PendingActivity::class.java)
+                val gson = Gson()
+                val jsonString = gson.toJson(currentTransaction)
+                intent.putExtra("currentTransaction", jsonString)
+                c.startActivity(intent)
+            }
         }
     }
 

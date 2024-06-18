@@ -3,6 +3,7 @@ package com.example.AddUser
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -84,11 +85,7 @@ class AddCustomerEntry : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.addCustomerRecyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = AddMemeberRecyclerViewAdapter(familyMembers, this) { position ->
-            familyMembers.removeAt(position as Int)
-            adapter.notifyItemRemoved(position as Int)
-            adapter.notifyItemRangeChanged(position as Int, familyMembers.size)
-        }
+        adapter = AddMemeberRecyclerViewAdapter(familyMembers, this)
         recyclerView.adapter = adapter
 
         addMember.setOnClickListener {
@@ -143,7 +140,6 @@ class AddCustomerEntry : AppCompatActivity() {
 
             // Disable the save button and show the ProgressBar
 
-
             val role = roleSpinner.selectedItem.toString()
             val userTelecom = telecomSpinner.selectedItem.toString()
 
@@ -156,34 +152,35 @@ class AddCustomerEntry : AppCompatActivity() {
             val userDob = dob.text.toString().trim()
             val userNumber = number.text.toString().trim()
             val userEmail = email.text.toString().trim()
-            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10  || userDob.isEmpty()) {
+            if (userName.isEmpty() || userNumber.isEmpty() || userNumber.length != 10 || userDob.isEmpty()) {
                 Toast.makeText(this, "Please enter name and number to add member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             saveDetails.isEnabled = false
             saveDetails.text = "Loading..."
             progressBar.visibility = View.VISIBLE
-            // Collect family members' data
-//            val familyMembers = ArrayList<Member>()
+
+            // Update the familyMembers list
             for (i in 0 until adapter.itemCount) {
                 val holder = recyclerView.findViewHolderForAdapterPosition(i) as? AddMemeberRecyclerViewAdapter.UserViewHolder
                 if (holder != null) {
-                    val member = holder.getMember()
-                    member.hofName = userName
-                    member.hofNumber = userNumber
-                    familyMembers.add(member)
+                    familyMembers[i] = holder.getMember()
+                    familyMembers[i].hofNumber = userNumber
+                    familyMembers[i].hofName = userName
                 }
             }
-            if (familyMembers.isEmpty() && roleSpinner.selectedItem.toString() == "Head of Family" ) {
+
+            if (familyMembers.isEmpty() && roleSpinner.selectedItem.toString() == "Head of Family") {
                 Toast.makeText(this, "No family members added", Toast.LENGTH_SHORT).show()
                 saveDetails.isEnabled = true
                 saveDetails.text = "Save"
                 progressBar.visibility = View.GONE
                 return@setOnClickListener
-            }
-            else if(roleSpinner.selectedItem.toString() == "Head of Family"){
-                for(member in familyMembers){
-                    if(member.name==null || member.dob==null || member.phone_no==null || member.telecom==null || member.name=="" || member.dob=="" || member.phone_no=="" || member.telecom==""){
+            } else if (roleSpinner.selectedItem.toString() == "Head of Family") {
+                Log.d("memberCount", familyMembers.size.toString())
+                for (member in familyMembers) {
+                    Log.d("memberst", member.toString())
+                    if (member.name.isNullOrEmpty() || member.dob.isNullOrEmpty() || member.phone_no.isNullOrEmpty() || member.telecom.isNullOrEmpty()) {
                         Toast.makeText(this, "Please fill all the details of each member", Toast.LENGTH_SHORT).show()
                         saveDetails.isEnabled = true
                         saveDetails.text = "Save"
@@ -192,6 +189,10 @@ class AddCustomerEntry : AppCompatActivity() {
                     }
                 }
             }
+                for (member in familyMembers) {
+                    member.uid = UUID.randomUUID().toString()
+                }
+
 
             firebaseAuth.currentUser?.let { currentUser ->
                 val user = NewCustomer(
@@ -206,7 +207,6 @@ class AddCustomerEntry : AppCompatActivity() {
                     role = role,
                     hofName = userName,
                     hofNumber = userNumber
-
                 )
 
                 val newUserRef = databaseReference.push()
@@ -227,6 +227,7 @@ class AddCustomerEntry : AppCompatActivity() {
         }
     }
 }
+
 
 
 
