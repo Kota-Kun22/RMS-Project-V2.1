@@ -346,23 +346,17 @@ class FamilyMemberDetails : AppCompatActivity() {
 
         val dialog = dialogBuilder.create()
         dialog.setOnShowListener {
-            val nameEditText = dialogView.findViewById<EditText>(R.id.editTextHOFName)
-            val numberEditText = dialogView.findViewById<EditText>(R.id.editTextHOFNumber)
             val telecomEditText = dialogView.findViewById<EditText>(R.id.editTextHOFNameTelecom)
 
             // Populate the fields with current HOF details
-            nameEditText.setText(hofName)
-            numberEditText.setText(hofNumber)
             telecomEditText.setText(telecom)
 
             val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             button.setOnClickListener {
-                val newName = nameEditText.text.toString()
-                val newNumber = numberEditText.text.toString()
                 val newTelecom = telecomEditText.text.toString()
 
-                if (newName.isNotEmpty() && newNumber.isNotEmpty() && newTelecom.isNotEmpty()) {
-                    updateHOFDetails(newName, newNumber, newTelecom)
+                if ( newTelecom.isNotEmpty()) {
+                    updateHOFDetails( newTelecom)
                     dialog.dismiss()
                 } else {
                     Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show()
@@ -371,7 +365,7 @@ class FamilyMemberDetails : AppCompatActivity() {
         }
         dialog.show()
     }
-    private fun updateHOFDetails(newName: String, newNumber: String, newTelecom: String) {
+    private fun updateHOFDetails(newTelecom: String) {
         val mDbRef = FirebaseDatabase.getInstance().getReference("Users")
         mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -379,17 +373,14 @@ class FamilyMemberDetails : AppCompatActivity() {
                     val customer = customerSnapshot.getValue(NewCustomer::class.java)
                     customer?.let {
                         if (customer.hofNumber == hofNumber) {  // Assuming hofNumber is the original HOF number
-                            customer.hofName = newName
-                            customer.hofNumber = newNumber
+                            customer.hofName = hofName
+                            customer.hofNumber = hofNumber
                             customer.telecom = newTelecom
-                            customer.hofNumber = newNumber
-                            customer.hofName = newName
+                            customer.hofNumber = hofNumber
+                            customer.hofName = hofName
                             mDbRef.child(customerSnapshot.key!!).setValue(customer)
                                 .addOnSuccessListener {
                                     Toast.makeText(this@FamilyMemberDetails, "HOF updated successfully", Toast.LENGTH_SHORT).show()
-                                    // Update the UI
-                                    findViewById<TextView>(R.id.HOFName).text = newName
-                                    findViewById<TextView>(R.id.HOFNumber).text = newNumber
                                 }
                                 .addOnFailureListener { exception ->
                                     Toast.makeText(this@FamilyMemberDetails, "Failed to update HOF: ${exception.message}", Toast.LENGTH_SHORT).show()

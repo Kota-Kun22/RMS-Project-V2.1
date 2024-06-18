@@ -213,7 +213,7 @@ class AddCustomerEntry : AppCompatActivity() {
                 newUserRef.setValue(user)
                     .addOnSuccessListener {
                         Toast.makeText(this@AddCustomerEntry, "Successfully Saved", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@AddCustomerEntry, MainActivity::class.java))
+                        finish()
                     }
                     .addOnFailureListener {
                         Toast.makeText(this@AddCustomerEntry, "Save Failed", Toast.LENGTH_SHORT).show()
