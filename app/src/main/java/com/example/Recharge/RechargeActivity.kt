@@ -33,14 +33,12 @@ class RechargeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recharge)
 
-        val validitySpinner = findViewById<Spinner>(R.id.spinner_Validity)
+        val validityEditText = findViewById<EditText>(R.id.spinner_Validity)
         val paymentStatusSpinner = findViewById<Spinner>(R.id.spinner_paymentStatus)
-        val validityPlans = arrayOf("Select Validity","28 Days","56 Days","84 Days","180 Days","365 Days")
-        val paymentStatus = arrayOf("Payment Status","Paid","Pending")
-        val arrayAdap1 =
 
-                ArrayAdapter(this@RechargeActivity,android.R.layout.simple_spinner_dropdown_item,validityPlans)
-                validitySpinner.adapter= arrayAdap1
+        val paymentStatus = arrayOf("Payment Status","Paid","Pending")
+
+
         val arrayAdap2 =
 
             ArrayAdapter(this@RechargeActivity,android.R.layout.simple_spinner_dropdown_item,paymentStatus)
@@ -72,7 +70,7 @@ class RechargeActivity : AppCompatActivity() {
 
             val amount: EditText = findViewById(R.id.editText3)
             val rechargeAmount = amount.text.toString().trim()
-            val validity = validitySpinner.selectedItem.toString()
+            val validity = validityEditText.text.toString()
             val paymentStatus = paymentStatusSpinner.selectedItem.toString()
 
             if (validity == "Select Validity" || paymentStatus == "Payment Status" || rechargeAmount.isEmpty()) {

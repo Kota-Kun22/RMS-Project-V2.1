@@ -250,11 +250,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-        <Spinner
+        <EditText
             android:id="@+id/spinner_Validity"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/spinner_bg"
+            android:hint="Enter Validity"
+            android:padding="6dp"
+            android:inputType="number"
+
+            android:background="@drawable/edittext_bg"
             android:textAlignment="textStart"
             android:paddingEnd="20dp"
             app:layout_constraintStart_toStartOf="parent"
