@@ -49,14 +49,8 @@ class FamilyMemberDetails : AppCompatActivity() {
         hofNumber = intent.getStringExtra("HOF_Number")!!
         hofTelecom = intent.getStringExtra("HOF_TELECOM")!!
 
-
-
-
         findViewById<TextView>(R.id.HOFName).text = hofName
         findViewById<TextView>(R.id.HOFNumber).text = hofNumber
-
-
-
 
         findViewById<ImageView>(R.id.messageButton).setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
