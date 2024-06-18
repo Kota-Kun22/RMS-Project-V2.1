@@ -38,16 +38,18 @@ class CustomerAdapter(private val context: Context, private var userList: ArrayL
         holder.telecom.text = currentUser.telecom
 
         holder.itemView.setOnClickListener {
-            if (currentUser.count != 0) {
+            if (currentUser.count != 0 || currentUser.role=="Head of Family") {
                 val intent = Intent(context, FamilyMemberDetails::class.java)
                 intent.putExtra("count", currentUser.count)
                 val gson = Gson()
                 val jsonString = gson.toJson(currentUser.members)
                 intent.putExtra("HOF_Name",currentUser.name.toString() )
                 intent.putExtra("HOF_Number", currentUser.phone_no.toString())
+                intent.putExtra("HOF_TELECOM", currentUser.telecom.toString())
                 intent.putExtra("memberListJson", jsonString)
                 context.startActivity(intent)
             } else {
+
                 Toast.makeText(context, "No members added", Toast.LENGTH_SHORT).show()
             }
         }

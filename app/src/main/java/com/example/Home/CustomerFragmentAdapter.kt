@@ -104,6 +104,7 @@ RecyclerView.Adapter<CustomerFragmentAdapter.UserViewHolder>()  {
                 intent.putExtra("HOF_Name",user.name.toString() )
                 intent.putExtra("HOF_Number", user.phone_no.toString())
                 intent.putExtra("memberListJson", jsonString)
+                intent.putExtra("HOF_TELECOM",user.telecom)
                 c.startActivity(intent)
             } else {
                 Toast.makeText(c, "This is individual user", Toast.LENGTH_SHORT).show()
