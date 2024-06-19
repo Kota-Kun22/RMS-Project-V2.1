@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.Transcation.CreditManagement.PendingActivity
+import com.example.entities.Member
 import com.example.entities.Transaction
 import com.example.rms_project_v2.R
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class TransactionAdapter(
     val c: Context,
@@ -36,22 +40,17 @@ class TransactionAdapter(
         holder.status.text = if (currentTransaction.pending > 0) "Pending" else "Paid"
         if (currentTransaction.pending > 0) {
             holder.status.setTextColor(ContextCompat.getColor(c, R.color.g_red))
-            holder.itemView.setOnClickListener {
-                val intent = Intent(c, PendingActivity::class.java)
-                intent.putExtra("name", currentTransaction.name)
-                intent.putExtra("id", currentTransaction.id)
-                intent.putExtra("number", currentTransaction.number)
-                intent.putExtra("pendingAmount", currentTransaction.pending.toString())
-                intent.putExtra("telecom", currentTransaction.telecom)
-                intent.putExtra("date", currentTransaction.date)
-                intent.putExtra("paid", currentTransaction.paid)
-                intent.putExtra("totalAmount", currentTransaction.amount)
-                intent.putExtra("HOF_NUMBER", currentTransaction.hofNumber)
-                intent.putExtra("HOF_NAME", currentTransaction.hofName)
-                c.startActivity(intent)
-            }
         } else {
             holder.status.setTextColor(ContextCompat.getColor(c, R.color.g_green))
+        }
+        holder.itemView.setOnClickListener {
+            if(currentTransaction.pending>0.0) {
+                val intent = Intent(c, PendingActivity::class.java)
+                val gson = Gson()
+                val jsonString = gson.toJson(currentTransaction)
+                intent.putExtra("currentTransaction", jsonString)
+                c.startActivity(intent)
+            }
         }
     }
 
@@ -65,6 +64,25 @@ class TransactionAdapter(
 
     }
 }
+
+
+
+
+
+
+//
+//
+//
+//                intent.putExtra("name", currentTransaction.name)
+//                intent.putExtra("id", currentTransaction.id)
+//                intent.putExtra("number", currentTransaction.number)
+//                intent.putExtra("pendingAmount", currentTransaction.pending.toString())
+//                intent.putExtra("telecom", currentTransaction.telecom)
+//                intent.putExtra("date", currentTransaction.date)
+//                intent.putExtra("paid", currentTransaction.paid)
+//                intent.putExtra("totalAmount", currentTransaction.amount)
+//                intent.putExtra("HOF_NUMBER", currentTransaction.hofNumber)
+//                intent.putExtra("HOF_NAME", currentTransaction.hofName)
 
 ////
 //package com.example.Transcationpackage

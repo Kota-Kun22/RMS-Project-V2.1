@@ -30,6 +30,7 @@
             android:src="@drawable/baseline_calendar_month_24" />
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/delete_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -257,7 +258,7 @@
         android:background="#C2C2C2" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/transaction_rv"
+        android:id="@+id/transactionRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="405dp"
