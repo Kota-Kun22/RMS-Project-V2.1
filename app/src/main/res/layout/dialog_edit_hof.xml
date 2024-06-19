@@ -12,6 +12,15 @@
     <Spinner
         android:id="@+id/editTextHOFNameTelecom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Telecom" />
+        android:layout_height="35dp"
+        android:autofillHints=""
+        android:background="@drawable/spinner_bg"
+        android:drawableTint="@color/black"
+        android:ems="10"
+        android:layout_marginTop="8dp"
+        android:hint="@string/select"
+        android:inputType="none"
+        android:layout_marginBottom="10dp"
+        android:text=""
+        android:textSize="@dimen/h2TextSize" />
 </LinearLayout>

@@ -8,26 +8,81 @@
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name" />
+        android:layout_height="match_parent"
 
+        android:background="@drawable/edittext_bg"
+        android:ems="20"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/user_name"
+        android:inputType="textPersonName"
+        android:minHeight="18dp"
+        android:paddingStart="10dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="6dp"
+        android:layout_marginEnd="15dp"
+        android:text=""
+        android:textSize="@dimen/h2TextSize" />
     <TextView
         android:id="@+id/editTextDob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@drawable/edittext_bg"
+        android:drawableEnd="@drawable/baseline_calendar_month_24"
+        android:ems="20"
+        android:layout_marginEnd="15dp"
+        android:hint="@string/dob"
         android:inputType="date"
-        android:hint="Date of Birth" />
+        android:minHeight="18dp"
+        android:padding="6dp"
+        android:paddingStart="10dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="6dp"
+        android:text=""
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/g_gray700"
+        android:textSize="@dimen/h2TextSize" />
 
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone Number" />
+        android:layout_height="match_parent"
+        android:autofillHints=""
+        android:background="@drawable/edittext_bg"
+        android:ems="20"
+        android:maxLength="10"
+        android:layout_marginBottom="10dp"
+        android:hint="Phone Number"
+        android:inputType="textPersonName"
+        android:minHeight="18dp"
+        android:paddingStart="10dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="6dp"
+        android:layout_marginEnd="15dp"
+        android:text=""
+        android:textSize="@dimen/h2TextSize" />
 
     <Spinner
         android:id="@+id/editTextTelecom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Telecom" />
+        android:layout_height="35dp"
+        android:autofillHints=""
+        android:background="@drawable/spinner_bg"
+        android:drawableTint="@color/black"
+        android:ems="10"
+        android:hint="@string/select"
+        android:inputType="none"
+        android:minHeight="18dp"
+        android:paddingStart="10dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="6dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:text=""
+        android:textSize="@dimen/h2TextSize" />
 
 </LinearLayout>
