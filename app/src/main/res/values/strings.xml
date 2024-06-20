@@ -38,4 +38,5 @@
     <string name="enter_customer_s_recharge_details_here">Enter Customer’s recharge details here!</string>
     <string name="recharge_details">Recharge Details</string>
     <string name="type_your_password">Type Your Password</string>
+    <string name="edit_h_o_f">Edit H.O.F</string>
 </resources>
