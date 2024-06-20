@@ -130,24 +130,25 @@
         android:layout_gravity="center"
         android:text="Edit H.O.F"
         android:layout_marginTop="20dp"
-        android:padding="3dp"
-        android:background="#6E75EF"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:background="@drawable/submit_btn_bg"
 
         />
+
+
     <Button
         android:id="@+id/addMemberButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Add Member"
         android:layout_marginTop="20dp"
-        android:padding="3dp"
-        android:background="#323CB5"
+        android:background="@drawable/submit_btn_bg"
+        android:padding="13dp"
+        android:textColor="@color/white"
+        android:text="Add Member"
 
         />
-
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/familyMember_rv"
