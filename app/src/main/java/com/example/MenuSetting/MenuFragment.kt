@@ -31,7 +31,7 @@ class MenuFragment : Fragment() {
         appenius = rootView.findViewById(R.id.appeniusPrivateLimited)
         appenius.setOnClickListener{
             val intent = Intent(Intent.ACTION_VIEW)
-            val url = "https://appeniusprivatelimited.com/"
+            val url = "https://www.linkedin.com/in/harshrastogi2103/"//https://www.linkedin.com/in/harshrastogi2103/
             intent.data = Uri.parse(url)
             this.startActivity(intent)
         }

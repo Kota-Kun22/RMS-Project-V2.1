@@ -4,9 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.MainActivity
+import com.example.rms_project_v2.R
 import com.example.rms_project_v2.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -46,6 +48,11 @@ class SignIn_activity : AppCompatActivity() {
 
             }
             progressBar.visibility = View.GONE
+        }
+        val singUp = findViewById<Button>(R.id.sign_in_page_signUp_button)
+        singUp.setOnClickListener {
+            val intent = Intent(this, signUp_activity::class.java)
+            startActivity(intent)
         }
     }
 
