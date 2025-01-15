@@ -35,11 +35,11 @@ class PasswordChange : AppCompatActivity() {
 //        appenius = findViewById(R.id.appeniusPrivateLimited)
 //        appenius.setOnClickListener{
 //            val intent = Intent(Intent.ACTION_VIEW)
-//            val url = "https://appeniusprivatelimited.com/"
+//            val url = "www.linkedin.com/in/harshrastogi2103"
 //            intent.data = Uri.parse(url)
 //            this.startActivity(intent)
 //        }
-
+//checks for the passwords
         saveButton.setOnClickListener {
             val currentPassword = currentPasswordInput.editText?.text.toString()
             val newPassword = newPasswordInput.editText?.text.toString()
